@@ -1,0 +1,14 @@
+{
+    "name": "meu-projeto-node",
+    "version": "1.0.0",
+    "description": "API com Express e Swagger",
+    "main": "server.js",
+    "scripts": {
+      "start": "node server.js"
+    },
+    "dependencies": {
+      "express": "^4.18.2",
+      "swagger-ui-express": "^4.6.3"
+    }
+  }
+  
