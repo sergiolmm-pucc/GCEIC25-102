@@ -6,6 +6,11 @@ yarn-error.log*
 package-lock.json
 .env
 
+
+# _ do macOS
+*._*
+
+
 # Logs
 logs
 *.log
