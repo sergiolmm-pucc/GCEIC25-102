@@ -27,3 +27,7 @@ Documentação Swagger:
 
 http://localhost:3000/api-docs
 
+Apos deploy
+
+https://sincere-magnificent-cobweb.glitch.me/datetime
+
