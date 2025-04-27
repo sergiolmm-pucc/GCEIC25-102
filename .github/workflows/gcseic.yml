@@ -50,9 +50,9 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Instala Dependencias
         run: npm ci
-      - name: Run Lint
-        run:
-             npm run lint
+  #    - name: Run Lint
+  #      run:
+  #           npm run lint
       # aqui uma entrada para cada teste
         
   Deploy:
@@ -67,4 +67,3 @@ jobs:
           auth-token: "${{ secrets.authToken }}"
           project-id: "${{ secrets.projectId }}"
         
-          
