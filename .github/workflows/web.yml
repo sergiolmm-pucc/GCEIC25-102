@@ -51,4 +51,4 @@ jobs:
           username: ${{ secrets.FTP_USERNAME }}
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: web/gcseic25/build/web/
-          server-dir: /public_html/
+          server-dir: /
