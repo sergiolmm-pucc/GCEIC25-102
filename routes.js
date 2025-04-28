@@ -9,6 +9,15 @@ router.get('/datetime', (req, res) => {
   });
 });
 
+
+// GET /datetime
+router.get('/data', (req, res) => {
+  const now = new Date();
+  res.json({
+    datetime: now.toISOString()
+  });
+});
+
 // POST /concat
 router.post('/concat', (req, res) => {
   const { value } = req.body;
