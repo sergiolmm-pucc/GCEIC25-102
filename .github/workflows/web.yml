@@ -9,6 +9,18 @@ on:
       - 'assets/**'       # Ou se houver alterações na pasta assets/
       # Adicione outras pastas ou arquivos conforme necessário
 
+
+  workflow_dispatch:
+    inputs:
+      environment:
+        description: Environment
+        type: choice
+        required: true
+        default: dev
+        options:
+              - web
+              - IOS
+              - android
 jobs:
   build_and_deploy:
     runs-on: ubuntu-latest
