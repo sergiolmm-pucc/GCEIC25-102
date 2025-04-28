@@ -65,7 +65,7 @@ class _DateTimeHomePageState extends State<DateTimeHomePage> {
           children: [
             ElevatedButton(
               onPressed: _fetchDateTime,
-              child: Text('Obter Data e Hora'),
+              child: Text('Obter Data e Hora atual do servidor'),
             ),
             SizedBox(height: 20),
             Container(
