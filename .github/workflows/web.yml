@@ -44,6 +44,16 @@ jobs:
       - name: Build Flutter Web
         run: flutter build web
 
+
+      
+          
+      #- name: Archive APK
+      #  uses: actions/upload-artifact@v2
+      #  with:
+      #    name: release-apk
+      #    # Try running the build locally with the build command to be sure of this path
+      #    path: build/app/outputs/flutter-apk/app-dev-release.apk
+
       - name: Upload to FTP
         uses: SamKirkland/FTP-Deploy-Action@v4.3.4
         with:
