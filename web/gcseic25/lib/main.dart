@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
-
+import 'package:gcseic25/equipes/base/base.dart';
 
 void main() {
   runApp(MyApp());
@@ -17,7 +17,7 @@ class MyApp extends StatelessWidget {
       ),
       home: HomePage(),
       routes: {
-        '/splash1': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 1')),
+        '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
       },
     );
@@ -39,7 +39,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/splash1');
               },
-              child: Text('Abrir Consulta 1'),
+              child: Text('Abrir Base 1'),
             ),
             SizedBox(height: 20),
             ElevatedButton(

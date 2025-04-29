@@ -1,6 +1,9 @@
 // Lista todos os usuários
 exports.listUsers = (req, res) => {
-    res.send('Listando todos os usuários');
+  res.json({
+    datetime: now.toISOString(),
+    usuario: "sergio"
+  });
   };
   
   // Pega um usuário pelo ID
