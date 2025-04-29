@@ -111,4 +111,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: flutter-macos-release
-          path: web/gcseic25/build/macos/Build/Products/Release/
+          path: web/gcseic25/build/macos/Build/Products/Release/gcseic25.app
