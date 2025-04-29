@@ -1,5 +1,6 @@
 // Lista todos os usuários
 exports.listUsers = (req, res) => {
+  const now = new Date();
   res.json({
     datetime: now.toISOString(),
     usuario: "sergio"
