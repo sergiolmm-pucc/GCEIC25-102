@@ -19,9 +19,30 @@ on:
         default: dev
         options:
               - web
-              - IOS
+              - macOs
               - android
 jobs:
+  set-environment:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set environment from branch or input
+        id: branch_check
+        run: |
+          if [ -n "${{ github.event.inputs.environment }}" ]; then
+            if  [ "${{ github.event.inputs.environment }}" = "macOs" ];
+              echo "env_name=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT              
+            else
+              echo "Error: Invalid target"
+              exit 1
+            fi  
+          else
+            echo "Error: Invalid target"
+            exit 1
+          fi
+    outputs:
+      env_name: ${{ steps.branch_check.outputs.env_name }}
+
   build_and_deploy:
     runs-on: ubuntu-latest
 
@@ -62,3 +83,32 @@ jobs:
           password: ${{ secrets.FTP_PASSWORD }}
           local-dir: web/gcseic25/build/web/
           server-dir: /
+
+
+  macOSdeploy:
+    needs: [set-environment]
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: web/gcseic25  # Define o diretório base para todos os comandos
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Set up Flutter
+        uses: subosito/flutter-action@v2
+        with:
+          channel: "stable"
+
+      - name: Install dependencies
+        run: flutter pub get
+
+      - name: Build macOS release
+        run: flutter build macos
+
+      - name: Upload macOS build as artifact
+        uses: actions/upload-artifact@v4
+        with:
+          name: flutter-macos-release
+          path: web/gcseic25/build/macos/Build/Products/Release/
