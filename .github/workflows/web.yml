@@ -87,7 +87,7 @@ jobs:
 
   macOSdeploy:
     needs: [set-environment]
-    runs-on: ubuntu-latest
+    runs-on: macos-latest
     defaults:
       run:
         working-directory: web/gcseic25  # Define o diretório base para todos os comandos
