@@ -110,7 +110,7 @@ jobs:
 
       - name: Zip macOS .app bundle
         run: |
-          cd web/gcseic25/build/macos/Build/Products/Release/
+          cd web/gcseic25/build/macos/Build/Products/Release
           zip -r FlutterApp.zip gcseic25.app
       
 
