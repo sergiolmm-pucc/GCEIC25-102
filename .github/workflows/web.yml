@@ -107,8 +107,15 @@ jobs:
       - name: Build macOS release
         run: flutter build macos
 
+
+      - name: Zip macOS .app bundle
+        run: |
+          cd web/gcseic25/build/macos/Build/Products/Release/
+          zip -r FlutterApp.zip gcseic25.app
+      
+
       - name: Upload macOS build as artifact
         uses: actions/upload-artifact@v4
         with:
-          name: flutter-macos-release
-          path: web/gcseic25/build/macos/Build/Products/Release/gcseic25.app
+          name: flutter-macos-app
+          path: web/gcseic25/build/macos/Build/Products/Release/FlutterApp.zip
