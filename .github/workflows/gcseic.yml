@@ -43,7 +43,7 @@ jobs:
         working-directory: api  # Define o diretório base para todos os comandos
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [14.x, 18.x]
     steps:
       - name: Get Code from repository
         uses: actions/checkout@v3
