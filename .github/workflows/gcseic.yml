@@ -47,6 +47,8 @@ jobs:
     steps:
       - name: Get Code from repository
         uses: actions/checkout@v3
+      - name: lista diretorio
+        run: ls -la     
       - name: Install NodeJS
         uses: actions/setup-node@v3
         with:
