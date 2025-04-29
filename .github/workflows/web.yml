@@ -105,12 +105,12 @@ jobs:
         run: flutter pub get
 
       - name: Build macOS release
-        run: flutter build macos
+        run: flutter build macos 
 
 
       - name: Zip macOS .app bundle
         run: |
-          cd web/gcseic25/build/macos/Build/Products/Release
+          cd build/macos/Build/Products/Release
           zip -r FlutterApp.zip gcseic25.app
       
 
