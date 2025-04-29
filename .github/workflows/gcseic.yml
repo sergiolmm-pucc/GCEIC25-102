@@ -38,6 +38,9 @@ jobs:
     needs: getCode
     permissions: write-all
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api  # Define o diretório base para todos os comandos
     strategy:
       matrix:
         node-version: [18.x]
@@ -58,6 +61,9 @@ jobs:
   Deploy:
     needs: test
     runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api  # Define o diretório base para todos os comandos    
     steps:
       - name: Get Code
         uses: actions/checkout@v3
