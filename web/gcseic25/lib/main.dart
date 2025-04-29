@@ -1,71 +1,133 @@
 import 'package:flutter/material.dart';
+import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
-import 'dart:convert';
+
 
 void main() {
-  runApp(DateTimeApp());
+  runApp(MyApp());
 }
 
-class DateTimeApp extends StatelessWidget {
-  const DateTimeApp({super.key});
-
+class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'API DateTime Demo',
+      title: 'App de Navegação',
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: DateTimeHomePage(),
+      home: HomePage(),
+      routes: {
+        '/splash1': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 1')),
+        '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+      },
     );
   }
 }
 
-class DateTimeHomePage extends StatefulWidget {
-  const DateTimeHomePage({super.key});
-
+class HomePage extends StatelessWidget {
   @override
-  _DateTimeHomePageState createState() => _DateTimeHomePageState();
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Tela Inicial'),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/splash1');
+              },
+              child: Text('Abrir Consulta 1'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/splash2');
+              },
+              child: Text('Abrir Consulta 2'),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
 }
 
-class _DateTimeHomePageState extends State<DateTimeHomePage> {
-  String _responseText = 'Clique no botão para obter a data e hora';
+class SplashScreen extends StatefulWidget {
+  final Widget nextPage;
 
-  Future<void> _fetchDateTime() async {
-    final url = Uri.parse('https://sincere-magnificent-cobweb.glitch.me/datetime');
-    try {
-      final response = await http.get(url);
-      if (response.statusCode == 200) {
-        final data = json.decode(response.body);
-        setState(() {
-          _responseText = data['datetime'] ?? 'Resposta inesperada';
-        });
-      } else {
-        setState(() {
-          _responseText = 'Erro ao obter dados: ${response.statusCode}';
-        });
-      }
-    } catch (e) {
-      setState(() {
-        _responseText = 'Erro: $e';
-        print(e);
-      });
-    }
+  const SplashScreen({required this.nextPage});
+
+  @override
+  _SplashScreenState createState() => _SplashScreenState();
+}
+
+class _SplashScreenState extends State<SplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(seconds: 10), () {
+      Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(builder: (context) => widget.nextPage),
+      );
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Text(
+          'Carregando...',
+          style: TextStyle(fontSize: 24),
+        ),
+      ),
+    );
+  }
+}
+
+class ConsultaPage extends StatefulWidget {
+  final String title;
+
+  const ConsultaPage({required this.title});
+
+  @override
+  _ConsultaPageState createState() => _ConsultaPageState();
+}
+
+class _ConsultaPageState extends State<ConsultaPage> {
+  String _responseText = 'Resultado aparecerá aqui.';
+
+  Future<void> _fetchData() async {
+    //
+   final response = await http.get(Uri.parse('http://sincere-magnificent-cobweb.glitch.me/datetime'));
+  if (response.statusCode == 200) {
+    setState(() {
+      _responseText = response.body;
+    });
+  } else {
+    setState(() {
+      _responseText = 'Erro ao consultar API.';
+    });
+  }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('API DateTime Demo'),
+        title: Text(widget.title),
       ),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
             ElevatedButton(
-              onPressed: _fetchDateTime,
-              child: Text('Obter Data e Hora atual do servidor'),
+              onPressed: _fetchData,
+              child: Text('Consultar API'),
             ),
             SizedBox(height: 20),
             Container(
