@@ -30,7 +30,7 @@ jobs:
         id: branch_check
         run: |
           if [ -n "${{ github.event.inputs.environment }}" ]; then
-            if  [ "${{ github.event.inputs.environment }}" = "macOs" ];
+            if  [ "${{ github.event.inputs.environment }}" = "macOs" ]; then
               echo "env_name=${{ github.event.inputs.environment }}" >> $GITHUB_OUTPUT              
             else
               echo "Error: Invalid target"
