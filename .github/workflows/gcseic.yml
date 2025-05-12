@@ -55,11 +55,20 @@ jobs:
           node-version: ${{ matrix.node-version }}
       - name: Instala Dependencias
         run: npm ci
-  #    - name: Run Lint
-  #      run:
-  #           npm run lint
-      # aqui uma entrada para cada teste
-        
+     # - name: Run Lint
+     #   run:
+     #     npm run lint
+          # aqui uma entrada para cada teste
+      - name: Roda os testes
+        run: npm test
+      - name: Gera o Relatório dos testes
+        uses: dorny/test-reporter@v1
+        if: success() || failure() # roda de qualquer maneira
+        with:
+          name: JEST tests
+          path: j*.xml
+          reporter: jest-junit        
+
   Deploy:
     needs: test
     runs-on: ubuntu-latest
