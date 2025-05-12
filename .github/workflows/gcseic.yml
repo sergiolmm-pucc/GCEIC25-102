@@ -64,13 +64,13 @@ jobs:
         
       - name: lista
         run: ls -la
-                
+
       - name: Gera o Relatório dos testes
         uses: dorny/test-reporter@v1
         if: success() || failure() # roda de qualquer maneira
         with:
           name: JEST tests
-          path: j*.xml
+          path: api/j*.xml
           reporter: jest-junit        
 
   Deploy:
