@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<coverage generated="1747015829072" clover="3.2.0">
-  <project timestamp="1747015829072" name="All files">
+<coverage generated="1747016760996" clover="3.2.0">
+  <project timestamp="1747016760996" name="All files">
     <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1" elements="11" coveredelements="10" complexity="0" loc="8" ncloc="8" packages="1" files="1" classes="1"/>
     <file name="funcoes_base.js" path="/Users/slmm/Projetos/PUCC/GCEIC25-102/api/controllers/funcoes_base.js">
       <metrics statements="8" coveredstatements="8" conditionals="2" coveredconditionals="1" methods="1" coveredmethods="1"/>

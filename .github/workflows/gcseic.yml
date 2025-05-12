@@ -61,6 +61,7 @@ jobs:
           # aqui uma entrada para cada teste
       - name: Roda os testes
         run: npm test
+        
       - name: Gera o Relatório dos testes
         uses: dorny/test-reporter@v1
         if: success() || failure() # roda de qualquer maneira
