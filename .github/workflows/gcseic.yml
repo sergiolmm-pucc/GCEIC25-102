@@ -43,7 +43,7 @@ jobs:
         working-directory: api  # Define o diretório base para todos os comandos
     strategy:
       matrix:
-        node-version: [18.x]
+        node-version: [22.x]
     steps:
       - name: Get Code from repository
         uses: actions/checkout@v3
@@ -67,7 +67,7 @@ jobs:
         if: success() || failure() # roda de qualquer maneira
         with:
           name: JEST tests
-          path: j*.xml
+          path: '*.xml'
           reporter: jest-junit        
 
   Deploy:
