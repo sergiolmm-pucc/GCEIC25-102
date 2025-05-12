@@ -37,6 +37,5 @@ Apos deploy
 
 https://sincere-magnificent-cobweb.glitch.me/datetime
 
-test
 
 ```
