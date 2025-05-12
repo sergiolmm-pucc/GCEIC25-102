@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="2" failures="0" errors="0" time="0.128">
-  <testsuite name="Texte exemplo" errors="0" failures="0" skipped="0" timestamp="2025-05-12T02:40:42" time="0.083" tests="1">
-    <testcase classname="Texte exemplo Aplicar desconto" name="Texte exemplo Aplicar desconto" time="0">
+<testsuites name="jest tests" tests="2" failures="0" errors="0" time="0.159">
+  <testsuite name="Texte exemplo" errors="0" failures="0" skipped="0" timestamp="2025-05-12T02:59:41" time="0.087" tests="1">
+    <testcase classname="Texte exemplo Aplicar desconto" name="Texte exemplo Aplicar desconto" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="Texte exemplo" errors="0" failures="0" skipped="0" timestamp="2025-05-12T02:40:42" time="0.023" tests="1">
+  <testsuite name="Texte exemplo" errors="0" failures="0" skipped="0" timestamp="2025-05-12T02:59:41" time="0.023" tests="1">
     <testcase classname="Texte exemplo Aplicar desconto" name="Texte exemplo Aplicar desconto" time="0">
     </testcase>
   </testsuite>

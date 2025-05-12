@@ -82,6 +82,10 @@ jobs:
     steps:
       - name: Get Code
         uses: actions/checkout@v3
+      - name: lista
+        run: ls -la
+      - name:  limps coverage
+        run: rm -rf coverage        
       - name: Faz sincronismo com o Glitch
         uses: kanadgupta/glitch-sync@v3.0.1
         with:
