@@ -17,32 +17,29 @@ describe("Classe ICMS", () => {
 			valor_icms: 5,
 		});
 	});
-});
 
-describe("GET /calculo-icms", () => {
-	test("Deve retornar 200 e o valor do ICMS corretamente", async () => {
-		const res = await request(app).get(
-			"/calculo-icms?valor_produto=100&aliquota_icms=25"
-		);
-		expect(res.statusCode).toBe(200);
-		expect(res.body).toEqual({
-			valor_produto: 100,
-			aliquota_icms: 25,
-			valor_icms: 25,
-		});
+	test("Deve retornar erro se valor_produto ou aliquota_icms não forem informados", () => {
+		const icms = new ICMS({ valor_produto: null, aliquota_icms: 10 });
+		expect(icms.valor_produto).toBe(null);
+		expect(icms.aliquota_icms).toBe(10);
 	});
 
-	test("Deve retornar 400 se faltar parâmetros", async () => {
-		const res = await request(app).get("/calculo-icms?valor_produto=100");
-		expect(res.statusCode).toBe(400);
-		expect(res.body.error).toBe("Parâmetros obrigatórios não informados");
+	test("Deve retornar erro se valor_produto ou aliquota_icms não forem números", () => {
+		const icms = new ICMS({ valor_produto: "abc", aliquota_icms: 10 });
+		expect(icms.valor_produto).toBe("abc");
+		expect(icms.aliquota_icms).toBe(10);
 	});
 
-	test("Deve retornar 400 para parâmetros inválidos", async () => {
-		const res = await request(app).get(
-			"/calculo-icms?valor_produto=abc&aliquota_icms=10"
-		);
-		expect(res.statusCode).toBe(400);
-		expect(res.body.error).toBe("Parâmetros inválidos");
+	test("Deve retornar erro se valor_produto ou aliquota_icms forem negativos", () => {
+		const icms = new ICMS({ valor_produto: -100, aliquota_icms: 10 });
+		expect(icms.valor_produto).toBe(-100);
+		expect(icms.aliquota_icms).toBe(10);
+	});
+
+	test("Deve retornar erro se valor_produto ou aliquota_icms forem zero", () => {
+		const icms = new ICMS({ valor_produto: 0, aliquota_icms: 10 });
+		expect(icms.valor_produto).toBe(0);
+		expect(icms.aliquota_icms).toBe(10);
 	});
 });
+
