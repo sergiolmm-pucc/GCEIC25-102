@@ -1,7 +1,7 @@
 // imposto.test.js
 // equipe 1 - kauan, paulo, gian e vinicius
 const { getICMS } = require("../controllers/impostoController");
-const { ICMS } = require("../models/ICMS");
+const ICMS = require("../models/ICMS");
 
 describe("Classe ICMS", () => {
 	test("Deve calcular corretamente o valor do ICMS", () => {
