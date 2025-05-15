@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'sobre.dart';
 import 'ajuda.dart';
+import 'calculo_icms.dart';
 
 class UsoAppPage extends StatefulWidget {
   @override
@@ -52,6 +53,10 @@ class _UsoAppPageState extends State<UsoAppPage> {
             ElevatedButton(
               onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AjudaPage())),
               child: Text('Ajuda'),
+            ),
+            ElevatedButton(
+              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => CalculoIcmsPage(title: 'Cálculo ICMS'))),
+              child: Text('Cálculo ICMS'),
             ),
           ],
         ),
