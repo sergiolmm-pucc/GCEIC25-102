@@ -2,6 +2,7 @@
 
 const NotaFiscal = require("../models/NotaFiscal"); // Supondo que você tenha um modelo NotaFiscal
 const ICMS = require("../models/ICMS"); // Supondo que você tenha um modelo ICMS
+const Ipi = require("../models/Ipi");
 
 exports.getNotaFiscal = (req, res) => {
 	const { valor_produto, valor_ipi, valor_pis, valor_cofins, valor_icms } =
@@ -60,3 +61,27 @@ exports.getICMS = (req, res) => {
 
   res.json(icms.toJSON());
 };
+
+exports.getValorIpiTotal = (req, res) => {
+	const { valor_produto, aliquota_ipi, quantidade } = req.query;
+
+	const ipi = new Ipi({
+		valor_produto: parseFloat(valor_produto) || 0,
+		aliquota_ipi: parseFloat(aliquota_ipi) || 0,
+		quantidade: parseInt(quantidade) || 0,
+	});
+
+	if(!valor_produto || !aliquota_ipi || !quantidade) {
+		return res
+		.status(400)
+		.json({ error: "Parâmetros obrigatórios não informados" });
+	}
+
+	if (isNaN(ipi.valor_produto) || isNaN(ipi.aliquota_ipi) || isNaN(quantidade)) {
+		return res
+		.status(400)
+		.json({ error: "Parâmetros inválidos"})
+	}
+
+	res.json(ipi.toJSON());
+}
