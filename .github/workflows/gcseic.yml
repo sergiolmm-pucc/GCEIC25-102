@@ -115,9 +115,18 @@ jobs:
         run: npm ci
       - name: Limpa coverage recursivamente
         run: rm -rf coverage/*
+      - name: Prepara arquivos para sincronização
+        run: |
+          echo "Removendo pasta coverage antes da sincronização"
+          rm -rf coverage
+          echo "Criando arquivo .glitchignore"
+          echo "coverage/" > ../.glitchignore
+          echo "Conteúdo do .glitchignore:"
+          cat ../.glitchignore
       - name: Faz sincronismo com o Glitch
         uses: kanadgupta/glitch-sync@v3.0.1
         with:
           auth-token: "${{ secrets.authToken }}"
           project-id: "${{ secrets.projectId }}"
           path: "api"
+          ignore-file: "../.glitchignore"
