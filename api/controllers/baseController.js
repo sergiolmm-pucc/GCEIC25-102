@@ -50,6 +50,11 @@ exports.calcularCustoCasaContainer = (req, res) => {
       rooms,
     } = req.body;
 
+    // Validar campos obrigatórios
+    if (!containers || !container_size || !finish_level || !foundation_type) {
+      throw new Error('Campos obrigatórios não fornecidos: containers, container_size, finish_level, foundation_type');
+    }
+
     const input = {
       containers,
       container_size,
