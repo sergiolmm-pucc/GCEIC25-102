@@ -113,20 +113,16 @@ jobs:
           ls -la
       - name: Instala Dependencias
         run: npm ci
-      - name: Limpa coverage recursivamente
-        run: rm -rf coverage/*
       - name: Prepara arquivos para sincronização
         run: |
-          echo "Removendo pasta coverage antes da sincronização"
-          rm -rf coverage
-          echo "Criando arquivo .glitchignore"
-          echo "coverage/" > ../.glitchignore
-          echo "Conteúdo do .glitchignore:"
-          cat ../.glitchignore
+          echo "Criando uma cópia temporária da API sem a pasta coverage"
+          mkdir -p /tmp/api_for_glitch
+          rsync -av --exclude='coverage' ./ /tmp/api_for_glitch/
+          echo "Conteúdo do diretório temporário:"
+          ls -la /tmp/api_for_glitch/
       - name: Faz sincronismo com o Glitch
         uses: kanadgupta/glitch-sync@v3.0.1
         with:
           auth-token: "${{ secrets.authToken }}"
           project-id: "${{ secrets.projectId }}"
-          path: "api"
-          ignore-file: "../.glitchignore"
+          path: "/tmp/api_for_glitch"
