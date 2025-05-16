@@ -1,5 +1,8 @@
 {
   "devDependencies": {
     "lint": "^0.8.19"
+  },
+  "scripts": {
+    "info": "echo 'Informações do projeto' && node -v"
   }
 }

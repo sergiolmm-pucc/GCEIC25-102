@@ -19,7 +19,15 @@ jobs:
   info:
     runs-on: ubuntu-latest
     steps:
-      - name: Gera siada do Github context
+      - name: Get code from repository
+        uses: actions/checkout@v3
+      - name: Instalar Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '22.x'
+      - name: Executar script info
+        run: npm run info
+      - name: Gera saida do Github context
         run: echo "${{ toJSON(github) }}"
       - name: Mostra mensagem
         run: echo "Alo turma"
