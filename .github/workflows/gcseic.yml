@@ -31,14 +31,15 @@ jobs:
           ls -la
           echo "API directory content:"
           ls -la api || echo "API directory not found"
-          echo "Package.json content:"
-          cat package.json
       - name: Exibir informações do projeto manualmente
         run: |
           echo "Informações do projeto"
           node -v
-      - name: Gera saida do Github context
-        run: echo "${{ toJSON(github) }}"
+      - name: Gera saida do Github context sem execução direta
+        run: |
+          echo 'GitHub Context:' > github_context.txt
+          echo '${{ toJSON(github) }}' >> github_context.txt
+          cat github_context.txt
       - name: Mostra mensagem
         run: echo "Alo turma"
 
