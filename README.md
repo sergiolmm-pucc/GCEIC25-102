@@ -1,17 +1,16 @@
 # GCEIC25-102
+
 Repositorio para aula de GCEIC 2025 github actions turma 102
 
+para teste da pagina API flutter
 
-para teste da pagina API flutter 
-
-->  https://sergi3607.c35.integrator.host/
+-> https://sergi3607.c35.integrator.host/
 
 Repositorio glitch para API
 
 https://sincere-magnificent-cobweb.glitch.me/
 
 Repositorio para Flutter A ser disponibilizado.
-
 
 # API Node.js com Express e Swagger
 
@@ -38,3 +37,5 @@ Apos deploy
 
 https://sincere-magnificent-cobweb.glitch.me/datetime
 
+
+```
