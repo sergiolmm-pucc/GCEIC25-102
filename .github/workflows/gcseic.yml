@@ -31,8 +31,12 @@ jobs:
           ls -la
           echo "API directory content:"
           ls -la api || echo "API directory not found"
-      - name: Executar script info
-        run: npm run info
+          echo "Package.json content:"
+          cat package.json
+      - name: Exibir informações do projeto manualmente
+        run: |
+          echo "Informações do projeto"
+          node -v
       - name: Gera saida do Github context
         run: echo "${{ toJSON(github) }}"
       - name: Mostra mensagem
@@ -40,7 +44,6 @@ jobs:
 
   getCode:
     runs-on: ubuntu-latest
-    needs: info
     steps:
       - name: Get code from repositori to evaluate
         uses: actions/checkout@v3
