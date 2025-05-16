@@ -116,13 +116,17 @@ jobs:
       - name: Prepara arquivos para sincronização
         run: |
           echo "Criando uma cópia temporária da API sem a pasta coverage"
-          mkdir -p /tmp/api_for_glitch
-          rsync -av --exclude='coverage' ./ /tmp/api_for_glitch/
+          # Saindo do diretório api e criando um diretório temporário
+          cd ..
+          mkdir -p temp_api_for_glitch
+          # Copiando tudo exceto a pasta coverage
+          cd api
+          rsync -av --exclude='coverage' ./ ../temp_api_for_glitch/
           echo "Conteúdo do diretório temporário:"
-          ls -la /tmp/api_for_glitch/
+          ls -la ../temp_api_for_glitch/
       - name: Faz sincronismo com o Glitch
         uses: kanadgupta/glitch-sync@v3.0.1
         with:
           auth-token: "${{ secrets.authToken }}"
           project-id: "${{ secrets.projectId }}"
-          path: "/tmp/api_for_glitch"
+          path: "../temp_api_for_glitch"
