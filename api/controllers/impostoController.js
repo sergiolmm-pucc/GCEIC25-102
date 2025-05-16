@@ -71,7 +71,7 @@ exports.getValorIpiTotal = (req, res) => {
 		quantidade: parseInt(quantidade) || 0,
 	});
 
-	if(!valor_produto || !aliquota_ipi || !quantidade) {
+	if (!valor_produto || !aliquota_ipi || !quantidade) {
 		return res
 		.status(400)
 		.json({ error: "Parâmetros obrigatórios não informados" });
