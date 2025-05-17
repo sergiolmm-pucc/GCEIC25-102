@@ -48,6 +48,16 @@ class HomePage extends StatelessWidget {
               },
               child: Text('Abrir Consulta 2'),
             ),
+            Semantics(
+      label: 'Entrar',
+      button: true,
+      child: ElevatedButton(
+        onPressed: () {
+         Navigator.pushNamed(context, '/splash1');
+        },
+        child: const Text('Entrar'),
+      ),
+    )
           ],
         ),
       ),

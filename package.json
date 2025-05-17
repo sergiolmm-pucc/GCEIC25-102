@@ -1,5 +1,9 @@
 {
   "devDependencies": {
-    "lint": "^0.8.19"
+    "lint": "^0.8.19",
+    "start-server-and-test": "^2.0.12"
+  },
+  "dependencies": {
+    "selenium-webdriver": "^4.32.0"
   }
 }

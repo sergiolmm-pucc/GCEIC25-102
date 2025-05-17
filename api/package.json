@@ -5,7 +5,8 @@
     "main": "server.js",
     "scripts": {
         "start": "node server.js",
-        "test": "jest  --ci --reporters=default --testResultsProcessor=jest-junit"
+        "test": "jest  --ci --reporters=default --testResultsProcessor=jest-junit",
+        "funcional": "node ./test/funcionalExemplo"
     },
     "dependencies": {
         "cors": "^2.8.5",
