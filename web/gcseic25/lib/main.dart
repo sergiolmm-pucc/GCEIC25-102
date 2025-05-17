@@ -55,7 +55,7 @@ class HomePage extends StatelessWidget {
               onPressed: () {
                 Navigator.pushNamed(context, '/calculadora');
               },
-              child: Text('Abrir Calculadora'),
+              child: Text('Calculadora equipe 7'),
             ),
 
             Semantics(
