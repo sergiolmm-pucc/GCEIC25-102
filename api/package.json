@@ -9,6 +9,7 @@
         "funcional": "node ./test/funcionalExemplo"
     },
     "dependencies": {
+        "@rentready/flutter-selenium-bridge": "^1.0.5",
         "cors": "^2.8.5",
         "express": "^4.18.2",
         "jest-junit": "^16.0.0",
