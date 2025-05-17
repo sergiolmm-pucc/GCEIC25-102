@@ -113,15 +113,24 @@ jobs:
           ls -la
       - name: Instala Dependencias
         run: npm ci
-      - name: Remove coverage directory
+      - name: Prepara diretório para sincronização
         run: |
           echo "Removendo diretório coverage antes da sincronização"
-          rm -rf coverage
-          echo "Conteúdo do diretório após remoção:"
-          ls -la
+          if [ -d "coverage" ]; then
+            rm -rf coverage
+          fi
+          # Criando um diretório temporário limpo para sincronização
+          mkdir -p /tmp/glitch-sync-dir
+          cp -r ./* /tmp/glitch-sync-dir/
+          # Verificando se não tem coverage no diretório temporário
+          if [ -d "/tmp/glitch-sync-dir/coverage" ]; then
+            rm -rf /tmp/glitch-sync-dir/coverage
+          fi
+          echo "Conteúdo do diretório temporário para sincronização:"
+          ls -la /tmp/glitch-sync-dir
       - name: Faz sincronismo com o Glitch
         uses: kanadgupta/glitch-sync@v3.0.1
         with:
           auth-token: "${{ secrets.authToken }}"
           project-id: "${{ secrets.projectId }}"
-          path: "api"
+          path: "/tmp/glitch-sync-dir"
