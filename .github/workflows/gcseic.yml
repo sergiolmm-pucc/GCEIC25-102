@@ -120,11 +120,19 @@ jobs:
           rm -rf coverage || true
           # Remove outros arquivos grandes ou temporários se necessário
           rm -rf node_modules/.cache || true
-          echo "Conteúdo do diretório após limpeza:"
+          # Tentar limpar o diretório temporário também
+          cd ..
+          echo "Diretório atual (raiz do repositório):"
+          pwd
           ls -la
+          echo "Tentativa de preparar o diretório para sincronização..."
+          mkdir -p /tmp/clean-glitch-sync
+          cp -r api /tmp/clean-glitch-sync/
+          echo "Diretório limpo criado em /tmp/clean-glitch-sync:"
+          ls -la /tmp/clean-glitch-sync
       - name: Faz sincronismo com o Glitch
         uses: kanadgupta/glitch-sync@v3.0.1
         with:
           auth-token: "${{ secrets.authToken }}"
           project-id: "${{ secrets.projectId }}"
-          force: true
+          path: "/tmp/clean-glitch-sync/api"
