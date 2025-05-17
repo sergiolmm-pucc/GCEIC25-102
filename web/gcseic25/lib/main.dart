@@ -3,6 +3,8 @@ import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
 
+import 'equipes/equipe7/calculator_screen.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -19,6 +21,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/calculadora': (context) => CalculatorScreen(),
       },
     );
   }
@@ -48,6 +51,13 @@ class HomePage extends StatelessWidget {
               },
               child: Text('Abrir Consulta 2'),
             ),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.pushNamed(context, '/calculadora');
+              },
+              child: Text('Calculadora equipe 7'),
+            ),
+
             Semantics(
       label: 'Entrar',
       button: true,
