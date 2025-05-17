@@ -36,7 +36,9 @@ const { Options } = require('selenium-webdriver/chrome');
     // Wait for 5 secs to let the dynamic content to load
     await driver.sleep(5000);
     
+
     const button = await driver.findElement(By.css('[aria-label="Entrar"]'));
+    
     await button.click();
     /*
     driver.findElement(By.XPATH, "//div[@aria-label='Abrir Consulta 2']").click();
