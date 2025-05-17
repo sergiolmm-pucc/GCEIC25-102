@@ -1,9 +1,16 @@
 {
   "devDependencies": {
+<<<<<<< HEAD
     "lint": "^0.8.19",
     "start-server-and-test": "^2.0.12"
   },
   "dependencies": {
     "selenium-webdriver": "^4.32.0"
+=======
+    "lint": "^0.8.19"
+  },
+  "scripts": {
+    "info": "echo 'Informações do projeto' && node -v"
+>>>>>>> b69eab7ed2611c8d0ca1bf438324c11ace8fd18d
   }
 }

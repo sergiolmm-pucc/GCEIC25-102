@@ -77,7 +77,155 @@
             }
           }
         }
+      },
+      "/calcular-custo-casa-container": {
+        "post": {
+          "tags": ["CI_CD7"],
+          "summary": "Calcula o custo total de uma casa container",
+          "description": "Calcula o custo total de uma casa container com base nos parâmetros fornecidos",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "containers": {
+                      "type": "integer",
+                      "description": "Número de containers",
+                      "example": 2
+                    },
+                    "container_size": {
+                      "type": "string",
+                      "description": "Tamanho do container",
+                      "enum": ["20ft", "40ft"],
+                      "example": "40ft"
+                    },
+                    "finish_level": {
+                      "type": "string",
+                      "description": "Nível de acabamento",
+                      "enum": ["basico", "intermediario", "luxo"],
+                      "example": "intermediario"
+                    },
+                    "foundation_type": {
+                      "type": "string",
+                      "description": "Tipo de fundação",
+                      "enum": ["sapata", "radier", "pilotis"],
+                      "example": "radier"
+                    },
+                    "insulation": {
+                      "type": "string",
+                      "description": "Tipo de isolamento",
+                      "enum": ["nenhum", "poliuretano", "lã de rocha"],
+                      "example": "poliuretano"
+                    },
+                    "electricity": {
+                      "type": "boolean",
+                      "description": "Inclui instalação elétrica",
+                      "example": true
+                    },
+                    "plumbing": {
+                      "type": "boolean",
+                      "description": "Inclui instalação hidráulica",
+                      "example": true
+                    },
+                    "solar_energy": {
+                      "type": "boolean",
+                      "description": "Inclui energia solar",
+                      "example": false
+                    },
+                    "windows": {
+                      "type": "integer",
+                      "description": "Número de janelas",
+                      "example": 4
+                    },
+                    "doors": {
+                      "type": "integer",
+                      "description": "Número de portas",
+                      "example": 3
+                    },
+                    "custom_furniture": {
+                      "type": "boolean",
+                      "description": "Inclui móveis personalizados",
+                      "example": true
+                    },
+                    "project_ready": {
+                      "type": "boolean",
+                      "description": "Projeto pronto (se false, adiciona custo de design)",
+                      "example": false
+                    },
+                    "distance": {
+                      "type": "integer",
+                      "description": "Distância para entrega em km",
+                      "example": 50
+                    },
+                    "rooms": {
+                      "type": "integer",
+                      "description": "Número de cômodos",
+                      "example": 3
+                    }
+                  },
+                  "required": ["containers", "container_size", "finish_level", "foundation_type", "insulation"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Cálculo do custo total realizado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "custoTotal": {
+                        "type": "number",
+                        "description": "Custo total calculado para a casa container",
+                        "example": 185750
+                      }
+                    }
+                  },
+                  "examples": {
+                    "casaBasica": {
+                      "value": {
+                        "custoTotal": 63000
+                      },
+                      "summary": "Casa básica com 1 container"
+                    },
+                    "casaIntermediaria": {
+                      "value": {
+                        "custoTotal": 185750
+                      },
+                      "summary": "Casa intermediária com 2 containers"
+                    },
+                    "casaLuxo": {
+                      "value": {
+                        "custoTotal": 283000
+                      },
+                      "summary": "Casa de luxo com 3 containers"
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Erro nos parâmetros fornecidos",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Parâmetros inválidos"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
       }
     }
   }
-  
