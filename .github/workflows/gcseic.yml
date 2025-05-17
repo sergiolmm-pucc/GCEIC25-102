@@ -93,9 +93,6 @@ jobs:
   Deploy:
     needs: test
     runs-on: ubuntu-latest
-    defaults:
-      run:
-        working-directory: api # Define o diretório base para todos os comandos
     steps:
       - name: Get Code
         uses: actions/checkout@v3
@@ -113,15 +110,17 @@ jobs:
           ls -la
       - name: Instala Dependencias
         run: npm ci
-      - name: Limpa diretório api para sincronização
+      - name: Prepara arquivos para sincronização
         run: |
-          echo "Removendo o conteúdo do diretório api para evitar conflitos..."
-          rm -rf *
-          echo "Conteúdo do diretório api após limpeza:"
+          echo "Copiando conteúdo de api para a raiz do diretório de trabalho..."
+          cp -r * ../
+          echo "Conteúdo da raiz do diretório de trabalho:"
+          ls -la ../
+          echo "Conteúdo do diretório api:"
           ls -la
       - name: Faz sincronismo com o Glitch
         uses: kanadgupta/glitch-sync@v3.0.1
         with:
           auth-token: "${{ secrets.authToken }}"
           project-id: "${{ secrets.projectId }}"
-          path: ./
+          path: ../
