@@ -127,3 +127,4 @@ jobs:
         with:
           auth-token: "${{ secrets.authToken }}"
           project-id: "${{ secrets.projectId }}"
+          force: true
