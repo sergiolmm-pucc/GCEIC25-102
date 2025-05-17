@@ -23,6 +23,7 @@ Repositorio para Flutter A ser disponibilizado.
 
 npm install
 npm start
+flutter start
 
 
 GET http://localhost:3000/datetime
