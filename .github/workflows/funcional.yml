@@ -40,5 +40,11 @@ jobs:
         run: npm i @rentready/flutter-selenium-bridge
       - name: Roda os testes
         run: npm run funcional2
-
+      - name: fotos da tela
+        uses: actions/upload-artifact@v4
+        with:
+          name: Fotos dos testes
+          # Path to the release files
+          # Gravar as fotos na raiz do projeto no docker
+          path: /home/runner/work//GCEIC25-102/GCEIC25-102/api/fotos/**/*.png
 
