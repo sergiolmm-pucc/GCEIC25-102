@@ -1,12 +1,30 @@
 const { Builder } = require('selenium-webdriver');
 const { FlutterSeleniumBridge } = require('@rentready/flutter-selenium-bridge');
 const { Browser, By,Key,  until } = require('selenium-webdriver');
+const { Options } = require('selenium-webdriver/chrome');
 
 (async () => {
+   // Configuração do ambiente do WebDriver e opções do navegador
+   const screen = {
+    width: 1024,
+    height: 720
+  };
 
-  const driver = await new Builder()
+  const chromeOptions = new Options();
+  chromeOptions.addArguments('--headless');
+  chromeOptions.addArguments('--no-sandbox');
+  chromeOptions.windowSize(screen);
+
+  const builder = new Builder()
     .forBrowser('chrome')
-    .build();
+    .setChromeOptions(chromeOptions);
+
+    // Criação da instância do WebDriver
+  let driver = await builder.build();
+
+  //const driver = await new Builder()
+  //  .forBrowser('chrome')
+  //  .build();
 
   const bridge = new FlutterSeleniumBridge(driver);
   
@@ -14,7 +32,7 @@ const { Browser, By,Key,  until } = require('selenium-webdriver');
   //await driver.get('http://localhost:3030/'); // Replace with your Flutter Web app URL
  // await bridge.enableAccessibility();
   // Wait for 5 secs to let the dynamic content to load
-  await driver.sleep(5000);
+  await driver.sleep(10000);
 
 
 //
@@ -25,17 +43,11 @@ const { Browser, By,Key,  until } = require('selenium-webdriver');
 
   await driver.executeScript("arguments[0].focus(); arguments[0].click();", botao);
 */
-
-  const buttonXPath = "//flt-semantics[text()='Entrar']";
-  const clickMeButton = await driver.findElement(By.xpath(buttonXPath));
-  await clickMeButton.click();  
-
-
-    // diretorio deve existir...
+   // diretorio deve existir...
     await driver.takeScreenshot().then((image, err) => {
-        require('fs').writeFile('./fotos/exemplo/inicio-example_102b2.png', image, 'base64', function (err) {
+        require('fs').writeFile('./fotos/exemplo/tela-inicio_102.png', image, 'base64', function (err) {
           if (err == null){
-              console.log('Gravou Foto');
+              console.log('Gravou Foto 1 ');
           }else{
               console.log('Erro ->' + err);
           }
@@ -43,15 +55,43 @@ const { Browser, By,Key,  until } = require('selenium-webdriver');
         });
       });
 
-  await driver.sleep(11000);
+  const buttonXPath = "//flt-semantics[text()='Entrar']";
+  const clickMeButton = await driver.findElement(By.xpath(buttonXPath));
+  await clickMeButton.click();  
+
+  await driver.sleep(5000);
+    // diretorio deve existir...
+  await driver.takeScreenshot().then((image, err) => {
+        require('fs').writeFile('./fotos/exemplo/inicio-splash102.png', image, 'base64', function (err) {
+          if (err == null){
+              console.log('Gravou Foto 2 ');
+          }else{
+              console.log('Erro ->' + err);
+          }
+  
+        });
+      });
+
+  await driver.sleep(12000);
+  await driver.takeScreenshot().then((image, err) => {
+        require('fs').writeFile('./fotos/exemplo/segunda_tela_102-b3.png', image, 'base64', function (err) {
+          if (err == null){
+              console.log('Gravou Foto 3');
+          }else{
+              console.log('Erro ->' + err);
+          }
+  
+        });
+      });
   const buttonXPath2 = "//flt-semantics[text()='Consultar API']";
   const clickMeButton2 = await driver.findElement(By.xpath(buttonXPath2));
-  await clickMeButton2.click();  
+  await clickMeButton2.click();
+  await driver.sleep(5000);  
  // diretorio deve existir...
     await driver.takeScreenshot().then((image, err) => {
-        require('fs').writeFile('./fotos/exemplo/inicio-example_102-b3.png', image, 'base64', function (err) {
+        require('fs').writeFile('./fotos/exemplo/resultado_102-b3.png', image, 'base64', function (err) {
           if (err == null){
-              console.log('Gravou Foto');
+              console.log('Gravou Foto 4');
           }else{
               console.log('Erro ->' + err);
           }

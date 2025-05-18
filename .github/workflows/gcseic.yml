@@ -129,5 +129,3 @@ jobs:
           auth-token: "${{ secrets.authToken }}"
           project-id: "${{ secrets.projectId }}"
           path: 'api'
-      - name: teste
-        run: npm rum funcional2    
