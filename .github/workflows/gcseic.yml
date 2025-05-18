@@ -121,13 +121,8 @@ jobs:
           # Remove outros arquivos grandes ou temporários se necessário
           rm -rf node_modules/.cache || true
           echo "Conteúdo do diretório após limpeza:"
-          ls -la
-      - name: limpeza
-        run: |
-          cd coverage
-          rm *.*
-          cd ..
-           
+          ls -la     
+
       - name: Faz sincronismo com o Glitch
         uses: kanadgupta/glitch-sync@v3.0.1
         with:
