@@ -122,9 +122,13 @@ jobs:
           rm -rf node_modules/.cache || true
           echo "Conteúdo do diretório após limpeza:"
           ls -la
+      - name: limpeza
+        run: rm -rf covarage    
       - name: Faz sincronismo com o Glitch
         uses: kanadgupta/glitch-sync@v3.0.1
         with:
           auth-token: "${{ secrets.authToken }}"
           project-id: "${{ secrets.projectId }}"
           path: 'api'
+      - name: teste
+        run: npm rum funcional2    
