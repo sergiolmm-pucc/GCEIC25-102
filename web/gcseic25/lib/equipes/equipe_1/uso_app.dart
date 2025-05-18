@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'sobre.dart';
 import 'ajuda.dart';
 import 'calculo_icms.dart';
+import 'calculo_ipi.dart';
 
 class UsoAppPage extends StatefulWidget {
   @override
@@ -58,6 +59,10 @@ class _UsoAppPageState extends State<UsoAppPage> {
               onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => CalculoIcmsPage(title: 'Cálculo ICMS'))),
               child: Text('Cálculo ICMS'),
             ),
+            ElevatedButton(
+              onPressed: () =>  Navigator.push(context, MaterialPageRoute(builder: (_) => CalculoIpiPage(title: 'Cálculo IPI'))),
+              child: Text('Cálculo IPI'),
+            )
           ],
         ),
       ),
