@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'sobre.dart';
 import 'ajuda.dart';
+import 'calculo_pis_cofins.dart';
 
 class UsoAppPage extends StatefulWidget {
   @override
@@ -52,6 +53,11 @@ class _UsoAppPageState extends State<UsoAppPage> {
             ElevatedButton(
               onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AjudaPage())),
               child: Text('Ajuda'),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => PisCofinsPage(title: 'Cálculo de PIS/COFINS'))),
+              child: Text('Cálculo de PIS/COFINS'),
             ),
           ],
         ),

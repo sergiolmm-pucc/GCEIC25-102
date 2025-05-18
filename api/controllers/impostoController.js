@@ -23,3 +23,44 @@ exports.getNotaFiscal = (req, res) => {
 
   res.json(notaFiscal.toJSON());
 }
+
+// POST /calcular-pis-cofins
+exports.calcularPisCofins = (req, res) => {
+  const { regime, receitaBruta, aliquota } = req.body;
+
+  if (!regime || !receitaBruta || !aliquota) {
+    return res.status(400).json({
+      success: false,
+      message: 'Todos os campos são obrigatórios: regime, receitaBruta e aliquota'
+    });
+  }
+
+  let valorPis = 0;
+  let valorCofins = 0;
+
+  // Alíquotas padrão
+  const aliquotaPis = regime === 'cumulativo' ? 0.65 : 1.65;
+  const aliquotaCofins = regime === 'cumulativo' ? 3.0 : 7.6;
+
+  // Cálculos
+  valorPis = (receitaBruta * aliquotaPis) / 100;
+  valorCofins = (receitaBruta * aliquotaCofins) / 100;
+
+  // Aplicando a alíquota informada (se necessário)
+  if (aliquota > 0) {
+    const fator = aliquota / 100;
+    valorPis *= fator;
+    valorCofins *= fator;
+  }
+
+  res.json({
+    success: true,
+    resultado: {
+      regime, 
+      receitaBruta,
+      valorPis,
+      valorCofins,
+      total: valorPis + valorCofins
+    }
+  })
+}
