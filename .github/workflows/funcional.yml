@@ -39,6 +39,6 @@ jobs:
       - name: instala bridge
         run: npm i @rentready/flutter-selenium-bridge
       - name: Roda os testes
-        run: npm test
+        run: npm run funcional2
 
 
