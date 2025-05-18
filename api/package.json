@@ -6,7 +6,8 @@
     "scripts": {
         "start": "node server.js",
         "test": "jest  --ci --reporters=default --testResultsProcessor=jest-junit",
-        "funcional": "node ./test/funcionalExemplo"
+        "funcional": "node ./test/funcionalExemplo",
+        "funcional2": "node ./test/funcionalExemplo2"
     },
     "dependencies": {
         "@rentready/flutter-selenium-bridge": "^1.0.5",

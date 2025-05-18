@@ -1,72 +1,49 @@
-// npm install selenium-webdriver
-// npm install --save-dev start-server-and-test
-//"e2e-test": "start-server-and-test http://localhost:3000/ht test2"
-
-const { Builder, Browser, By,Key,  until } = require('selenium-webdriver');
-const chrome = require('selenium-webdriver/chrome');
-const { Options } = require('selenium-webdriver/chrome');
-
 const { Builder } = require('selenium-webdriver');
 const { FlutterSeleniumBridge } = require('@rentready/flutter-selenium-bridge');
 
-
-
 (async () => {
 
-   // Configuração do ambiente do WebDriver e opções do navegador
-   const screen = {
-    width: 1024,
-    height: 720
-  };
-
-  const chromeOptions = new Options();
-  chromeOptions.addArguments('--headless');
-  chromeOptions.addArguments('--no-sandbox');
-  chromeOptions.windowSize(screen);
-
-  const builder = new Builder()
+  const driver = await new Builder()
     .forBrowser('chrome')
-    .setChromeOptions(chromeOptions);
+    .build();
 
-    // Criação da instância do WebDriver
-  let driver = await builder.build();
+  const bridge = new FlutterSeleniumBridge(driver);
+  await driver.get('https://sergi3607.c35.integrator.host/'); // Replace with your Flutter Web app URL
+  await bridge.enableAccessibility();
+  // Wait for 5 secs to let the dynamic content to load
+  await driver.sleep(15000);
 
-  try {
-    
-    // Navegação para a página HTML
-//    await driver.get('https://www.sergio.dev.br');
 
-    await driver.get(' https://sergi3607.c35.integrator.host/');
+// Clica no primeiro "semantics" clicável
+const root = document.querySelector('flt-glass-pane')?.shadowRoot;
+if (root) {
+  console.log([...root.querySelectorAll('*')]);
+    console.log(root);
+  const targets = root.querySelectorAll('[aria-label]');
+  for (const el of targets) {
+    if (el.getAttribute('aria-label') === 'Entrar') {
+      el.click();
+      break;
+    }
+  }
+}
 
-    // Wait for 5 secs to let the dynamic content to load
-    await driver.sleep(5000);
-    
 
-    const button = await driver.findElement(By.css('[aria-label="Entrar"]'));
-    
-    await button.click();
-    /*
-    driver.findElement(By.XPATH, "//div[@aria-label='Abrir Consulta 2']").click();
-    // Esperar o site carregar completamente
-    await driver.sleep(15000);
-*/
+  const botao = await driver.findElement(
+      By.css('flt-semantics-placeholder[aria-label="Enable accessibility"]')
+    );
 
-    // await driver.wait(until.elementLocated(By.id('valorBase')), 10000);
-  //  await driver.wait(until.elementIsVisible(driver.findElement(By.id('valorBase'))), 10000);
-  //  await driver.wait(until.elementLocated(By.id('valorAltura')), 10000);
-  //  await driver.wait(until.elementIsVisible(driver.findElement(By.id('valorAltura'))), 10000);
+  await driver.executeScript("arguments[0].focus(); arguments[0].click();", botao);
 
-/*
-driver.takeScreenshot().then(function(data){
-  var base64Data = data.replace(/^data:image\/png;base64,/,"")
-   fs.writeFile("out.png", base64Data, 'base64', function(err) {
-        if(err) console.log(err);
-   });
-*/ 
+
+  const buttonXPath = '//flt-semantics[contains(@aria-label, "Entrar")]';
+  const clickMeButton = await driver.findElement(By.xpath(buttonXPath));
+  await clickMeButton.click();  
+
 
     // diretorio deve existir...
     await driver.takeScreenshot().then((image, err) => {
-        require('fs').writeFile('./fotos/exemplo/inicio-example_102.png', image, 'base64', function (err) {
+        require('fs').writeFile('./fotos/exemplo/inicio-example_102b.png', image, 'base64', function (err) {
           if (err == null){
               console.log('Gravou Foto');
           }else{
@@ -75,6 +52,9 @@ driver.takeScreenshot().then(function(data){
   
         });
       });
+
+
+})();
   
   //  await driver.findElement(By.name('valorBase')).sendKeys(4, Key.RETURN);
   //  await driver.findElement(By.name('valorAltura')).sendKeys(4, Key.RETURN);
@@ -121,7 +101,6 @@ driver.takeScreenshot().then(function(data){
       });
     });
     // Encerramento do WebDriver
-  */  
   } catch (error) {
     console.error('Teste funcional falhou:', error);
   } finally {
@@ -129,3 +108,4 @@ driver.takeScreenshot().then(function(data){
   }
 
 })();
+*/
