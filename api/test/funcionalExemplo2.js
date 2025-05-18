@@ -10,8 +10,8 @@ const { Browser, By,Key,  until } = require('selenium-webdriver');
 
   const bridge = new FlutterSeleniumBridge(driver);
   
-  //await driver.get('https://sergi3607.c35.integrator.host/'); // Replace with your Flutter Web app URL
-  await driver.get('http://localhost:3030/'); // Replace with your Flutter Web app URL
+  await driver.get('https://sergi3607.c35.integrator.host/'); // Replace with your Flutter Web app URL
+  //await driver.get('http://localhost:3030/'); // Replace with your Flutter Web app URL
  // await bridge.enableAccessibility();
   // Wait for 5 secs to let the dynamic content to load
   await driver.sleep(5000);
@@ -33,7 +33,7 @@ const { Browser, By,Key,  until } = require('selenium-webdriver');
 
     // diretorio deve existir...
     await driver.takeScreenshot().then((image, err) => {
-        require('fs').writeFile('./fotos/exemplo/inicio-example_102b.png', image, 'base64', function (err) {
+        require('fs').writeFile('./fotos/exemplo/inicio-example_102b2.png', image, 'base64', function (err) {
           if (err == null){
               console.log('Gravou Foto');
           }else{
@@ -49,7 +49,7 @@ const { Browser, By,Key,  until } = require('selenium-webdriver');
   await clickMeButton2.click();  
  // diretorio deve existir...
     await driver.takeScreenshot().then((image, err) => {
-        require('fs').writeFile('./fotos/exemplo/inicio-example_102-f.png', image, 'base64', function (err) {
+        require('fs').writeFile('./fotos/exemplo/inicio-example_102-b3.png', image, 'base64', function (err) {
           if (err == null){
               console.log('Gravou Foto');
           }else{
