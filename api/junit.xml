@@ -1,3 +1,39 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="0" failures="0" errors="0" time="0.001">
+<testsuites name="jest tests" tests="15" failures="0" errors="0" time="0.284">
+  <testsuite name="Classe ICMS" errors="0" failures="0" skipped="0" timestamp="2025-05-18T22:27:14" time="0.153" tests="13">
+    <testcase classname="Classe ICMS Deve calcular corretamente o valor do ICMS" name="Classe ICMS Deve calcular corretamente o valor do ICMS" time="0.001">
+    </testcase>
+    <testcase classname="Classe ICMS toJSON deve retornar o objeto esperado" name="Classe ICMS toJSON deve retornar o objeto esperado" time="0.001">
+    </testcase>
+    <testcase classname="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms não forem informados" name="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms não forem informados" time="0">
+    </testcase>
+    <testcase classname="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms não forem números" name="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms não forem números" time="0">
+    </testcase>
+    <testcase classname="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms forem negativos" name="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms forem negativos" time="0">
+    </testcase>
+    <testcase classname="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms forem zero" name="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms forem zero" time="0.001">
+    </testcase>
+    <testcase classname="Função getICMS Deve calcular corretamente o ICMS com parâmetros válidos" name="Função getICMS Deve calcular corretamente o ICMS com parâmetros válidos" time="0">
+    </testcase>
+    <testcase classname="Função getICMS Deve retornar erro quando parâmetros obrigatórios não são informados" name="Função getICMS Deve retornar erro quando parâmetros obrigatórios não são informados" time="0">
+    </testcase>
+    <testcase classname="Função getICMS Deve retornar erro quando parâmetros inválidos são fornecidos" name="Função getICMS Deve retornar erro quando parâmetros inválidos são fornecidos" time="0.001">
+    </testcase>
+    <testcase classname="Função calcularPisCofins Deve calcular corretamente PIS/COFINS no regime cumulativo" name="Função calcularPisCofins Deve calcular corretamente PIS/COFINS no regime cumulativo" time="0">
+    </testcase>
+    <testcase classname="Função calcularPisCofins Deve calcular corretamente PIS/COFINS no regime não-cumulativo" name="Função calcularPisCofins Deve calcular corretamente PIS/COFINS no regime não-cumulativo" time="0">
+    </testcase>
+    <testcase classname="Função calcularPisCofins Deve aplicar o fator de alíquota corretamente" name="Função calcularPisCofins Deve aplicar o fator de alíquota corretamente" time="0">
+    </testcase>
+    <testcase classname="Função calcularPisCofins Deve retornar erro quando parâmetros obrigatórios não são informados" name="Função calcularPisCofins Deve retornar erro quando parâmetros obrigatórios não são informados" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Texte exemplo" errors="0" failures="0" skipped="0" timestamp="2025-05-18T22:27:14" time="0.034" tests="1">
+    <testcase classname="Texte exemplo Aplicar desconto" name="Texte exemplo Aplicar desconto" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Texte exemplo" errors="0" failures="0" skipped="0" timestamp="2025-05-18T22:27:14" time="0.037" tests="1">
+    <testcase classname="Texte exemplo Aplicar desconto" name="Texte exemplo Aplicar desconto" time="0">
+    </testcase>
+  </testsuite>
 </testsuites>
