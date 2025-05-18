@@ -74,10 +74,16 @@ class _ConsultaPageState1 extends State<ConsultaPage1> {
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            ElevatedButton(
-              onPressed: _fetchData,
-              child: Text('Consultar API'),
-            ),
+             Semantics(
+                identifier: 'Entrar2',
+                label: 'Entrar2',
+                button: true,
+                child: ElevatedButton(
+                   onPressed: _fetchData,
+                  child: Text('Consultar API'),
+                )
+    )
+            ,
             SizedBox(height: 20),
             Container(
               width: double.infinity,

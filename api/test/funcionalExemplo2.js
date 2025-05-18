@@ -1,5 +1,6 @@
 const { Builder } = require('selenium-webdriver');
 const { FlutterSeleniumBridge } = require('@rentready/flutter-selenium-bridge');
+const { Browser, By,Key,  until } = require('selenium-webdriver');
 
 (async () => {
 
@@ -8,35 +9,24 @@ const { FlutterSeleniumBridge } = require('@rentready/flutter-selenium-bridge');
     .build();
 
   const bridge = new FlutterSeleniumBridge(driver);
-  await driver.get('https://sergi3607.c35.integrator.host/'); // Replace with your Flutter Web app URL
-  await bridge.enableAccessibility();
+  
+  //await driver.get('https://sergi3607.c35.integrator.host/'); // Replace with your Flutter Web app URL
+  await driver.get('http://localhost:3030/'); // Replace with your Flutter Web app URL
+ // await bridge.enableAccessibility();
   // Wait for 5 secs to let the dynamic content to load
-  await driver.sleep(15000);
+  await driver.sleep(5000);
 
 
-// Clica no primeiro "semantics" clicável
-const root = document.querySelector('flt-glass-pane')?.shadowRoot;
-if (root) {
-  console.log([...root.querySelectorAll('*')]);
-    console.log(root);
-  const targets = root.querySelectorAll('[aria-label]');
-  for (const el of targets) {
-    if (el.getAttribute('aria-label') === 'Entrar') {
-      el.click();
-      break;
-    }
-  }
-}
-
-
+//
+/*
   const botao = await driver.findElement(
       By.css('flt-semantics-placeholder[aria-label="Enable accessibility"]')
     );
 
   await driver.executeScript("arguments[0].focus(); arguments[0].click();", botao);
+*/
 
-
-  const buttonXPath = '//flt-semantics[contains(@aria-label, "Entrar")]';
+  const buttonXPath = "//flt-semantics[text()='Entrar']";
   const clickMeButton = await driver.findElement(By.xpath(buttonXPath));
   await clickMeButton.click();  
 
@@ -53,6 +43,21 @@ if (root) {
         });
       });
 
+  await driver.sleep(11000);
+  const buttonXPath2 = "//flt-semantics[text()='Consultar API']";
+  const clickMeButton2 = await driver.findElement(By.xpath(buttonXPath2));
+  await clickMeButton2.click();  
+ // diretorio deve existir...
+    await driver.takeScreenshot().then((image, err) => {
+        require('fs').writeFile('./fotos/exemplo/inicio-example_102-f.png', image, 'base64', function (err) {
+          if (err == null){
+              console.log('Gravou Foto');
+          }else{
+              console.log('Erro ->' + err);
+          }
+  
+        });
+      });
 
 })();
   

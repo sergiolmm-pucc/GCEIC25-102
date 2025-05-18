@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
@@ -6,6 +7,8 @@ import 'package:gcseic25/equipes/base/base.dart';
 import 'equipes/equipe7/calculator_screen.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
+  SemanticsBinding.instance.ensureSemantics();
   runApp(MyApp());
 }
 
@@ -59,6 +62,7 @@ class HomePage extends StatelessWidget {
             ),
 
             Semantics(
+              identifier: 'Entrar',
       label: 'Entrar',
       button: true,
       child: ElevatedButton(
