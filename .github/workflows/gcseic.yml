@@ -123,7 +123,11 @@ jobs:
           echo "Conteúdo do diretório após limpeza:"
           ls -la
       - name: limpeza
-        run: rm -rf covarage    
+        run: |
+          cd coverage
+          rm *.*
+          cd ..
+           
       - name: Faz sincronismo com o Glitch
         uses: kanadgupta/glitch-sync@v3.0.1
         with:
