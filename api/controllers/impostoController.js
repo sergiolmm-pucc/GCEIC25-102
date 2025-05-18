@@ -41,22 +41,69 @@ exports.getNotaFiscal = (req, res) => {
 };
 
 exports.getICMS = (req, res) => {
-	const { valor_produto, aliquota_icms } = req.query;
+  const { valor_produto, aliquota_icms } = req.query;
 
-	const icms = new ICMS({
-		valor_produto: parseFloat(valor_produto) || 0,
-		aliquota_icms: parseFloat(aliquota_icms) || 0,
-	});
+  // Valida os parâmetros obrigatórios
+  if (!valor_produto || !aliquota_icms) {
+    return res
+      .status(400)
+      .json({ error: "Parâmetros obrigatórios não informados" });
+  }
 
-	// Valida os parâmetros
-	if (!valor_produto || !aliquota_icms) {
-		return res
-			.status(400)
-			.json({ error: "Parâmetros obrigatórios não informados" });
-	}
-	if (isNaN(icms.valor_produto) || isNaN(icms.aliquota_icms)) {
-		return res.status(400).json({ error: "Parâmetros inválidos" });
-	}
+  // Verifica se os parâmetros são números válidos
+  const valorProdutoFloat = parseFloat(valor_produto);
+  const aliquotaIcmsFloat = parseFloat(aliquota_icms);
+
+  if (isNaN(valorProdutoFloat) || isNaN(aliquotaIcmsFloat)) {
+    return res.status(400).json({ error: "Parâmetros inválidos" });
+  }
+
+  const icms = new ICMS({
+    valor_produto: valorProdutoFloat,
+    aliquota_icms: aliquotaIcmsFloat,
+  });
 
   res.json(icms.toJSON());
 };
+
+
+// POST /calcular-pis-cofins
+exports.calcularPisCofins = (req, res) => {
+  const { regime, receitaBruta, aliquota } = req.body;
+
+  if (!regime || !receitaBruta || !aliquota) {
+    return res.status(400).json({
+      success: false,
+      message: 'Todos os campos são obrigatórios: regime, receitaBruta e aliquota'
+    });
+  }
+
+  let valorPis = 0;
+  let valorCofins = 0;
+
+  // Alíquotas padrão
+  const aliquotaPis = regime === 'cumulativo' ? 0.65 : 1.65;
+  const aliquotaCofins = regime === 'cumulativo' ? 3.0 : 7.6;
+
+  // Cálculos
+  valorPis = (receitaBruta * aliquotaPis) / 100;
+  valorCofins = (receitaBruta * aliquotaCofins) / 100;
+
+  // Aplicando a alíquota informada (se necessário)
+  if (aliquota > 0) {
+    const fator = aliquota / 100;
+    valorPis *= fator;
+    valorCofins *= fator;
+  }
+
+  res.json({
+    success: true,
+    resultado: {
+      regime, 
+      receitaBruta,
+      valorPis,
+      valorCofins,
+      total: valorPis + valorCofins
+    }
+  })
+}
