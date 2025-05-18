@@ -88,6 +88,9 @@ class _UsoAppPageState extends State<UsoAppPage> {
               },
               child: Text('Cálculo ICMS'),
             ),
+            Text(
+              'Estrutura de Impostos: ICMS: ${estruturaImpostos.icms}, PIS: ${estruturaImpostos.pis}, COFINS: ${estruturaImpostos.cofins}, IPI: ${estruturaImpostos.ipi}',
+            ),
           ],
         ),
       ),
