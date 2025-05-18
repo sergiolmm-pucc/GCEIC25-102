@@ -77,6 +77,49 @@
             }
           }
         }
+      },
+      "/imposto/calculo-icms": {
+        "get": {
+          "summary": "Calcula o valor do ICMS",
+          "parameters": [
+            {
+              "name": "valor_produto",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "number"
+              }
+            },
+            {
+              "name": "aliquota_icms",
+              "in": "query",
+              "required": true,
+              "schema": {
+                "type": "number"
+              }
+            }
+          ],
+          "responses": {
+            "200": {
+              "description": "Retorna os dados do ICMS calculado",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "valor_produto": { "type": "number" },
+                      "aliquota_icms": { "type": "number" },
+                      "valor_icms": { "type": "number" }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Erro - parâmetros inválidos ou ausentes"
+            }
+          }
+        }
       }
     }
   }

@@ -1,11 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'estrutura_impostos.dart';
 
 class PisCofinsPage extends StatefulWidget {
   final String title;
+  final EstruturaImpostos estruturaImpostos;
 
-  const PisCofinsPage({required this.title});
+  const PisCofinsPage({required this.title, required this.estruturaImpostos});
 
   @override
   _PisCofinsPageState createState() => _PisCofinsPageState();
@@ -50,6 +52,8 @@ class _PisCofinsPageState extends State<PisCofinsPage> {
             Valor COFINS: ${data['resultado']['valorCofins'].toStringAsFixed(2)}
             Total: ${data['resultado']['total'].toStringAsFixed(2)}
             ''';
+            widget.estruturaImpostos.pis = data['resultado']['valorPis'];
+            widget.estruturaImpostos.cofins = data['resultado']['valorCofins'];
           });
         } else {
           setState(() {
