@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'estrutura_impostos.dart';
 
 class CalculoIcmsPage extends StatefulWidget {
   final String title;
-  const CalculoIcmsPage({super.key, required this.title});
+  final EstruturaImpostos estruturaImpostos;
+  const CalculoIcmsPage({super.key, required this.title, required this.estruturaImpostos});
 
   @override
   State<CalculoIcmsPage> createState() => _CalculoIcmsPageState();
@@ -37,6 +38,7 @@ class _CalculoIcmsPageState extends State<CalculoIcmsPage> {
         final data = jsonDecode(resp.body);
         setState(() {
           valor_icms = data['valor_icms']?.toDouble() ?? 0.0;
+          widget.estruturaImpostos.icms = valor_icms;
           valor_produto = data['valor_produto']?.toDouble() ?? 0.0;
           aliquota_icms = data['aliquota_icms']?.toDouble() ?? 0.0;
           resultado =
@@ -45,8 +47,6 @@ class _CalculoIcmsPageState extends State<CalculoIcmsPage> {
               'Valor do ICMS: R\$ $valor_icms\n'
               'Valor total: R\$ ${valor_produto + valor_icms}';
         });
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setDouble('valor_icms', valor_icms);
       } else {
         setState(() {
           resultado = 'Erro: ${resp.statusCode}';
