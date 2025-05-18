@@ -77,11 +77,11 @@ exports.getValorIpiTotal = (req, res) => {
 		.json({ error: "Parâmetros obrigatórios não informados" });
 	}
 
-	if (isNaN(ipi.valor_produto) || isNaN(ipi.aliquota_ipi) || isNaN(quantidade)) {
-		return res
+	if (isNaN(ipi.valor_produto) || isNaN(ipi.aliquota_ipi) || isNaN(ipi.quantidade)) {
+        return res
 		.status(400)
-		.json({ error: "Parâmetros inválidos"})
-	}
+		.json({ error: "Parâmetros inválidos"});
+    }
 
 	res.json(ipi.toJSON());
 }
