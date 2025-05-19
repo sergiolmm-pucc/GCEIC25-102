@@ -10,17 +10,22 @@ const { Options } = require('selenium-webdriver/chrome');
     height: 720
   };
 
+  console.log('Config chrome');
   const chromeOptions = new Options();
-  // descomentar as linhas abaixo quando for subir para teste no actions
-  //chromeOptions.addArguments('--headless');
-  //chromeOptions.addArguments('--no-sandbox');
+  // comentar as linhas abaixo quando for subir para teste local
+  chromeOptions.addArguments('--headless');
+  chromeOptions.addArguments('--no-sandbox');
   chromeOptions.windowSize(screen);
 
+
+  console.log('ini builder');
   const builder = new Builder()
     .forBrowser('chrome')
     .setChromeOptions(chromeOptions);
 
     // Criação da instância do WebDriver
+  
+  console.log('driver creation');  
   let driver = await builder.build();
 
   //const driver = await new Builder()
@@ -29,6 +34,7 @@ const { Options } = require('selenium-webdriver/chrome');
 
   const bridge = new FlutterSeleniumBridge(driver);
   
+  console.log('https://sergi3607.c35.integrator.host/');
   await driver.get('https://sergi3607.c35.integrator.host/'); // Replace with your Flutter Web app URL
   //await driver.get('http://localhost:3030/'); // Replace with your Flutter Web app URL
   //await bridge.enableAccessibility();
