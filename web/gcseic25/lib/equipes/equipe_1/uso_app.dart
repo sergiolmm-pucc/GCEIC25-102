@@ -3,6 +3,7 @@ import 'package:http/http.dart' as http;
 import 'sobre.dart';
 import 'ajuda.dart';
 import 'calculo_icms.dart';
+import 'calculo_ipi.dart';
 import 'estrutura_impostos.dart';
 import 'calculo_pis_cofins.dart';
 import 'nota_fiscal_page.dart';
@@ -15,6 +16,7 @@ class UsoAppPage extends StatefulWidget {
 class _UsoAppPageState extends State<UsoAppPage> {
   String resultado = 'Clique para consultar a API.';
   EstruturaImpostos estruturaImpostos = EstruturaImpostos(
+    valor_produto: 0.0,
     icms: 0.0,
     pis: 0.0,
     cofins: 0.0,
@@ -89,6 +91,22 @@ class _UsoAppPageState extends State<UsoAppPage> {
                 setState(() {});
               },
               child: Text('Cálculo ICMS'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => CalculoIpiPage(
+                      title: 'Cálculo IPI',
+                      estruturaImpostos: estruturaImpostos,
+                    ),
+                  ),
+                );
+                // Atualiza a tela principal ao voltar da tela de cálculo
+                setState(() {});
+              },
+              child: Text('Cálculo IPI'),
             ),
             ElevatedButton(
               onPressed: () async {
