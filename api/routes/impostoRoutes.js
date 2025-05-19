@@ -8,5 +8,6 @@ const impostosController = require('../controllers/impostoController');
 router.get('/resumo-nota-fiscal', impostosController.getNotaFiscal);
 router.get('/calculo-icms', impostosController.getICMS);
 router.get('/calculo-ipi', impostosController.getValorIpiTotal);
+router.post('/calcular-pis-cofins', impostosController.calcularPisCofins);
 
 module.exports = router;

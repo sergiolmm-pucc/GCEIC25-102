@@ -42,46 +42,27 @@ exports.getNotaFiscal = (req, res) => {
 };
 
 exports.getICMS = (req, res) => {
-	const { valor_produto, aliquota_icms } = req.query;
+  const { valor_produto, aliquota_icms } = req.query;
 
-	const icms = new ICMS({
-		valor_produto: parseFloat(valor_produto) || 0,
-		aliquota_icms: parseFloat(aliquota_icms) || 0,
-	});
+  // Valida os parâmetros obrigatórios
+  if (!valor_produto || !aliquota_icms) {
+    return res
+      .status(400)
+      .json({ error: "Parâmetros obrigatórios não informados" });
+  }
 
-	// Valida os parâmetros
-	if (!valor_produto || !aliquota_icms) {
-		return res
-			.status(400)
-			.json({ error: "Parâmetros obrigatórios não informados" });
-	}
-	if (isNaN(icms.valor_produto) || isNaN(icms.aliquota_icms)) {
-		return res.status(400).json({ error: "Parâmetros inválidos" });
-	}
+  // Verifica se os parâmetros são números válidos
+  const valorProdutoFloat = parseFloat(valor_produto);
+  const aliquotaIcmsFloat = parseFloat(aliquota_icms);
+
+  if (isNaN(valorProdutoFloat) || isNaN(aliquotaIcmsFloat)) {
+    return res.status(400).json({ error: "Parâmetros inválidos" });
+  }
+
+  const icms = new ICMS({
+    valor_produto: valorProdutoFloat,
+    aliquota_icms: aliquotaIcmsFloat,
+  });
 
   res.json(icms.toJSON());
 };
-
-exports.getValorIpiTotal = (req, res) => {
-	const { valor_produto, aliquota_ipi, quantidade } = req.query;
-
-	const ipi = new Ipi({
-		valor_produto: parseFloat(valor_produto) || 0,
-		aliquota_ipi: parseFloat(aliquota_ipi) || 0,
-		quantidade: parseInt(quantidade) || 0,
-	});
-
-	if (!valor_produto || !aliquota_ipi || !quantidade) {
-		return res
-		.status(400)
-		.json({ error: "Parâmetros obrigatórios não informados" });
-	}
-
-	if (isNaN(ipi.valor_produto) || isNaN(ipi.aliquota_ipi) || isNaN(ipi.quantidade)) {
-        return res
-		.status(400)
-		.json({ error: "Parâmetros inválidos"});
-    }
-
-	res.json(ipi.toJSON());
-}

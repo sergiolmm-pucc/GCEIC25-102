@@ -3,7 +3,6 @@ import 'package:http/http.dart' as http;
 import 'sobre.dart';
 import 'ajuda.dart';
 import 'calculo_icms.dart';
-import 'calculo_ipi.dart';
 
 class UsoAppPage extends StatefulWidget {
   @override
@@ -12,10 +11,18 @@ class UsoAppPage extends StatefulWidget {
 
 class _UsoAppPageState extends State<UsoAppPage> {
   String resultado = 'Clique para consultar a API.';
+  EstruturaImpostos estruturaImpostos = EstruturaImpostos(
+    icms: 0.0,
+    pis: 0.0,
+    cofins: 0.0,
+    ipi: 0.0,
+  );
 
   Future<void> consultarAPI() async {
     try {
-      final response = await http.get(Uri.parse('http://localhost:3000/imposto/')); // substitua pelo seu endpoint
+      final response = await http.get(
+        Uri.parse('http://localhost:3000/imposto/'),
+      ); // substitua pelo seu endpoint
       if (response.statusCode == 200) {
         setState(() {
           resultado = response.body;
@@ -48,21 +55,38 @@ class _UsoAppPageState extends State<UsoAppPage> {
             Text(resultado),
             Divider(height: 40),
             ElevatedButton(
-              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => SobrePage())),
+              onPressed:
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => SobrePage()),
+                  ),
               child: Text('Sobre a Equipe'),
             ),
             ElevatedButton(
-              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => AjudaPage())),
+              onPressed:
+                  () => Navigator.push(
+                    context,
+                    MaterialPageRoute(builder: (_) => AjudaPage()),
+                  ),
               child: Text('Ajuda'),
             ),
             ElevatedButton(
-              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => CalculoIcmsPage(title: 'Cálculo ICMS'))),
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (_) => CalculoIcmsPage(
+                          title: 'Cálculo ICMS',
+                          estruturaImpostos: estruturaImpostos,
+                        ),
+                  ),
+                );
+                // Atualiza a tela principal ao voltar da tela de cálculo
+                setState(() {});
+              },
               child: Text('Cálculo ICMS'),
             ),
-            ElevatedButton(
-              onPressed: () =>  Navigator.push(context, MaterialPageRoute(builder: (_) => CalculoIpiPage(title: 'Cálculo IPI'))),
-              child: Text('Cálculo IPI'),
-            )
           ],
         ),
       ),
