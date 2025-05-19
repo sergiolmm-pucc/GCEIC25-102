@@ -97,43 +97,43 @@ jobs:
       run:
         working-directory: api # Define o diretório base para todos os comandos
     steps:
-      - name: Get Code
-        uses: actions/checkout@v3
-      - name: lista
-        run: ls -la
-      - name: Limpa arquivos antes da sincronização
-        run: |
-          echo "Removendo arquivos e diretórios que causam problemas na sincronização"
-          # Remove o diretório de coverage
-          rm -rf coverage || true
-          # Remove outros arquivos grandes ou temporários se necessário
-          rm -rf node_modules/.cache || true
-          echo "Conteúdo do diretório após limpeza:"
-          ls -la     
+ #     - name: Get Code
+ #       uses: actions/checkout@v3
+ #     - name: lista
+ #       run: ls -la
+ #     - name: Limpa arquivos antes da sincronização
+ #       run: |
+ #         echo "Removendo arquivos e diretórios que causam problemas na sincronização"
+ #         # Remove o diretório de coverage
+ #         rm -rf coverage || true
+ #         # Remove outros arquivos grandes ou temporários se necessário
+ #         rm -rf node_modules/.cache || true
+ #         echo "Conteúdo do diretório após limpeza:"
+ #         ls -la     
 
         
-      - name: Install NodeJS
-        uses: actions/setup-node@v3
-        with:
-          node-version: '22.x'
-      - name: Validate API Directory
-        run: |
-          if [ ! -d "." ]; then
-            echo "Error: API directory does not exist or is not accessible.";
-            exit 1;
-          fi
-          echo "API directory content:"
-          ls -la
-      - name: Instala Dependencias
-        run: npm ci
-      - name: Validate API Directory
-        run: |
-          if [ ! -d "." ]; then
-            echo "Error: API directory does not exist or is not accessible.";
-            exit 1;
-          fi
-          echo "API directory content:"
-          ls -la     
+ #     - name: Install NodeJS
+ #       uses: actions/setup-node@v3
+ #       with:
+ #         node-version: '22.x'
+ #     - name: Validate API Directory
+ #       run: |
+ #         if [ ! -d "." ]; then
+ #           echo "Error: API directory does not exist or is not accessible.";
+ #           exit 1;
+ #         fi
+ #         echo "API directory content:"
+ #         ls -la
+ #     - name: Instala Dependencias
+ #       run: npm ci
+ #     - name: Validate API Directory
+ #       run: |
+ #         if [ ! -d "." ]; then
+ #           echo "Error: API directory does not exist or is not accessible.";
+ #           exit 1;
+ #         fi
+ #         echo "API directory content:"
+ #         ls -la     
       - name: Faz sincronismo com o Glitch
         uses: kanadgupta/glitch-sync@v3.0.1
         with:
