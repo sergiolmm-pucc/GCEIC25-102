@@ -29,8 +29,8 @@ const { Options } = require('selenium-webdriver/chrome');
 
   const bridge = new FlutterSeleniumBridge(driver);
   
-  //await driver.get('https://sergi3607.c35.integrator.host/'); // Replace with your Flutter Web app URL
-  await driver.get('http://localhost:3030/'); // Replace with your Flutter Web app URL
+  await driver.get('https://sergi3607.c35.integrator.host/'); // Replace with your Flutter Web app URL
+  //await driver.get('http://localhost:3030/'); // Replace with your Flutter Web app URL
   //await bridge.enableAccessibility();
   // Wait for 5 secs to let the dynamic content to load
   await driver.sleep(10000);
