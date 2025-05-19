@@ -11,8 +11,9 @@ const { Options } = require('selenium-webdriver/chrome');
   };
 
   const chromeOptions = new Options();
-  chromeOptions.addArguments('--headless');
-  chromeOptions.addArguments('--no-sandbox');
+  // descomentar as linhas abaixo quando for subir para teste no actions
+  //chromeOptions.addArguments('--headless');
+  //chromeOptions.addArguments('--no-sandbox');
   chromeOptions.windowSize(screen);
 
   const builder = new Builder()
@@ -189,7 +190,7 @@ console.table(infoList);
     await driver.takeScreenshot().then((image, err) => {
         require('fs').writeFile('./fotos/exemplo/resultado-3.png', image, 'base64', function (err) {
           if (err == null){
-              console.log('Gravou Foto 4');
+              console.log('Gravou Foto 5');
           }else{
               console.log('Erro ->' + err);
           }
