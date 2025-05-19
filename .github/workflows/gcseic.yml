@@ -97,10 +97,10 @@ jobs:
       run:
         working-directory: api # Define o diretório base para todos os comandos
     steps:
-      - name: lista
-        run: ls -la
       - name: Get Code
         uses: actions/checkout@v3
+      - name: lista
+        run: ls -la
       - name: Limpa arquivos antes da sincronização
         run: |
           echo "Removendo arquivos e diretórios que causam problemas na sincronização"
