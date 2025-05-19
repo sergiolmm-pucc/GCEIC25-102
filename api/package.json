@@ -1,34 +1,35 @@
 {
-    "name": "meu-projeto-node",
-    "version": "1.0.0",
-    "description": "API com Express e Swagger",
-    "main": "server.js",
-    "scripts": {
-        "start": "node server.js",
-        "test": "jest  --ci --reporters=default --testResultsProcessor=jest-junit",
-        "funcional": "node ./test/funcionalExemplo",
-        "funcional2": "node ./test/funcionalExemplo2"
-    },
-    "dependencies": {
-        "@rentready/flutter-selenium-bridge": "^1.0.5",
-        "cors": "^2.8.5",
-        "express": "^4.18.2",      
-        "swagger-ui-express": "^4.6.3"
-    },
-    "engines": {
-        "node": "22.x"
-    },
-    "repository": {
-        "url": "https://glitch.com/edit/#!/glitch-hello-node"
-    },
-    "license": "MIT",
-    "keywords": [
-        "node",
-        "glitch"
-    ],
-    "devDependencies": {
-        "jest": "^29.7.0",
-        "supertest": "^7.1.1", 
-        "jest-junit": "^16.0.0"
-    }
+  "name": "meu-projeto-node",
+  "version": "1.0.0",
+  "description": "API com Express e Swagger",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "test": "jest --no-coverage --ci --reporters=default --testResultsProcessor=jest-junit",
+    "test:coverage": "jest --coverage --ci --reporters=default --testResultsProcessor=jest-junit",
+    "funcional": "node ./test/funcionalExemplo",
+    "funcional2": "node ./test/funcionalExemplo2"
+  },
+  "dependencies": {
+    "@rentready/flutter-selenium-bridge": "^1.0.5",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "swagger-ui-express": "^4.6.3"
+  },
+  "engines": {
+    "node": "22.x"
+  },
+  "repository": {
+    "url": "https://glitch.com/edit/#!/glitch-hello-node"
+  },
+  "license": "MIT",
+  "keywords": [
+    "node",
+    "glitch"
+  ],
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "supertest": "^7.1.1",
+    "jest-junit": "^16.0.0"
+  }
 }
