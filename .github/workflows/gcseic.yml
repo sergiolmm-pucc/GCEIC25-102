@@ -99,6 +99,17 @@ jobs:
     steps:
       - name: Get Code
         uses: actions/checkout@v3
+      - name: Limpa arquivos antes da sincronização
+        run: |
+          echo "Removendo arquivos e diretórios que causam problemas na sincronização"
+          # Remove o diretório de coverage
+          rm -rf coverage || true
+          # Remove outros arquivos grandes ou temporários se necessário
+          rm -rf node_modules/.cache || true
+          echo "Conteúdo do diretório após limpeza:"
+          ls -la     
+
+        
       - name: Install NodeJS
         uses: actions/setup-node@v3
         with:
@@ -113,16 +124,7 @@ jobs:
           ls -la
       - name: Instala Dependencias
         run: npm ci
-      - name: Limpa arquivos antes da sincronização
-        run: |
-          echo "Removendo arquivos e diretórios que causam problemas na sincronização"
-          # Remove o diretório de coverage
-          rm -rf coverage || true
-          # Remove outros arquivos grandes ou temporários se necessário
-          rm -rf node_modules/.cache || true
-          echo "Conteúdo do diretório após limpeza:"
-          ls -la     
-
+     
       - name: Faz sincronismo com o Glitch
         uses: kanadgupta/glitch-sync@v3.0.1
         with:
