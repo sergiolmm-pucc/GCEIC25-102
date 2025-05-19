@@ -27,6 +27,12 @@
     </testcase>
     <testcase classname="Função calcularPisCofins Deve retornar erro quando parâmetros obrigatórios não são informados" name="Função calcularPisCofins Deve retornar erro quando parâmetros obrigatórios não são informados" time="0">
     </testcase>
+    <testcase classname="Função getNotaFiscal Deve retornar nota fiscal válida com parâmetros corretos" name="Função getNotaFiscal Deve retornar nota fiscal válida com parâmetros corretos" time="0.001">
+    </testcase>
+    <testcase classname="Função getNotaFiscal Deve retornar erro quando parâmetros estão ausentes" name="Função getNotaFiscal Deve retornar erro quando parâmetros estão ausentes" time="0.001">
+    </testcase>
+    <testcase classname="Função getNotaFiscal Deve retornar erro quando parâmetros são inválidos" name="Função getNotaFiscal Deve retornar erro quando parâmetros são inválidos" time="0.001">
+    </testcase>
   </testsuite>
   <testsuite name="Texte exemplo" errors="0" failures="0" skipped="0" timestamp="2025-05-18T22:27:14" time="0.034" tests="1">
     <testcase classname="Texte exemplo Aplicar desconto" name="Texte exemplo Aplicar desconto" time="0">
