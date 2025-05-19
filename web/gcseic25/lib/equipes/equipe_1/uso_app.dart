@@ -6,6 +6,7 @@ import 'calculo_icms.dart';
 import 'calculo_ipi.dart';
 import 'estrutura_impostos.dart';
 import 'calculo_pis_cofins.dart';
+import 'nota_fiscal_page.dart';
 
 class UsoAppPage extends StatefulWidget {
   @override
@@ -52,8 +53,8 @@ class _UsoAppPageState extends State<UsoAppPage> {
         child: Column(
           children: [
             ElevatedButton(
-              onPressed: consultarAPI,
-              child: Text('Consultar API'),
+              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (_) => NotaFiscalPage()))},
+              child: Text('Nota Fiscal'),
             ),
             SizedBox(height: 20),
             Text(resultado),
