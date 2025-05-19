@@ -5,6 +5,10 @@ import 'estrutura_impostos.dart';
 import 'dart:convert';
 
 class NotaFiscalPage extends StatefulWidget {
+  final EstruturaImpostos estruturaImpostos;
+
+  const NotaFiscalPage({required this.estruturaImpostos});
+
   @override
   _NotaFiscalPageState createState() => _NotaFiscalPageState();
 }
@@ -13,13 +17,14 @@ class _NotaFiscalPageState extends State<NotaFiscalPage> {
   String _resultado = 'Clique em "Consultar API" para ver o resumo.';
 
   Future<void> consultarNotaFiscal() async {
-    final baseUrl = 'http://10.0.2.2:3000/impostos/resumo-nota-fiscal'; // use o IP correto conforme seu ambiente
+    final baseUrl = 'http://localhost:3000/imposto/resumo-nota-fiscal'; // use o IP correto conforme seu ambiente
 
     final uri = Uri.parse(baseUrl).replace(queryParameters: {
-      'icms': EstruturaImpostos.icms.toString(),
-      'ipi': EstruturaImpostos.ipi.toString(),
-      'pis': EstruturaImpostos.pis.toString(),
-      'cofins': EstruturaImpostos.cofins.toString(),
+      'valor_produto': widget.estruturaImpostos.valor_produto.toString(),
+      'valor_icms': widget.estruturaImpostos.icms.toString(),
+      'valor_ipi': widget.estruturaImpostos.ipi.toString(),
+      'valor_pis': widget.estruturaImpostos.pis.toString(),
+      'valor_cofins': widget.estruturaImpostos.cofins.toString(),
     });
 
     try {
