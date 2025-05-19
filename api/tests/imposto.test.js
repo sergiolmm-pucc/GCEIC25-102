@@ -1,6 +1,6 @@
 // imposto.test.js
 // equipe 1 - kauan, paulo, gian e vinicius
-const { getICMS, calcularPisCofins } = require("../controllers/impostoController");
+const { getICMS, calcularPisCofins, getNotaFiscal } = require("../controllers/impostoController");
 const ICMS = require("../models/ICMS");
 
 describe("Classe ICMS", () => {
@@ -215,4 +215,67 @@ describe("Função calcularPisCofins", () => {
 		message: 'Todos os campos são obrigatórios: regime, receitaBruta e aliquota'
 	  });
 	});
+});
+
+describe("Função getNotaFiscal", () => {
+  let req, res;
+
+  beforeEach(() => {
+    req = { query: {} };
+    res = {
+      status: jest.fn().mockReturnThis(),
+      json: jest.fn()
+    };
+  });
+
+  test("Deve retornar nota fiscal válida com parâmetros corretos", () => {
+    req.query = {
+      valor_produto: "100",
+      valor_ipi: "10",
+      valor_pis: "5",
+      valor_cofins: "15",
+      valor_icms: "20"
+    };
+
+    getNotaFiscal(req, res);
+
+    expect(res.json).toHaveBeenCalledWith({
+      valor_produto: 100,
+      valor_ipi: 10,
+      valor_pis: 5,
+      valor_cofins: 15,
+      valor_icms: 20
+    });
+  });
+
+  test("Deve retornar erro quando parâmetros estão ausentes", () => {
+    req.query = {
+      valor_produto: "100",
+      valor_ipi: "10"
+    };
+
+    getNotaFiscal(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({
+      error: "Parâmetros obrigatórios não informados"
+    });
+  });
+
+  test("Deve retornar erro quando parâmetros são inválidos", () => {
+    req.query = {
+      valor_produto: "abc", // inválido
+      valor_ipi: "10",
+      valor_pis: "5",
+      valor_cofins: "15",
+      valor_icms: "20"
+    };
+
+    getNotaFiscal(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith({
+      error: "Parâmetros inválidos"
+    });
+  });
 });
