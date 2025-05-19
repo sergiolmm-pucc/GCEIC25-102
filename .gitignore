@@ -26,3 +26,6 @@ Thumbs.db
 # Diretórios de build ou temporários (se você criar algum)
 dist/
 tmp/
+
+# Test coverage reports
+coverage/
