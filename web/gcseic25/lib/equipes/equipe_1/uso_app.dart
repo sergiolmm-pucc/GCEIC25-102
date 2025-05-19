@@ -53,7 +53,7 @@ class _UsoAppPageState extends State<UsoAppPage> {
         child: Column(
           children: [
             ElevatedButton(
-              onPressed: () {Navigator.push(context, MaterialPageRoute(builder: (_) => NotaFiscalPage()))},
+              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => NotaFiscalPage(estruturaImpostos: estruturaImpostos))),
               child: Text('Nota Fiscal'),
             ),
             SizedBox(height: 20),

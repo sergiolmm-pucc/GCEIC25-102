@@ -32,3 +32,5 @@ class NotaFiscal {
     };
   }
 }
+
+module.exports = NotaFiscal
