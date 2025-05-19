@@ -124,10 +124,19 @@ jobs:
           ls -la
       - name: Instala Dependencias
         run: npm ci
-     
+      - name: Validate API Directory
+        run: |
+          if [ ! -d "." ]; then
+            echo "Error: API directory does not exist or is not accessible.";
+            exit 1;
+          fi
+          echo "API directory content:"
+          ls -la     
       - name: Faz sincronismo com o Glitch
         uses: kanadgupta/glitch-sync@v3.0.1
         with:
           auth-token: "${{ secrets.authToken }}"
           project-id: "${{ secrets.projectId }}"
           path: 'api'
+      - name: lista
+        run: ls -la
