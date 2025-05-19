@@ -28,7 +28,7 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   double? result;
 
   Future<void> calculateCost() async {
-    final url = Uri.parse('http://localhost:3000/calcular-custo-casa-container');
+    final url = Uri.parse('https://sincere-magnificent-cobweb.glitch.me/calcular-custo-casa-container');
 
     final response = await http.post(
       url,
