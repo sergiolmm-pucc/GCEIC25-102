@@ -3,6 +3,9 @@ import 'package:http/http.dart' as http;
 import 'sobre.dart';
 import 'ajuda.dart';
 import 'calculo_icms.dart';
+import 'calculo_ipi.dart';
+import 'estrutura_impostos.dart';
+import 'calculo_pis_cofins.dart';
 
 class UsoAppPage extends StatefulWidget {
   @override
@@ -86,6 +89,42 @@ class _UsoAppPageState extends State<UsoAppPage> {
                 setState(() {});
               },
               child: Text('Cálculo ICMS'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder: (_) => CalculoIpiPage(
+                      title: 'Cálculo IPI',
+                      estruturaImpostos: estruturaImpostos,
+                    ),
+                  ),
+                );
+                // Atualiza a tela principal ao voltar da tela de cálculo
+                setState(() {});
+              },
+              child: Text('Cálculo IPI'),
+            ),
+            ElevatedButton(
+              onPressed: () async {
+                await Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                    builder:
+                        (_) => PisCofinsPage(
+                          title: 'Cálculo de PIS/COFINS',
+                          estruturaImpostos: estruturaImpostos,
+                        ),
+                  ),
+                );
+                // Atualiza a tela principal ao voltar da tela de cálculo
+                setState(() {});
+              },
+              child: Text('Cálculo de PIS/COFINS'),
+            ),
+            Text(
+              'Estrutura de Impostos: ICMS: ${estruturaImpostos.icms}, PIS: ${estruturaImpostos.pis}, COFINS: ${estruturaImpostos.cofins}, IPI: ${estruturaImpostos.ipi}',
             ),
           ],
         ),

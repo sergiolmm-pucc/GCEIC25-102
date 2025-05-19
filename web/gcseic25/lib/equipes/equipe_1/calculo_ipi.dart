@@ -2,10 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
+import 'estrutura_impostos.dart';
 
 class CalculoIpiPage extends StatefulWidget {
   final String title;
-  const CalculoIpiPage({super.key, required this.title});
+  final EstruturaImpostos estruturaImpostos;
+  const CalculoIpiPage({super.key, required this.title, required this.estruturaImpostos});
 
   @override
   State<CalculoIpiPage> createState() => _CalculoIpiPageState();
@@ -41,6 +43,7 @@ class _CalculoIpiPageState extends State<CalculoIpiPage> {
         final data = jsonDecode(resp.body);
         setState(() {
           valor_ipi_total = data['valor_ipi_total']?.toDouble() ?? 0.0;
+          widget.estruturaImpostos.ipi = valor_ipi_total;
           valor_produto = data['valor_produto']?.toDouble() ?? 0.0;
           aliquota_ipi = data['aliquota_ipi']?.toDouble() ?? 0.0;
           this.quantidade = data['quantidade']?.toDouble() ?? 0.0;
