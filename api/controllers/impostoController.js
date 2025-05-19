@@ -66,3 +66,71 @@ exports.getICMS = (req, res) => {
 
   res.json(icms.toJSON());
 };
+
+exports.getValorIpiTotal = (req, res) => {
+	const { valor_produto, aliquota_ipi, quantidade } = req.query;
+
+	const ipi = new Ipi({
+		valor_produto: parseFloat(valor_produto) || 0,
+		aliquota_ipi: parseFloat(aliquota_ipi) || 0,
+		quantidade: parseInt(quantidade) || 0,
+	});
+
+	if (!valor_produto || !aliquota_ipi || !quantidade) {
+		return res
+		.status(400)
+		.json({ error: "Parâmetros obrigatórios não informados" });
+	}
+
+	if (isNaN(ipi.valor_produto) || isNaN(ipi.aliquota_ipi) || isNaN(ipi.quantidade)) {
+        return res
+		.status(400)
+		.json({ error: "Parâmetros inválidos"});
+    }
+
+  res.json(ipi.toJSON());
+};
+
+  
+
+// POST /calcular-pis-cofins
+exports.calcularPisCofins = (req, res) => {
+  const { regime, receitaBruta, aliquota } = req.body;
+
+  if (!regime || !receitaBruta || !aliquota) {
+    return res.status(400).json({
+      success: false,
+
+      message: 'Todos os campos são obrigatórios: regime, receitaBruta e aliquota'
+    });
+  }
+
+  let valorPis = 0;
+  let valorCofins = 0;
+
+  // Alíquotas padrão
+  const aliquotaPis = regime === 'cumulativo' ? 0.65 : 1.65;
+  const aliquotaCofins = regime === 'cumulativo' ? 3.0 : 7.6;
+
+  // Cálculos
+  valorPis = (receitaBruta * aliquotaPis) / 100;
+  valorCofins = (receitaBruta * aliquotaCofins) / 100;
+
+  // Aplicando a alíquota informada (se necessário)
+  if (aliquota > 0) {
+    const fator = aliquota / 100;
+    valorPis *= fator;
+    valorCofins *= fator;
+  }
+
+  res.json({
+    success: true,
+    resultado: {
+      regime, 
+      receitaBruta,
+      valorPis,
+      valorCofins,
+      total: valorPis + valorCofins
+    }
+  })
+}
