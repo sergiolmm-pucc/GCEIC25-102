@@ -15,6 +15,7 @@ class UsoAppPage extends StatefulWidget {
 class _UsoAppPageState extends State<UsoAppPage> {
   String resultado = 'Clique para consultar a API.';
   EstruturaImpostos estruturaImpostos = EstruturaImpostos(
+    valor_produto: 0.0,
     icms: 0.0,
     pis: 0.0,
     cofins: 0.0,

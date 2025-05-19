@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:http/http.dart' as http;
 import 'dart:convert';
 import 'estrutura_impostos.dart';
@@ -45,6 +44,7 @@ class _CalculoIpiPageState extends State<CalculoIpiPage> {
           valor_ipi_total = data['valor_ipi_total']?.toDouble() ?? 0.0;
           widget.estruturaImpostos.ipi = valor_ipi_total;
           valor_produto = data['valor_produto']?.toDouble() ?? 0.0;
+          widget.estruturaImpostos.valor_produto = valor_produto;
           aliquota_ipi = data['aliquota_ipi']?.toDouble() ?? 0.0;
           this.quantidade = data['quantidade']?.toDouble() ?? 0.0;
           
@@ -56,8 +56,6 @@ class _CalculoIpiPageState extends State<CalculoIpiPage> {
               'Valor total: R\$ ${(valor_produto * this.quantidade) + valor_ipi_total}';
         });
         
-        final prefs = await SharedPreferences.getInstance();
-        await prefs.setDouble('valor_ipi_total', valor_ipi_total);
       } else {
         setState(() {
           resultado = 'Erro: ${resp.statusCode}';
