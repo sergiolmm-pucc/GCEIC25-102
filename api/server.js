@@ -11,6 +11,9 @@ const port = 3000;
 const userRoutes = require('./routes/userRoutes')
 const baseRoutes = require('./routes/baseRoutes')
 const gestorFinancasRoute = require('./routes/gestor_financas_route');
+const loginFixoEquipeTresRoutes = require('./routes/loginFixoEquipeTresRoutes');
+
+
 
 
 app.use(cors()); // Enable CORS for all routes
@@ -19,6 +22,8 @@ app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/', baseRoutes);
 app.use('/users', userRoutes);
 app.use('/gf', gestorFinancasRoute);
+app.use('/loginFixoEquipeTres', loginFixoEquipeTresRoutes);
+
 
 
 
