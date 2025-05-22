@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:fl_chart/fl_chart.dart';
 import 'financas_result.dart';
+import 'salary_input.dart';
 
 class ResultsScreen extends StatelessWidget {
   final FinancasResult resultado;
@@ -99,14 +100,16 @@ class ResultsScreen extends StatelessWidget {
             SizedBox(height: 36),
             ElevatedButton(
               onPressed: () {
-                Navigator.popUntil(context, (route) => route.isFirst);
+                Navigator.pushReplacement(
+                  context,
+                  MaterialPageRoute(builder: (_) => const SalaryInputScreen()),
+                );
               },
               style: ElevatedButton.styleFrom(
                 backgroundColor: Colors.cyanAccent,
                 foregroundColor: Colors.black,
                 minimumSize: Size(double.infinity, 48),
-                shape:
-                    RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
               ),
               child: Text('Calcular Novamente',
                   style: TextStyle(fontWeight: FontWeight.bold)),

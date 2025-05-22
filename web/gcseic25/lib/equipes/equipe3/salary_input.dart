@@ -27,10 +27,23 @@ class _SalaryInputScreenState extends State<SalaryInputScreen> {
     );
   }
 
+  void _logout() {
+    Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
+      appBar: AppBar(
+        backgroundColor: Colors.black,
+        leading: IconButton(
+          icon: Icon(Icons.exit_to_app, color: Colors.redAccent),
+          tooltip: 'Sair',
+          onPressed: _logout,
+        ),
+        elevation: 0,
+      ),
       body: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 24.0),
         child: Center(
