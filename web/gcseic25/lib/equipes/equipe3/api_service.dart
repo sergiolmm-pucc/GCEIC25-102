@@ -3,7 +3,7 @@ import 'package:http/http.dart' as http;
 import 'financas_result.dart';
 
 class ApiService {
-  static const String baseUrl = 'http://localhost:3000/gf';
+  static const String baseUrl = 'https://sincere-magnificent-cobweb.glitch.me/gf';
 
   static Future<FinancasResult> calcularFinancas({
     required double salarioBruto,
