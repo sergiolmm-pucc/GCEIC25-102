@@ -26,7 +26,7 @@ class _UsoAppPageState extends State<UsoAppPage> {
   Future<void> consultarAPI() async {
     try {
       final response = await http.get(
-        Uri.parse('http://localhost:3000/imposto/'),
+        Uri.parse('https://sincere-magnificent-cobweb.glitch.me/gf/imposto/'),
       ); // substitua pelo seu endpoint
       if (response.statusCode == 200) {
         setState(() {

@@ -32,7 +32,7 @@ class _PisCofinsPageState extends State<PisCofinsPage> {
       final double aliquota = double.parse(_aliquotaController.text);
       
       final response = await http.post(
-        Uri.parse('http://localhost:3000/imposto/calcular-pis-cofins'),
+        Uri.parse('https://sincere-magnificent-cobweb.glitch.me/gf/imposto/calcular-pis-cofins'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({
           'regime': _regime,

@@ -31,7 +31,7 @@ class _CalculoIcmsPageState extends State<CalculoIcmsPage> {
 
     try {
       final url = Uri.parse(
-        'http://localhost:3000/imposto/calculo-icms?valor_produto=$valor&aliquota_icms=$aliquota',
+        'https://sincere-magnificent-cobweb.glitch.me/gf/imposto/calculo-icms?valor_produto=$valor&aliquota_icms=$aliquota',
       );
       final resp = await http.get(url);
       if (resp.statusCode == 200) {
