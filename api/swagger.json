@@ -227,5 +227,72 @@
           }
         }
       }
+      ,
+      "/equipe6": {
+        "post": {
+          "summary": "Calcula INSS, FGTS e salário líquido",
+          "description": "Recebe o salário bruto e retorna os valores calculados de INSS, FGTS e salário líquido.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "salario": {
+                      "type": "number",
+                      "example": 3000
+                    }
+                  },
+                  "required": ["salario"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Cálculo realizado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "inss": {
+                        "type": "string",
+                        "example": "240.00"
+                      },
+                      "fgts": {
+                        "type": "string",
+                        "example": "240.00"
+                      },
+                      "salarioLiquido": {
+                        "type": "string",
+                        "example": "2760.00"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Salário inválido",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Salário inválido"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
     }
   }
