@@ -13,43 +13,32 @@ class ResultsScreen extends StatelessWidget {
       PieChartSectionData(
         color: Colors.greenAccent,
         value: resultado.saldoFinal < 0 ? 0 : resultado.saldoFinal,
-        title:
-            'Saldo\nR\$${(resultado.saldoFinal < 0 ? 0 : resultado.saldoFinal).toStringAsFixed(2)}',
-        radius: 70,
-        titleStyle:
-            TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black),
+        title: '',
+        radius: 90,
       ),
       PieChartSectionData(
         color: Colors.cyanAccent,
         value: resultado.valorInvestimento,
-        title: 'Investimento\nR\$${resultado.valorInvestimento.toStringAsFixed(2)}',
-        radius: 70,
-        titleStyle:
-            TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black),
+        title: '',
+        radius: 90,
       ),
       PieChartSectionData(
         color: Colors.deepPurpleAccent,
         value: resultado.valorLazer,
-        title: 'Lazer\nR\$${resultado.valorLazer.toStringAsFixed(2)}',
-        radius: 70,
-        titleStyle:
-            TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black),
+        title: '',
+        radius: 90,
       ),
       PieChartSectionData(
         color: Colors.redAccent,
         value: resultado.gastosTotais,
-        title: 'Gastos\nR\$${resultado.gastosTotais.toStringAsFixed(2)}',
-        radius: 70,
-        titleStyle:
-            TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black),
+        title: '',
+        radius: 90,
       ),
       PieChartSectionData(
         color: Colors.orangeAccent,
         value: resultado.inss + resultado.irpf,
-        title: 'INSS+IRPF\nR\$${(resultado.inss + resultado.irpf).toStringAsFixed(2)}',
-        radius: 70,
-        titleStyle:
-            TextStyle(fontSize: 14, fontWeight: FontWeight.bold, color: Colors.black),
+        title: '',
+        radius: 90,
       ),
     ];
   }
@@ -63,72 +52,176 @@ class ResultsScreen extends StatelessWidget {
         backgroundColor: Colors.cyanAccent,
         foregroundColor: Colors.black,
       ),
-      body: SingleChildScrollView(
-        padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 30),
-        child: Column(
+      body: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 20),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text(
-              'Seu resumo financeiro:',
-              style:
-                  TextStyle(fontSize: 22, fontWeight: FontWeight.bold, color: Colors.white),
-            ),
-            SizedBox(height: 24),
-            AspectRatio(
-              aspectRatio: 1.3,
-              child: PieChart(
-                PieChartData(
-                  sections: showingSections(),
-                  sectionsSpace: 2,
-                  centerSpaceRadius: 40,
-                ),
+            // Coluna do gráfico com texto acima
+            Expanded(
+              flex: 2,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    'Representação Gráfica',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 18,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 8),
+                  AspectRatio(
+                    aspectRatio: 1,
+                    child: PieChart(
+                      PieChartData(
+                        sections: showingSections(),
+                        sectionsSpace: 3,
+                        centerSpaceRadius: 50,
+                        borderData: FlBorderData(show: false),
+                      ),
+                    ),
+                  ),
+                  const SizedBox(height: 12),
+                  buildLegend(
+                    Colors.greenAccent,
+                    'Saldo',
+                    resultado.saldoFinal < 0 ? 0 : resultado.saldoFinal,
+                  ),
+                  buildLegend(
+                    Colors.cyanAccent,
+                    'Investimento',
+                    resultado.valorInvestimento,
+                  ),
+                  buildLegend(
+                    Colors.deepPurpleAccent,
+                    'Lazer',
+                    resultado.valorLazer,
+                  ),
+                  buildLegend(
+                    Colors.orangeAccent,
+                    'INSS + IRPF',
+                    resultado.inss + resultado.irpf,
+                  ),
+                  buildLegend(
+                    Colors.redAccent,
+                    'Gastos',
+                    resultado.gastosTotais,
+                  ),
+                ],
               ),
             ),
-            SizedBox(height: 36),
-            buildRow("Salário Bruto",
-                resultado.salarioLiquido + resultado.inss + resultado.irpf + resultado.gastosTotais),
-            buildRow("Imposto de Renda + INSS", resultado.inss + resultado.irpf),
-            buildRow("Total de Gastos Fixos", resultado.gastosTotais),
-            SizedBox(height: 12),
-            Text(
-              "Salário Líquido",
-              style: TextStyle(
-                  fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
-            ),
-            buildRow("Valor para Investir", resultado.valorInvestimento),
-            buildRow("Valor para Lazer", resultado.valorLazer),
-            buildRow("Saldo Final", resultado.saldoFinal < 0 ? 0 : resultado.saldoFinal),
-            SizedBox(height: 36),
-            ElevatedButton(
-              onPressed: () {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(builder: (_) => const SalaryInputScreen()),
-                );
-              },
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.cyanAccent,
-                foregroundColor: Colors.black,
-                minimumSize: Size(double.infinity, 48),
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+
+            SizedBox(width: 50),
+
+            // Coluna do resumo financeiro
+            Expanded(
+              flex: 3,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: [
+                  Text(
+                    'Seu resumo financeiro:',
+                    style: TextStyle(
+                      fontWeight: FontWeight.bold,
+                      fontSize: 22,
+                      color: Colors.white,
+                    ),
+                  ),
+                  const SizedBox(height: 15),
+
+                  // Tabela para alinhamento do resumo financeiro
+                  Table(
+                    columnWidths: {
+                      0: FlexColumnWidth(3),
+                      1: FlexColumnWidth(2),
+                    },
+                    defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+                    children: [
+                      _buildTableRow("Salário Bruto", resultado.salarioLiquido + resultado.inss + resultado.irpf + resultado.gastosTotais),
+                      _buildTableRow("Imposto de Renda + INSS", resultado.inss + resultado.irpf),
+                      _buildTableRow("Total de Gastos Fixos", resultado.gastosTotais),
+                      TableRow(children: [
+                        Padding(
+                          padding: const EdgeInsets.symmetric(vertical: 8),
+                          child: Text(
+                            "Salário Líquido",
+                            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18, color: Colors.white),
+                          ),
+                        ),
+                        SizedBox(), // vazio para alinhar
+                      ]),
+                      _buildTableRow("Valor para Investir", resultado.valorInvestimento),
+                      _buildTableRow("Valor para Lazer", resultado.valorLazer),
+                      _buildTableRow("Saldo Final", resultado.saldoFinal < 0 ? 0 : resultado.saldoFinal),
+                    ],
+                  ),
+
+                  const SizedBox(height: 30),
+
+                  SizedBox(
+                    width: 180,
+                    height: 48,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushReplacement(
+                          context,
+                          MaterialPageRoute(builder: (_) => const SalaryInputScreen()),
+                        );
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.cyanAccent,
+                        foregroundColor: Colors.black,
+                        shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      ),
+                      child: Text('Calcular Novamente', style: TextStyle(fontWeight: FontWeight.bold)),
+                    ),
+                  ),
+                ],
               ),
-              child: Text('Calcular Novamente',
-                  style: TextStyle(fontWeight: FontWeight.bold)),
-            )
+            ),
           ],
         ),
       ),
     );
   }
 
-  Widget buildRow(String label, double valor) {
+  TableRow _buildTableRow(String label, double valor) {
+    return TableRow(children: [
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 6),
+        child: Text(label, style: TextStyle(color: Colors.white70, fontSize: 16)),
+      ),
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 6),
+        child: Text(
+          'R\$ ${valor.toStringAsFixed(2)}',
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16),
+          textAlign: TextAlign.right,
+        ),
+      ),
+    ]);
+  }
+
+  Widget buildLegend(Color color, String label, double valor) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 4),
+      padding: const EdgeInsets.only(bottom: 5, left: 4),
       child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Text(label, style: TextStyle(color: Colors.white70, fontSize: 16)),
-          Text('R\$ ${valor.toStringAsFixed(2)}',
-              style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 16)),
+          Container(
+            width: 18,
+            height: 18,
+            decoration: BoxDecoration(color: color, shape: BoxShape.rectangle),
+          ),
+          SizedBox(width: 8),
+          Flexible(
+            child: Text(
+              '$label: R\$ ${valor.toStringAsFixed(2)}',
+              style: TextStyle(color: Colors.white70, fontSize: 14),
+              overflow: TextOverflow.ellipsis,
+            ),
+          ),
         ],
       ),
     );

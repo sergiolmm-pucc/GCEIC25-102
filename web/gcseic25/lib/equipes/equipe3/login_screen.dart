@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'salary_input.dart';
-import 'help_screen.dart';  // Tela de ajuda
-import 'sobre_screen.dart'; // Tela sobre a equipe
+import 'help_screen.dart';  
+import 'sobre_screen.dart'; 
+import 'api_service.dart';  
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -14,12 +15,20 @@ class _LoginScreenState extends State<LoginScreen> {
   final _userController = TextEditingController();
   final _passwordController = TextEditingController();
   String? _errorMessage;
+  bool _isLoading = false;
 
-  void _tryLogin() {
-    final username = _userController.text.trim();
-    final password = _passwordController.text;
+void _tryLogin() async {
+  setState(() {
+    _errorMessage = null;
+    _isLoading = true;
+  });
 
-    if (username == 'admin' && password == 'admin123') {
+  final username = _userController.text.trim();
+  final password = _passwordController.text;
+
+  try {
+    bool success = await ApiService.loginFixoEquipeTres(username, password);
+    if (success) {
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(builder: (_) => SalaryInputScreen()),
@@ -29,7 +38,17 @@ class _LoginScreenState extends State<LoginScreen> {
         _errorMessage = 'Usuário ou senha incorretos';
       });
     }
+  } catch (e) {
+    setState(() {
+      _errorMessage = 'Erro ao conectar com o servidor';
+    });
+  } finally {
+    setState(() {
+      _isLoading = false;
+    });
   }
+}
+
 
   void _logout() {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -113,8 +132,10 @@ class _LoginScreenState extends State<LoginScreen> {
                       foregroundColor: Colors.black,
                       shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
                     ),
-                    onPressed: _tryLogin,
-                    child: Text('Entrar', style: TextStyle(fontWeight: FontWeight.bold)),
+                    onPressed: _isLoading ? null : _tryLogin,
+                    child: _isLoading
+                        ? CircularProgressIndicator(color: Colors.black)
+                        : Text('Entrar', style: TextStyle(fontWeight: FontWeight.bold)),
                   ),
                 ),
                 SizedBox(height: 12),

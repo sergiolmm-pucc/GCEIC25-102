@@ -27,7 +27,7 @@ class _SplashScreenEquipeTresState extends State<SplashScreenEquipeTres> {
       backgroundColor: Colors.black,
       body: const Center(
         child: Text(
-          'Gestor de Finanças',
+          'Carregando o Gestor de Finanças...',
           style: TextStyle(
             color: Colors.cyanAccent,
             fontSize: 32,
