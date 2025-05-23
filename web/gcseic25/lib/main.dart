@@ -3,6 +3,7 @@ import 'package:flutter/rendering.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
+import 'package:gcseic25/equipes/equipe_1/splash.dart';
 import 'package:gcseic25/equipes/equipe3/splash_screen_equipe_tres.dart';
 import 'equipes/equipe7/calculator_screen.dart';
 
@@ -26,6 +27,7 @@ class MyApp extends StatelessWidget {
       routes: {
         '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/splashEquipe1': (context) => SplashEquipe(),
         '/calculadora': (context) => CalculatorScreen(),
         '/gf': (context) => SplashScreenEquipeTres(),
       },
@@ -64,6 +66,16 @@ class HomePage extends StatelessWidget {
                     Navigator.pushNamed(context, '/splash2');
                   },
                   child: Text('Abrir Consulta 2'),
+                ),
+              ),
+              SizedBox(height: 20),
+              SizedBox(
+                width: 220,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/splashEquipe1');
+                  },
+                  child: Text('Abrir Equipe 1'),
                 ),
               ),
               SizedBox(height: 20),

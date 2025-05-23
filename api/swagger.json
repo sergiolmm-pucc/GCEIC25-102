@@ -10,6 +10,16 @@
       "url": "http://localhost:3000"
     }
   ],
+  "tags": [
+    {
+      "name": "default",
+      "description": "Operações básicas"
+    },
+    {
+      "name": "Impostos",
+      "description": "Operações relacionadas a cálculos de impostos"
+    }
+  ],
   "paths": {
     "/datetime": {
       "get": {
@@ -36,6 +46,7 @@
     },
     "/concat": {
       "post": {
+        "tags": ["default"],
         "summary": "Concatena valor com frase fixa",
         "requestBody": {
           "required": true,
@@ -67,6 +78,133 @@
                     "result": {
                       "type": "string"
                     }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro - valor não fornecido"
+          }
+        }
+      }
+    },
+    "/imposto/calculo-icms": {
+      "get": {
+        "tags": ["Impostos"],
+        "summary": "Calcula o valor do ICMS",
+        "parameters": [
+          {
+            "name": "valor_produto",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          },
+          {
+            "name": "aliquota_icms",
+            "in": "query",
+            "required": true,
+            "schema": {
+              "type": "number"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Retorna os dados do ICMS calculado",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "valor_produto": { "type": "number" },
+                    "aliquota_icms": { "type": "number" },
+                    "valor_icms": { "type": "number" }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Erro - parâmetros inválidos ou ausentes"
+          }
+        }
+      }
+    },
+    "/imposto/calculo-ipi": {
+      "get": {
+        "tags": ["Impostos"],
+        "summary": "Calcula o valor do IPI",
+        "description": "Calcula o valor total do IPI com base no valor do produto, alíquota e quantidade",
+        "parameters": [
+          {
+            "name": "valor_produto",
+            "in": "query",
+            "description": "Valor unitário do produto",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 100.50
+          },
+          {
+            "name": "aliquota_ipi",
+            "in": "query",
+            "description": "Alíquota do IPI em porcentagem",
+            "required": true,
+            "schema": {
+              "type": "number"
+            },
+            "example": 10.5
+          },
+          {
+            "name": "quantidade",
+            "in": "query",
+            "description": "Quantidade de produtos",
+            "required": true,
+            "schema": {
+              "type": "integer",
+              "minimum": 1
+            },
+            "example": 5
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Cálculo realizado com sucesso",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "valor_produto": {
+                      "type": "number",
+                      "description": "Valor unitário do produto",
+                      "example": 100.50
+                    },
+                    "aliquota_ipi": {
+                      "type": "number",
+                      "description": "Alíquota do IPI em porcentagem",
+                      "example": 10.5
+                    },
+                    "quantidade": {
+                      "type": "integer",
+                      "description": "Quantidade de produtos",
+                      "example": 5
+                    },
+                    "valor_ipi_total": {
+                      "type": "number",
+                      "description": "Valor total do IPI calculado",
+                      "example": 52.76
+                    }
+                  },
+                  "success": {
+                    "type": "boolean"
+                  },
+                  "result": {
+                    "type": "string"
                   }
                 }
               }
@@ -209,7 +347,7 @@
             }
           },
           "400": {
-            "description": "Erro nos parâmetros fornecidos",
+            "description": "Parâmetros inválidos ou ausentes",
             "content": {
               "application/json": {
                 "schema": {
@@ -217,6 +355,7 @@
                   "properties": {
                     "error": {
                       "type": "string",
+                      "description": "Mensagem de erro",
                       "example": "Parâmetros inválidos"
                     }
                   }
