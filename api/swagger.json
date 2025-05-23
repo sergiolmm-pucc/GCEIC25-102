@@ -199,13 +199,12 @@
                       "description": "Valor total do IPI calculado",
                       "example": 52.76
                     }
-                  }
-                    "success": {
-                      "type": "boolean"
-                    },
-                    "result": {
-                      "type": "string"
-                    }
+                  },
+                  "success": {
+                    "type": "boolean"
+                  },
+                  "result": {
+                    "type": "string"
                   }
                 }
               }
