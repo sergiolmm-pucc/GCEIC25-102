@@ -159,11 +159,17 @@ jobs:
       - name: git
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
-          mkdir -p ~/.ssh
-          ssh-keyscan -H sergi3607.c35.integrator.host >> ~/.ssh/known_hosts
           git --version
           git config --global user.email "sergio.marques@puc-campinas.edu.br"
           git config --global user.name "SLMM"
+
+      - name: Configurar chave SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H sergi3607.c35.integrator.host >> ~/.ssh/known_hosts
+
       - name: git2
         run: |
           #  ajusta a origem  e faz um git pull     
