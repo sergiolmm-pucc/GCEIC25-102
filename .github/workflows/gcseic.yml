@@ -152,10 +152,10 @@ jobs:
     steps:
   
          
-      - name: Git checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: '0'
+
+      - name: Git checkout    
+        uses: actions/checkout@v3
+        
       - name: git
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
@@ -170,8 +170,6 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H sergi3607.c35.integrator.host >> ~/.ssh/known_hosts
 
-      - name: Git checkout    
-        uses: actions/checkout@v3
 
       - name: lista
         run: ls -la
