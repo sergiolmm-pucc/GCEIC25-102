@@ -165,6 +165,8 @@ jobs:
           mkdir -p ~/.ssh
           ssh-keyscan -H sergi3607.c35.integrator.host >> ~/.ssh/known_hosts
           git --version
+          git config --global user.email "sergio.marques@puc-campinas.edu.br"
+          git config --global user.name "SLMM"
           git add -A
           git commit -m "Forçando push de todos os arquivos"
           git remote remove origin
