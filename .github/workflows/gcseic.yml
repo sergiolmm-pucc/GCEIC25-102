@@ -184,3 +184,30 @@ jobs:
  #  git remote remove origin
  #  git remote add origin ${{ secrets.integratorGit }}
        
+  Deploy_sl2:    
+    runs-on: ubuntu-latest
+    steps:  
+      - uses: actions/checkout@v4
+
+      - name: Setup SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+          chmod 600 ~/.ssh/id_rsa
+          ssh-keyscan -H sergi3607.c35.integrator.host >> ~/.ssh/known_hosts
+
+      - name: Debug SSH
+        run: |
+          ls -la ~/.ssh
+          ssh -v sergi3607@sergi3607.c35.integrator.host || true
+      - name: git
+        run: |
+          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+          git --version
+          git config --global user.email "sergio.marques@puc-campinas.edu.br"
+          git config --global user.name "SLMM"
+      - name: git2
+        run: |
+           #  ajusta a origem  e faz um git pull     
+           git remote set-url origin ssh://sergi3607@sergi3607.c35.integrator.host/home/sergi3607/applications/repositories/api102/.git
+           git push -u origin main
