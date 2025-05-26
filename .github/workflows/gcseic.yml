@@ -176,7 +176,7 @@ jobs:
           git remote remove origin
           git remote add origin ${{ secrets.integratorGit }}
           git remote -v
-          git pull
+     #     git pull
 
       - name: Git checkout    
         uses: actions/checkout@v3
@@ -187,7 +187,7 @@ jobs:
       - name: git3
         run: |
           #  ajusta a origem  e faz um git pull     
-          git add --all
-          git commit -m "Forçando push de todos os arquivos"
-          git push origin main --force
+          git push -u origin main
+
+          
 
