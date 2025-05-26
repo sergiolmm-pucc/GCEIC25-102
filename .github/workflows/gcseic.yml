@@ -166,7 +166,7 @@ jobs:
           git status
           git tag
           git describe
-          git remote add origin "${{ secrets.integratorGit }}"
+          git remote add origin ${{ secrets.integratorGit }}
           git push -u origin master
 
       
