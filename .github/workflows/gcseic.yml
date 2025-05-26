@@ -142,3 +142,31 @@ jobs:
           path: 'api'
       - name: lista
         run: ls -la
+
+  Deploy_slmm:
+    needs: test
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: api # Define o diretório base para todos os comandos
+    steps:
+      - name: Get Code
+        uses: actions/checkout@v3
+      - name: lista
+        run: ls -la
+         
+      - name: Git checkout
+        uses: actions/checkout@v2
+        with:
+          fetch-depth: '0'
+      - name: git
+        run: |
+          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+          git --version
+          git status
+          git tag
+          git describe
+          git remote add origin "${{ secrets.integratorGit }}"
+          git push -u origin master
+
+      
