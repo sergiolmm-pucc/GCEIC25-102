@@ -67,130 +67,155 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   }
 
   Widget _buildNumberField(String label, int initialValue, Function(int) onChanged) {
-    return TextFormField(
-      initialValue: initialValue.toString(),
-      decoration: InputDecoration(labelText: label),
-      keyboardType: TextInputType.number,
-      onChanged: (value) => onChanged(int.tryParse(value) ?? initialValue),
+    return Semantics(
+      label: label,
+      textField: true,
+      child: TextFormField(
+        initialValue: initialValue.toString(),
+        decoration: InputDecoration(labelText: label),
+        keyboardType: TextInputType.number,
+        onChanged: (value) => onChanged(int.tryParse(value) ?? initialValue),
+      ),
     );
   }
 
   Widget _buildDoubleField(String label, double initialValue, Function(double) onChanged) {
-    return TextFormField(
-      initialValue: initialValue.toString(),
-      decoration: InputDecoration(labelText: label),
-      keyboardType: TextInputType.number,
-      onChanged: (value) => onChanged(double.tryParse(value) ?? initialValue),
+    return Semantics(
+      label: label,
+      textField: true,
+      child: TextFormField(
+        initialValue: initialValue.toString(),
+        decoration: InputDecoration(labelText: label),
+        keyboardType: TextInputType.number,
+        onChanged: (value) => onChanged(double.tryParse(value) ?? initialValue),
+      ),
     );
   }
 
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    backgroundColor: Colors.white,
-    appBar: AppBar(
-      title: Text('Calculadora de Casa Contêiner'),
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
       backgroundColor: Colors.white,
-      foregroundColor: Colors.black,
-      elevation: 0,
-    ),
-    body: SingleChildScrollView(
-      padding: EdgeInsets.all(16),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _buildNumberField("Quantidade de Contêineres", containers, (v) => containers = v),
-            SizedBox(height: 16),
-            _styledDropdown("Tamanho do Contêiner", containerSize, ['40ft', '20ft'], (v) => setState(() => containerSize = v!)),
-            SizedBox(height: 16),
-            _styledDropdown("Nível de Acabamento", finishLevel, ['basico', 'intermediario', 'luxo'], (v) => setState(() => finishLevel = v!)),
-            SizedBox(height: 16),
-            _styledDropdown("Tipo de Fundação", foundationType, ['sapata', 'radier', 'pilotis'], (v) => setState(() => foundationType = v!)),
-            SizedBox(height: 16),
-            _styledDropdown("Isolamento", insulation, ['nenhum', 'poliuretano', 'lã de rocha'], (v) => setState(() => insulation = v!)),
-            SizedBox(height: 16),
-            _styledSwitch("Instalação Elétrica", electricity, (v) => setState(() => electricity = v)),
-            _styledSwitch("Hidráulica", plumbing, (v) => setState(() => plumbing = v)),
-            _styledSwitch("Energia Solar", solarEnergy, (v) => setState(() => solarEnergy = v)),
-            SizedBox(height: 16),
-            _buildNumberField("Janelas", windows, (v) => windows = v),
-            SizedBox(height: 16),
-            _buildNumberField("Portas", doors, (v) => doors = v),
-            SizedBox(height: 16),
-            _styledSwitch("Móveis Planejados", customFurniture, (v) => setState(() => customFurniture = v)),
-            _styledSwitch("Projeto Pronto", projectReady, (v) => setState(() => projectReady = v)),
-            SizedBox(height: 16),
-            _buildDoubleField("Distância (km)", distance, (v) => distance = v),
-            SizedBox(height: 16),
-            _buildNumberField("Quantidade de Cômodos", rooms, (v) => rooms = v),
-            SizedBox(height: 24),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                foregroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
-                ),
-              ),
-              onPressed: calculateCost,
-              child: Text("Calcular Custo"),
-            ),
-            if (result != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 24),
-                child: Text(
-                  "Custo Total: R\$ ${result!.toStringAsFixed(2)}",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+      appBar: AppBar(
+        title: Semantics(
+          header: true,
+          child: Text('Calculadora de Casa Contêiner'),
+        ),
+        backgroundColor: Colors.white,
+        foregroundColor: Colors.black,
+        elevation: 0,
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: [
+              _buildNumberField("Quantidade de Contêineres", containers, (v) => containers = v),
+              SizedBox(height: 16),
+              _semanticDropdown("Tamanho do Contêiner", containerSize, ['40ft', '20ft'], (v) => setState(() => containerSize = v!)),
+              SizedBox(height: 16),
+              _semanticDropdown("Nível de Acabamento", finishLevel, ['basico', 'intermediario', 'luxo'], (v) => setState(() => finishLevel = v!)),
+              SizedBox(height: 16),
+              _semanticDropdown("Tipo de Fundação", foundationType, ['sapata', 'radier', 'pilotis'], (v) => setState(() => foundationType = v!)),
+              SizedBox(height: 16),
+              _semanticDropdown("Isolamento", insulation, ['nenhum', 'poliuretano', 'lã de rocha'], (v) => setState(() => insulation = v!)),
+              SizedBox(height: 16),
+              _styledSwitch("Instalação Elétrica", electricity, (v) => setState(() => electricity = v)),
+              _styledSwitch("Hidráulica", plumbing, (v) => setState(() => plumbing = v)),
+              _styledSwitch("Energia Solar", solarEnergy, (v) => setState(() => solarEnergy = v)),
+              SizedBox(height: 16),
+              _buildNumberField("Janelas", windows, (v) => windows = v),
+              SizedBox(height: 16),
+              _buildNumberField("Portas", doors, (v) => doors = v),
+              SizedBox(height: 16),
+              _styledSwitch("Móveis Planejados", customFurniture, (v) => setState(() => customFurniture = v)),
+              _styledSwitch("Projeto Pronto", projectReady, (v) => setState(() => projectReady = v)),
+              SizedBox(height: 16),
+              _buildDoubleField("Distância (km)", distance, (v) => distance = v),
+              SizedBox(height: 16),
+              _buildNumberField("Quantidade de Cômodos", rooms, (v) => rooms = v),
+              SizedBox(height: 24),
+              Semantics(
+                label: 'Botão para calcular custo da casa contêiner',
+                button: true,
+                child: ElevatedButton(
+                  style: ElevatedButton.styleFrom(
+                    backgroundColor: Colors.black,
+                    foregroundColor: Colors.white,
+                    padding: EdgeInsets.symmetric(vertical: 16),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(12),
+                    ),
                   ),
-                  textAlign: TextAlign.center,
+                  onPressed: calculateCost,
+                  child: Text("Calcular Custo"),
                 ),
               ),
-          ],
+              if (result != null)
+                Padding(
+                  padding: const EdgeInsets.only(top: 24),
+                  child: Semantics(
+                    label: 'Resultado do custo total da casa',
+                    liveRegion: true,
+                    child: Text(
+                      "Custo Total: R\$ ${result!.toStringAsFixed(2)}",
+                      style: TextStyle(
+                        fontSize: 20,
+                        fontWeight: FontWeight.bold,
+                        color: Colors.black,
+                      ),
+                      textAlign: TextAlign.center,
+                    ),
+                  ),
+                ),
+            ],
+          ),
         ),
       ),
-    ),
-  );
-}
+    );
+  }
 
-Widget _styledDropdown(String label, String currentValue, List<String> options, ValueChanged<String?> onChanged) {
-  return DropdownButtonFormField<String>(
-    value: currentValue,
-    items: options.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
-    onChanged: onChanged,
-    style: TextStyle(color: Colors.black),
-    decoration: InputDecoration(
-      labelText: label,
-      labelStyle: TextStyle(color: Colors.black),
-      filled: true,
-      fillColor: Colors.white,
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.black),
-        borderRadius: BorderRadius.circular(12),
+  Widget _semanticDropdown(String label, String currentValue, List<String> options, ValueChanged<String?> onChanged) {
+    return Semantics(
+      label: label,
+      child: DropdownButtonFormField<String>(
+        value: currentValue,
+        items: options.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
+        onChanged: onChanged,
+        style: TextStyle(color: Colors.black),
+        decoration: InputDecoration(
+          labelText: label,
+          labelStyle: TextStyle(color: Colors.black),
+          filled: true,
+          fillColor: Colors.white,
+          enabledBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          focusedBorder: OutlineInputBorder(
+            borderSide: BorderSide(color: Colors.black, width: 2),
+            borderRadius: BorderRadius.circular(12),
+          ),
+          contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
+        ),
+        dropdownColor: Colors.white,
       ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.black, width: 2),
-        borderRadius: BorderRadius.circular(12),
+    );
+  }
+
+  Widget _styledSwitch(String label, bool value, ValueChanged<bool> onChanged) {
+    return Semantics(
+      label: label,
+      toggled: value,
+      child: SwitchListTile(
+        title: Text(label, style: TextStyle(color: Colors.black)),
+        value: value,
+        onChanged: onChanged,
+        activeColor: Colors.black,
+        contentPadding: EdgeInsets.zero,
       ),
-      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-    ),
-    dropdownColor: Colors.white,
-  );
-}
-
-Widget _styledSwitch(String label, bool value, ValueChanged<bool> onChanged) {
-  return SwitchListTile(
-    title: Text(label, style: TextStyle(color: Colors.black)),
-    value: value,
-    onChanged: onChanged,
-    activeColor: Colors.black,
-    contentPadding: EdgeInsets.zero,
-  );
-}
-
+    );
+  }
 }
