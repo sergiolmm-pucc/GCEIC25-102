@@ -6,6 +6,7 @@ import 'package:gcseic25/equipes/base/base.dart';
 import 'package:gcseic25/equipes/equipe_1/splash.dart';
 import 'package:gcseic25/equipes/equipe3/splash_screen_equipe_tres.dart';
 import 'equipes/equipe7/calculator_screen.dart';
+import 'equipes/equipe 5/splash_screen.dart' as SplashScreenEquipe5;
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -20,16 +21,20 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'App de Navegação',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: HomePage(),
       routes: {
-        '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
-        '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/splash1':
+            (context) =>
+                SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
+        '/splash2':
+            (context) =>
+                SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
         '/splashEquipe1': (context) => SplashEquipe(),
         '/calculadora': (context) => CalculatorScreen(),
         '/gf': (context) => SplashScreenEquipeTres(),
+        '/splash5':
+            (context) => SplashScreenEquipe5.SplashScreen(nextScreen: 'login'),
       },
     );
   }
@@ -41,9 +46,7 @@ class HomePage extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text('Tela Inicial 102'),
-      ),
+      appBar: AppBar(title: Text('Tela Inicial 102')),
       body: Center(
         child: SingleChildScrollView(
           child: Column(
@@ -113,6 +116,16 @@ class HomePage extends StatelessWidget {
                   ),
                 ),
               ),
+              SizedBox(height: 20),
+              SizedBox(
+                width: 220,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/splash5');
+                  },
+                  child: Text('Cálculo de Viagens Equipe 5'),
+                ),
+              ),
             ],
           ),
         ),
@@ -146,10 +159,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(
-          'Carregando...',
-          style: TextStyle(fontSize: 24),
-        ),
+        child: Text('Carregando...', style: TextStyle(fontSize: 24)),
       ),
     );
   }
@@ -169,32 +179,29 @@ class _ConsultaPageState extends State<ConsultaPage> {
 
   Future<void> _fetchData() async {
     //
-   final response = await http.get(Uri.parse('https://sincere-magnificent-cobweb.glitch.me/datetime'));
-  if (response.statusCode == 200) {
-    setState(() {
-      _responseText = response.body;
-    });
-  } else {
-    setState(() {
-      _responseText = 'Erro ao consultar API.';
-    });
-  }
+    final response = await http.get(
+      Uri.parse('https://sincere-magnificent-cobweb.glitch.me/datetime'),
+    );
+    if (response.statusCode == 200) {
+      setState(() {
+        _responseText = response.body;
+      });
+    } else {
+      setState(() {
+        _responseText = 'Erro ao consultar API.';
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(title: Text(widget.title)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            ElevatedButton(
-              onPressed: _fetchData,
-              child: Text('Consultar API'),
-            ),
+            ElevatedButton(onPressed: _fetchData, child: Text('Consultar API')),
             SizedBox(height: 20),
             Container(
               width: double.infinity,
@@ -203,10 +210,7 @@ class _ConsultaPageState extends State<ConsultaPage> {
                 border: Border.all(color: Colors.blueAccent),
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child: Text(
-                _responseText,
-                style: TextStyle(fontSize: 16),
-              ),
+              child: Text(_responseText, style: TextStyle(fontSize: 16)),
             ),
           ],
         ),
