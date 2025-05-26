@@ -163,6 +163,7 @@ jobs:
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
           git --version
+          git remote remove origin
           git remote add origin ${{ secrets.integratorGit }}
           git remote -v
           git push -u origin master -f
