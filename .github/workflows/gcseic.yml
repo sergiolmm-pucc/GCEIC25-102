@@ -178,18 +178,11 @@ jobs:
 
       - name: git2
         run: |
-          #  ajusta a origem  e faz um git pull     
-          git remote remove origin
-          git remote add origin ${{ secrets.integratorGit }}
-          git remote -v
-     #     git pull
-
-     
-
-      - name: git3
-        run: |
-          #  ajusta a origem  e faz um git pull     
-          git push -u origin main
+           #  ajusta a origem  e faz um git pull     
+           git remote set-url origin ssh://sergi3607@sergi3607.c35.integrator.host/home/sergi3607/applications/repositories/api102/.git
+           git push -u origin main
 
           
-
+ #  git remote remove origin
+ #  git remote add origin ${{ secrets.integratorGit }}
+       
