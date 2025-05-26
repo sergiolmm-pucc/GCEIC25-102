@@ -150,10 +150,7 @@ jobs:
       run:
         working-directory: api # Define o diretório base para todos os comandos
     steps:
-      - name: Get Code
-        uses: actions/checkout@v3
-      - name: lista
-        run: ls -la
+  
          
  #     - name: Git checkout
  #       uses: actions/checkout@v2
@@ -167,11 +164,24 @@ jobs:
           git --version
           git config --global user.email "sergio.marques@puc-campinas.edu.br"
           git config --global user.name "SLMM"
-          git add -A
-          git commit -m "Forçando push de todos os arquivos"
+      - name: git2
+        run: |
+          #  ajusta a origem  e faz um git pull     
           git remote remove origin
           git remote add origin ${{ secrets.integratorGit }}
           git remote -v
+          git pull
+
+      - name: Git checkout    
+        uses: actions/checkout@v3
+
+      - name: lista
+        run: ls -la
+
+      - name: git3
+        run: |
+          #  ajusta a origem  e faz um git pull     
+          git add --all
+          git commit -m "Forçando push de todos os arquivos"
           git push origin main --force
 
-      
