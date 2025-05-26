@@ -155,10 +155,10 @@ jobs:
       - name: lista
         run: ls -la
          
-      - name: Git checkout
-        uses: actions/checkout@v2
-        with:
-          fetch-depth: '0'
+ #     - name: Git checkout
+ #       uses: actions/checkout@v2
+ #       with:
+ #         fetch-depth: '0'
       - name: git
         run: |
           # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
