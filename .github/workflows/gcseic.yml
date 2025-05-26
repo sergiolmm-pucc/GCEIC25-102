@@ -170,6 +170,12 @@ jobs:
           chmod 600 ~/.ssh/id_rsa
           ssh-keyscan -H sergi3607.c35.integrator.host >> ~/.ssh/known_hosts
 
+      - name: Git checkout    
+        uses: actions/checkout@v3
+
+      - name: lista
+        run: ls -la
+
       - name: git2
         run: |
           #  ajusta a origem  e faz um git pull     
@@ -178,11 +184,7 @@ jobs:
           git remote -v
      #     git pull
 
-      - name: Git checkout    
-        uses: actions/checkout@v3
-
-      - name: lista
-        run: ls -la
+     
 
       - name: git3
         run: |
