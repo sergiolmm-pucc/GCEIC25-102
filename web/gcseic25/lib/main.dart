@@ -54,12 +54,17 @@ class HomePage extends StatelessWidget {
               },
               child: Text('Abrir Consulta 2'),
             ),
-            ElevatedButton(
+          Semantics(
+            label: 'Botão Calculadora equipe 7',
+            button: true,
+            child: ElevatedButton(
               onPressed: () {
                 Navigator.pushNamed(context, '/calculadora');
               },
               child: Text('Calculadora equipe 7'),
             ),
+          ),
+
 
             Semantics(
               identifier: 'Entrar',
