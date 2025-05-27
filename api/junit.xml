@@ -114,6 +114,11 @@
   </testsuite>
   <testsuite name="Texte exemplo" errors="0" failures="0" skipped="0" timestamp="2025-05-26T21:01:01" time="0.04" tests="1">
     <testcase classname="Texte exemplo Aplicar desconto" name="Texte exemplo Aplicar desconto" time="0.001">
+<testsuites name="jest tests" tests="2" failures="0" errors="0" time="0.47">
+  <testsuite name="Teste de login" errors="0" failures="0" skipped="0" timestamp="2025-05-27T01:31:16" time="0.387" tests="2">
+    <testcase classname="Teste de login Tentar fazer login com sucesso" name="Teste de login Tentar fazer login com sucesso" time="0.018">
+    </testcase>
+    <testcase classname="Teste de login Tentar fazer login com falha" name="Teste de login Tentar fazer login com falha" time="0.002">
     </testcase>
   </testsuite>
 </testsuites>

@@ -15,6 +15,8 @@ const impostosRoutes = require('./routes/impostoRoutes')
 const gestorFinancasRoute = require('./routes/gestor_financas_route');
 const loginFixoEquipeTresRoutes = require('./routes/loginFixoEquipeTresRoutes');
 const viagemRoutes = require('./routes/viagemRoutes');
+const calculadoraViagemRoutes = require('./routes/calculadoraViagemRoutes');
+
 
 
 app.use(cors()); // Enable CORS for all routes
@@ -27,8 +29,11 @@ app.use('/gf', gestorFinancasRoute);
 app.use('/loginFixoEquipeTres', loginFixoEquipeTresRoutes);
 app.use('/viagens2', viagemRoutes);
 app.use('/equipe6', equipe6Routes); // Rota da equipe6
+app.use('/login', calculadoraViagemRoutes);
+
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
   console.log(`Swagger em http://localhost:${port}/api-docs`);
 });
+
