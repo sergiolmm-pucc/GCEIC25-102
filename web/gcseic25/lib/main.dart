@@ -3,8 +3,9 @@ import 'package:flutter/rendering.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
+import 'package:gcseic25/equipes/equipe6/calculadora6.dart';
 import 'package:gcseic25/equipes/equipe_1/splash.dart';
-import 'package:gcseic25/equipes/equipe3/splash_screen_equipe_tres.dart';
+import 'package:gcseic25/equipes/equipe3/splash_screen_equipe_tres.dart'; 
 import 'equipes/equipe7/calculator_screen.dart';
 import 'package:gcseic25/equipes/equipe2/splash_screen_equipe2.dart';
 
@@ -27,83 +28,107 @@ class MyApp extends StatelessWidget {
       ),
       home: HomePage(),
       routes: {
-        '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
-        '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
-        '/splashEquipe1': (context) => SplashEquipe(),
-        '/calculadora': (context) => CalculatorScreen(),
-        '/gf': (context) => SplashScreenEquipeTres(),
-        '/equipe2': (context) => const SplashScreenEquipe2(), 
-      },
+      '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
+      '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+      '/splashEquipe1': (context) => SplashEquipe(), 
+      '/calculadora': (context) => CalculatorScreen(),
+      '/calculadora6': (context) => Calculadora6Page(), // Da equipe6
+      '/gf': (context) => SplashScreenEquipeTres(), // Da CI_CD6
+      '/equipe2': (context) => const SplashScreenEquipe2(), 
+    },
     );
   }
 }
 
-class HomePage extends StatelessWidget {
-  const HomePage({super.key});
+          class HomePage extends StatelessWidget {
+            const HomePage({super.key});
 
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        title: Text('Tela Inicial 102'),
-      ),
-      body: Center(
-        child: SingleChildScrollView(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              SizedBox(
-                width: 220,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/splash1');
-                  },
-                  child: Text('Abrir Base 1'),
+            @override
+            Widget build(BuildContext context) {
+              return Scaffold(
+                appBar: AppBar(
+                  title: Text('Tela Inicial 102'),
                 ),
-              ),
-              SizedBox(height: 20),
-              SizedBox(
-                width: 220,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/splash2');
-                  },
-                  child: Text('Abrir Consulta 2'),
-                ),
-              ),
-              SizedBox(height: 20),
-              SizedBox(
-                width: 220,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/splashEquipe1');
-                  },
-                  child: Text('Abrir Equipe 1'),
-                ),
-              ),
-              SizedBox(height: 20),
-              SizedBox(
-                width: 220,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/calculadora');
-                  },
-                  child: Text('Calculadora equipe 7'),
-                ),
-              ),
-              SizedBox(height: 20),
-              SizedBox(
-                width: 220,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/gf');
-                  },
-                  child: Text('Gestor de Finanças Equipe 3'),
-                ),
-              ),
-              SizedBox(height: 20),
-              
-              SizedBox( 
+                body: Center(
+            child: SingleChildScrollView( // Usando a estrutura da CI_CD6
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  SizedBox( // Botão Base 1
+                    width: 220,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/splash1');
+                      },
+                      child: Text('Abrir Base 1'),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  SizedBox( // Botão Consulta 2
+                    width: 220,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/splash2');
+                      },
+                      child: Text('Abrir Consulta 2'),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  SizedBox( // Botão Equipe 1 (da CI_CD6)
+                    width: 220,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/splashEquipe1');
+                      },
+                      child: Text('Abrir Equipe 1'),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  SizedBox( // Botão Calculadora equipe 7
+                    width: 220,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/calculadora');
+                      },
+                      child: Text('Calculadora equipe 7'),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  SizedBox( // Botão Calculadora Equipe 6 (da equipe6) - ADICIONADO AQUI
+                    width: 220,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/calculadora6');
+                      },
+                      child: Text('Calculadora Equipe 6'),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  SizedBox( // Botão Gestor de Finanças Equipe 3 (da CI_CD6)
+                    width: 220,
+                    child: ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, '/gf');
+                      },
+                      child: Text('Gestor de Finanças Equipe 3'),
+                    ),
+                  ),
+                  SizedBox(height: 20),
+                  Semantics( // Botão Entrar (parece comum às duas, mantendo a versão da CI_CD6 com SizedBox)
+                    identifier: 'Entrar',
+                    label: 'Entrar',
+                    button: true,
+                    child: SizedBox(
+                      width: 220,
+                      child: ElevatedButton(
+                        onPressed: () {
+                          Navigator.pushNamed(context, '/splash1');
+                        },
+                        child: const Text('Entrar'),
+                      ),
+                    ),
+                  ),
+                  SizedBox( 
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
@@ -113,22 +138,9 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20), 
-
-              Semantics(
-                identifier: 'Entrar',
-                label: 'Entrar',
-                button: true,
-                child: SizedBox(
-                  width: 220,
-                  child: ElevatedButton(
-                    onPressed: () {
-                      Navigator.pushNamed(context, '/splash1');
-                    },
-                    child: const Text('Entrar'),
-                  ),
-                ),
+                ],
               ),
-            ],
+            ),
           ),
         ),
       ),

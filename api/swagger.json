@@ -18,22 +18,6 @@
     {
       "name": "Impostos",
       "description": "Operações relacionadas a cálculos de impostos"
-    },
-    {
-      "name": "CI_CD7",
-      "description": "Operações da Equipe 7"
-    },
-    {
-      "name": "Gestor de Finanças",
-      "description": "Operações do Gestor de Finanças da Equipe 3"
-    },
-    {
-      "name": "Login Fixo Equipe 3",
-      "description": "Operações de Login da Equipe 3"
-    },
-    {
-      "name": "Equipe 2 - Viagens",
-      "description": "Operações de cálculo de viagens da Equipe 2"
     }
   ],
   "paths": {
@@ -361,6 +345,23 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Parâmetros inválidos ou ausentes",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "error": {
+                      "type": "string",
+                      "description": "Mensagem de erro",
+                      "example": "Parâmetros inválidos"
+                    }
+                  }
+                }
+              }
+            }
           }
         }
       }
@@ -531,6 +532,73 @@
           }
         }
       }
+      ,
+      "/equipe6": {
+        "post": {
+          "summary": "Calcula INSS, FGTS e salário líquido",
+          "description": "Recebe o salário bruto e retorna os valores calculados de INSS, FGTS e salário líquido.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "salario": {
+                      "type": "number",
+                      "example": 3000
+                    }
+                  },
+                  "required": ["salario"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Cálculo realizado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "inss": {
+                        "type": "string",
+                        "example": "240.00"
+                      },
+                      "fgts": {
+                        "type": "string",
+                        "example": "240.00"
+                      },
+                      "salarioLiquido": {
+                        "type": "string",
+                        "example": "2760.00"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Salário inválido",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Salário inválido"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
     },
     "/viagens2/calcular": {
       "post": {
@@ -653,3 +721,4 @@
     }
   }
 }
+
