@@ -4,7 +4,6 @@ const swaggerDocument = require('./swagger.json');
 const cors = require('cors');
 
 
-
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -14,7 +13,7 @@ const baseRoutes = require('./routes/baseRoutes')
 const impostosRoutes = require('./routes/impostoRoutes')
 const gestorFinancasRoute = require('./routes/gestor_financas_route');
 const loginFixoEquipeTresRoutes = require('./routes/loginFixoEquipeTresRoutes');
-
+const viagemRoutes = require('./routes/viagemRoutes');
 
 
 app.use(cors()); // Enable CORS for all routes
@@ -25,7 +24,7 @@ app.use('/users', userRoutes);
 app.use('/imposto', impostosRoutes);
 app.use('/gf', gestorFinancasRoute);
 app.use('/loginFixoEquipeTres', loginFixoEquipeTresRoutes);
-
+app.use('/viagens2', viagemRoutes);
 
 
 app.listen(port, () => {

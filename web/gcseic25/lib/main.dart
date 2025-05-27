@@ -6,6 +6,8 @@ import 'package:gcseic25/equipes/base/base.dart';
 import 'package:gcseic25/equipes/equipe_1/splash.dart';
 import 'package:gcseic25/equipes/equipe3/splash_screen_equipe_tres.dart';
 import 'equipes/equipe7/calculator_screen.dart';
+import 'package:gcseic25/equipes/equipe2/splash_screen_equipe2.dart';
+
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -30,6 +32,7 @@ class MyApp extends StatelessWidget {
         '/splashEquipe1': (context) => SplashEquipe(),
         '/calculadora': (context) => CalculatorScreen(),
         '/gf': (context) => SplashScreenEquipeTres(),
+        '/equipe2': (context) => const SplashScreenEquipe2(), 
       },
     );
   }
@@ -99,6 +102,18 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               SizedBox(height: 20),
+              
+              SizedBox( 
+                width: 220,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/equipe2'); 
+                  },
+                  child: const Text('Sistema de Viagens Equipe 2'),
+                ),
+              ),
+              SizedBox(height: 20), 
+
               Semantics(
                 identifier: 'Entrar',
                 label: 'Entrar',
@@ -169,7 +184,7 @@ class _ConsultaPageState extends State<ConsultaPage> {
 
   Future<void> _fetchData() async {
     //
-   final response = await http.get(Uri.parse('https://sincere-magnificent-cobweb.glitch.me/datetime'));
+    final response = await http.get(Uri.parse('https://sincere-magnificent-cobweb.glitch.me/datetime'));
   if (response.statusCode == 200) {
     setState(() {
       _responseText = response.body;
