@@ -1,5 +1,8 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:gcseic25/equipes/equipe 5/splash_screen.dart';
+import 'package:http/http.dart' as http;
 
 
 class LoginScreen extends StatefulWidget {
@@ -15,7 +18,7 @@ class _LoginScreenState extends State<LoginScreen> {
     text: 'teste123',
   );
 
-  void login() {
+  void login() async {
     final String username = usernameController.text;
     final String password = passwordController.text;
 
@@ -27,7 +30,7 @@ class _LoginScreenState extends State<LoginScreen> {
       body: jsonEncode({'username': username, 'password': password}),
     );
 
-    if (!response.success){
+    if (response.statusCode==401){
       showDialog(
         context: context,
         builder:
