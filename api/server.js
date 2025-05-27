@@ -15,6 +15,7 @@ const baseRoutes = require('./routes/baseRoutes')
 const impostosRoutes = require('./routes/impostoRoutes')
 const gestorFinancasRoute = require('./routes/gestor_financas_route');
 const loginFixoEquipeTresRoutes = require('./routes/loginFixoEquipeTresRoutes');
+const calculadoraViagemRoutes = require('./routes/calculadoraViagemRoutes');
 
 
 
@@ -23,10 +24,11 @@ app.use(express.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/', baseRoutes);
 app.use('/users', userRoutes);
+app.use('/imposto', impostosRoutes);
+app.use('/gf', gestorFinancasRoute);
+app.use('/loginFixoEquipeTres', loginFixoEquipeTresRoutes);
+app.use('/login', calculadoraViagemRoutes);
 app.use('/equipe6', equipe6Routes); // Rota da equipe 6
-app.use('/imposto', impostosRoutes); // Rota de impostos
-app.use('/gf', gestorFinancasRoute); // Rota do gestor de finanças
-app.use('/loginFixoEquipeTres', loginFixoEquipeTresRoutes); // Rota de login da equipe três
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
