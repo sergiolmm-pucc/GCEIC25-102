@@ -19,14 +19,15 @@ class _LoginScreenState extends State<LoginScreen> {
     final String username = usernameController.text;
     final String password = passwordController.text;
 
-    if (username == 'tester' && password == 'teste123') {
-      Navigator.push(
-        context,
-        MaterialPageRoute(
-          builder: (context) => SplashScreen(nextScreen: 'home'),
-        ),
-      );
-    } else {
+
+    final url = Uri.parse('https://sincere-magnificent-cobweb.glitch.me/calculadoraViagemRoutes/login');
+    final response = await http.post(
+      url,
+      headers: {'Content-Type': 'application/json'},
+      body: jsonEncode({'username': username, 'password': password}),
+    );
+
+    if (!response.success){
       showDialog(
         context: context,
         builder:
@@ -40,6 +41,13 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
               ],
             ),
+      );
+    } else {
+      Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => SplashScreen(nextScreen: 'home'),
+        ),
       );
     }
   }
