@@ -4,7 +4,6 @@ const swaggerDocument = require('./swagger.json');
 const cors = require('cors');
 
 
-
 const app = express();
 const port = process.env.PORT || 3000;
 
@@ -15,6 +14,7 @@ const baseRoutes = require('./routes/baseRoutes')
 const impostosRoutes = require('./routes/impostoRoutes')
 const gestorFinancasRoute = require('./routes/gestor_financas_route');
 const loginFixoEquipeTresRoutes = require('./routes/loginFixoEquipeTresRoutes');
+const viagemRoutes = require('./routes/viagemRoutes');
 const calculadoraViagemRoutes = require('./routes/calculadoraViagemRoutes');
 
 
@@ -27,10 +27,13 @@ app.use('/users', userRoutes);
 app.use('/imposto', impostosRoutes);
 app.use('/gf', gestorFinancasRoute);
 app.use('/loginFixoEquipeTres', loginFixoEquipeTresRoutes);
+app.use('/viagens2', viagemRoutes);
+app.use('/equipe6', equipe6Routes); // Rota da equipe6
 app.use('/login', calculadoraViagemRoutes);
-app.use('/equipe6', equipe6Routes); // Rota da equipe 6
+
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
   console.log(`Swagger em http://localhost:${port}/api-docs`);
 });
+
