@@ -9,7 +9,8 @@ import 'package:gcseic25/equipes/equipe3/splash_screen_equipe_tres.dart';
 import 'equipes/equipe7/calculator_screen.dart';
 import 'package:gcseic25/equipes/equipe2/splash_screen_equipe2.dart';
 
-import 'equipes/equipe 5/splash_screen.dart' as SplashScreenEquipe5;
+// Import da Equipe 5
+import 'equipes/equipe 5/splash_screen.dart' as SplashScreenEquipe5; // <--- Import da Equipe 5
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -33,9 +34,8 @@ class MyApp extends StatelessWidget {
         '/calculadora': (context) => CalculatorScreen(),
         '/calculadora6': (context) => Calculadora6Page(), // Da equipe6
         '/gf': (context) => SplashScreenEquipeTres(), // Da CI_CD6
-        '/equipe2': (context) => const SplashScreenEquipe2(), 
-        '/splash5':
-            (context) => SplashScreenEquipe5.SplashScreen(nextScreen: 'login'),
+        '/equipe2': (context) => const SplashScreenEquipe2(), // Da sua equipe
+        '/splash5': (context) => SplashScreenEquipe5.SplashScreen(nextScreen: 'login'), // Rota da Equipe 5
       },
     );
   }
@@ -48,13 +48,10 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tela Inicial 102'),
+        title: const Text('Tela Inicial 102'), // <--- AppBar CORRETA
       ),
       body: Center(
-        child: SingleChildScrollView( // Usando a estrutura da CI_CD6
-      appBar: AppBar(title: Text('Tela Inicial 102')),
-      body: Center(
-        child: SingleChildScrollView(
+        child: SingleChildScrollView( // <--- SingleChildScrollView CORRETA
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
@@ -64,61 +61,86 @@ class HomePage extends StatelessWidget {
                   onPressed: () {
                     Navigator.pushNamed(context, '/splash1');
                   },
-                  child: Text('Abrir Base 1'),
+                  child: const Text('Abrir Base 1'),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               SizedBox( // Botão Consulta 2
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/splash2');
                   },
-                  child: Text('Abrir Consulta 2'),
+                  child: const Text('Abrir Consulta 2'),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               SizedBox( // Botão Equipe 1
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/splashEquipe1');
                   },
-                  child: Text('Abrir Equipe 1'),
+                  child: const Text('Abrir Equipe 1'),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               SizedBox( // Botão Calculadora equipe 7
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/calculadora');
                   },
-                  child: Text('Calculadora equipe 7'),
+                  child: const Text('Calculadora equipe 7'),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               SizedBox( // Botão Calculadora Equipe 6
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/calculadora6');
                   },
-                  child: Text('Calculadora Equipe 6'),
+                  child: const Text('Calculadora Equipe 6'),
                 ),
               ),
-              SizedBox(height: 20),
+              const SizedBox(height: 20),
               SizedBox( // Botão Gestor de Finanças Equipe 3
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/gf');
                   },
-                  child: Text('Gestor de Finanças Equipe 3'),
+                  child: const Text('Gestor de Finanças Equipe 3'),
                 ),
               ),
-              SizedBox(height: 20),
-              Semantics( // Botão Entrar
+              const SizedBox(height: 20),
+              // ******** INÍCIO ADIÇÕES DA SUA EQUIPE (EQUIPE 2) ********
+              SizedBox( // Botão Sistema de Viagens Equipe 2
+                width: 220,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/equipe2');
+                  },
+                  child: const Text('Sistema de Viagens Equipe 2'),
+                ),
+              ),
+              const SizedBox(height: 20),
+              // ********************************************************
+              // ******** INÍCIO ADIÇÕES DA EQUIPE 5 ********
+              SizedBox( // Botão Cálculo de Viagens Equipe 5
+                width: 220,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/splash5');
+                  },
+                  child: const Text('Cálculo de Viagens Equipe 5'),
+                ),
+              ),
+              const SizedBox(height: 20),
+              // ********************************************
+              Semantics( // Botão Entrar (final)
+                identifier: 'Entrar',
                 label: 'Entrar',
                 button: true,
                 child: SizedBox(
@@ -129,19 +151,6 @@ class HomePage extends StatelessWidget {
                     },
                     child: const Text('Entrar'),
                   ),
-                ),
-              ),
-              // Remova a última linha 'SizedBox(height: 20),' que estava solta aqui.
-              // e o seu botão 'Sistema de Viagens Equipe 2' que estava depois do último Semantics.
-              // Eles foram movidos para a posição acima.
-              SizedBox(height: 20),
-              SizedBox(
-                width: 220,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/splash5');
-                  },
-                  child: Text('Cálculo de Viagens Equipe 5'),
                 ),
               ),
             ],
