@@ -9,6 +9,7 @@ const app = express();
 const port = process.env.PORT || 3000;
 
 // importa as rotas
+const equipe6Routes = require('./routes/equipe6Routes')
 const userRoutes = require('./routes/userRoutes')
 const baseRoutes = require('./routes/baseRoutes')
 const impostosRoutes = require('./routes/impostoRoutes')
@@ -27,8 +28,7 @@ app.use('/imposto', impostosRoutes);
 app.use('/gf', gestorFinancasRoute);
 app.use('/loginFixoEquipeTres', loginFixoEquipeTresRoutes);
 app.use('/login', calculadoraViagemRoutes);
-
-
+app.use('/equipe6', equipe6Routes); // Rota da equipe 6
 
 app.listen(port, () => {
   console.log(`Servidor rodando em http://localhost:${port}`);
