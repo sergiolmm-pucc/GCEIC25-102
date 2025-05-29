@@ -7,7 +7,7 @@ exports.calcularSalario = (req, res) => {
 
   const inss = salario * 0.08;
   const fgts = salario * 0.08;
-  const salarioLiquido = salario - inss;
+  const salarioLiquido = salario - inss - fgts;
 
   res.json({
     inss: inss.toFixed(2),
