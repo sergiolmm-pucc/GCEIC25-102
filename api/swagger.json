@@ -532,6 +532,193 @@
           }
         }
       }
+      ,
+      "/equipe6": {
+        "post": {
+          "summary": "Calcula INSS, FGTS e salário líquido",
+          "description": "Recebe o salário bruto e retorna os valores calculados de INSS, FGTS e salário líquido.",
+          "requestBody": {
+            "required": true,
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "salario": {
+                      "type": "number",
+                      "example": 3000
+                    }
+                  },
+                  "required": ["salario"]
+                }
+              }
+            }
+          },
+          "responses": {
+            "200": {
+              "description": "Cálculo realizado com sucesso",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "inss": {
+                        "type": "string",
+                        "example": "240.00"
+                      },
+                      "fgts": {
+                        "type": "string",
+                        "example": "240.00"
+                      },
+                      "salarioLiquido": {
+                        "type": "string",
+                        "example": "2760.00"
+                      }
+                    }
+                  }
+                }
+              }
+            },
+            "400": {
+              "description": "Salário inválido",
+              "content": {
+                "application/json": {
+                  "schema": {
+                    "type": "object",
+                    "properties": {
+                      "error": {
+                        "type": "string",
+                        "example": "Salário inválido"
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+
+    },
+    "/viagens2/calcular": {
+      "post": {
+        "tags": ["Equipe 2 - Viagens"],
+        "summary": "Calcula o custo total de uma viagem",
+        "description": "Recebe os detalhes de uma viagem e retorna o custo total estimado com base em país, temporada, companhia aérea, hotel, dias de estadia, restaurantes e quantidade de pessoas.",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "pais": {
+                    "type": "string",
+                    "description": "País de destino (ex: 'Brasil', 'Portugal').",
+                    "example": "Brasil"
+                  },
+                  "temporada": {
+                    "type": "string",
+                    "description": "Temporada da viagem ('alta' ou 'baixa').",
+                    "enum": ["alta", "baixa"],
+                    "example": "baixa"
+                  },
+                  "companhiaAerea": {
+                    "type": "string",
+                    "description": "Companhia aérea (ex: 'Latam', 'Azul', 'Gol').",
+                    "enum": ["Latam", "Azul", "Gol"],
+                    "example": "Latam"
+                  },
+                  "hotel": {
+                    "type": "string",
+                    "description": "Tipo de hotel (ex: 'Hotel Luxo', 'Pousada Simples').",
+                    "enum": ["Hotel Luxo", "Hotel Conforto", "Pousada Simples", "Hostel Economico", "Resort Familiar"],
+                    "example": "Pousada Simples"
+                  },
+                  "diasEstadia": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Número de dias de estadia.",
+                    "minimum": 1,
+                    "example": 7
+                  },
+                  "quantidadeRestaurantes": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Número de restaurantes a incluir no orçamento.",
+                    "minimum": 0,
+                    "example": 3
+                  },
+                  "quantidadePessoas": {
+                    "type": "integer",
+                    "format": "int32",
+                    "description": "Número de pessoas viajando.",
+                    "minimum": 1,
+                    "example": 2
+                  }
+                },
+                "required": [
+                  "pais",
+                  "temporada",
+                  "companhiaAerea",
+                  "hotel",
+                  "diasEstadia",
+                  "quantidadeRestaurantes",
+                  "quantidadePessoas"
+                ]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Cálculo realizado com sucesso.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": true
+                    },
+                    "custoTotal": {
+                      "type": "string",
+                      "description": "Custo total da viagem formatado.",
+                      "example": "9520.00"
+                    },
+                    "mensagem": {
+                      "type": "string",
+                      "example": "Cálculo da viagem realizado com sucesso!"
+                    }
+                  }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Requisição inválida ou dados faltando/incorretos.",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "object",
+                  "properties": {
+                    "success": {
+                      "type": "boolean",
+                      "example": false
+                    },
+                    "mensagem": {
+                      "type": "string",
+                      "example": "Todos os campos da viagem são obrigatórios."
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
     }
   }
 }
+

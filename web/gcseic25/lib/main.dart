@@ -3,9 +3,14 @@ import 'package:flutter/rendering.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
+import 'package:gcseic25/equipes/equipe6/calculadora6.dart';
 import 'package:gcseic25/equipes/equipe_1/splash.dart';
-import 'package:gcseic25/equipes/equipe3/splash_screen_equipe_tres.dart';
+import 'package:gcseic25/equipes/equipe3/splash_screen_equipe_tres.dart'; 
 import 'equipes/equipe7/calculator_screen.dart';
+import 'package:gcseic25/equipes/equipe2/splash_screen_equipe2.dart';
+
+// Import da Equipe 5
+import 'equipes/equipe 5/splash_screen.dart' as SplashScreenEquipe5; // <--- Import da Equipe 5
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -20,16 +25,17 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'App de Navegação',
-      theme: ThemeData(
-        primarySwatch: Colors.blue,
-      ),
+      theme: ThemeData(primarySwatch: Colors.blue),
       home: HomePage(),
       routes: {
         '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
         '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
-        '/splashEquipe1': (context) => SplashEquipe(),
+        '/splashEquipe1': (context) => SplashEquipe(), 
         '/calculadora': (context) => CalculatorScreen(),
-        '/gf': (context) => SplashScreenEquipeTres(),
+        '/calculadora6': (context) => Calculadora6Page(), // Da equipe6
+        '/gf': (context) => SplashScreenEquipeTres(), // Da CI_CD6
+        '/equipe2': (context) => const SplashScreenEquipe2(), // Da sua equipe
+        '/splash5': (context) => SplashScreenEquipe5.SplashScreen(nextScreen: 'login'), // Rota da Equipe 5
       },
     );
   }
@@ -42,64 +48,98 @@ class HomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text('Tela Inicial 102'),
+        title: const Text('Tela Inicial 102'), // <--- AppBar CORRETA
       ),
       body: Center(
-        child: SingleChildScrollView(
+        child: SingleChildScrollView( // <--- SingleChildScrollView CORRETA
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox(
+              SizedBox( // Botão Base 1
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/splash1');
                   },
-                  child: Text('Abrir Base 1'),
+                  child: const Text('Abrir Base 1'),
                 ),
               ),
-              SizedBox(height: 20),
-              SizedBox(
+              const SizedBox(height: 20),
+              SizedBox( // Botão Consulta 2
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/splash2');
                   },
-                  child: Text('Abrir Consulta 2'),
+                  child: const Text('Abrir Consulta 2'),
                 ),
               ),
-              SizedBox(height: 20),
-              SizedBox(
+              const SizedBox(height: 20),
+              SizedBox( // Botão Equipe 1
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/splashEquipe1');
                   },
-                  child: Text('Abrir Equipe 1'),
+                  child: const Text('Abrir Equipe 1'),
                 ),
               ),
-              SizedBox(height: 20),
-              SizedBox(
+              const SizedBox(height: 20),
+              SizedBox( // Botão Calculadora equipe 7
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/calculadora');
                   },
-                  child: Text('Calculadora equipe 7'),
+                  child: const Text('Calculadora equipe 7'),
                 ),
               ),
-              SizedBox(height: 20),
-              SizedBox(
+              const SizedBox(height: 20),
+              SizedBox( // Botão Calculadora Equipe 6
+                width: 220,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/calculadora6');
+                  },
+                  child: const Text('Calculadora Equipe 6'),
+                ),
+              ),
+              const SizedBox(height: 20),
+              SizedBox( // Botão Gestor de Finanças Equipe 3
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
                     Navigator.pushNamed(context, '/gf');
                   },
-                  child: Text('Gestor de Finanças Equipe 3'),
+                  child: const Text('Gestor de Finanças Equipe 3'),
                 ),
               ),
-              SizedBox(height: 20),
-              Semantics(
+              const SizedBox(height: 20),
+              // ******** INÍCIO ADIÇÕES DA SUA EQUIPE (EQUIPE 2) ********
+              SizedBox( // Botão Sistema de Viagens Equipe 2
+                width: 220,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/equipe2');
+                  },
+                  child: const Text('Sistema de Viagens Equipe 2'),
+                ),
+              ),
+              const SizedBox(height: 20),
+              // ********************************************************
+              // ******** INÍCIO ADIÇÕES DA EQUIPE 5 ********
+              SizedBox( // Botão Cálculo de Viagens Equipe 5
+                width: 220,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/splash5');
+                  },
+                  child: const Text('Cálculo de Viagens Equipe 5'),
+                ),
+              ),
+              const SizedBox(height: 20),
+              // ********************************************
+              Semantics( // Botão Entrar (final)
                 identifier: 'Entrar',
                 label: 'Entrar',
                 button: true,
@@ -120,6 +160,9 @@ class HomePage extends StatelessWidget {
     );
   }
 }
+
+// O restante do seu código (SplashScreen, ConsultaPage etc.) permanece INALTERADO
+// no seu main.dart, como já está.
 
 class SplashScreen extends StatefulWidget {
   final Widget nextPage;
@@ -146,10 +189,7 @@ class _SplashScreenState extends State<SplashScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       body: Center(
-        child: Text(
-          'Carregando...',
-          style: TextStyle(fontSize: 24),
-        ),
+        child: Text('Carregando...', style: TextStyle(fontSize: 24)),
       ),
     );
   }
@@ -168,33 +208,28 @@ class _ConsultaPageState extends State<ConsultaPage> {
   String _responseText = 'Resultado aparecerá aqui.';
 
   Future<void> _fetchData() async {
-    //
-   final response = await http.get(Uri.parse('https://sincere-magnificent-cobweb.glitch.me/datetime'));
-  if (response.statusCode == 200) {
-    setState(() {
-      _responseText = response.body;
-    });
-  } else {
-    setState(() {
-      _responseText = 'Erro ao consultar API.';
-    });
-  }
+
+    final response = await http.get(Uri.parse('https://sincere-magnificent-cobweb.glitch.me/datetime'));
+    if (response.statusCode == 200) {
+      setState(() {
+        _responseText = response.body;
+      });
+    } else {
+      setState(() {
+        _responseText = 'Erro ao consultar API.';
+      });
+    }
   }
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(
-        title: Text(widget.title),
-      ),
+      appBar: AppBar(title: Text(widget.title)),
       body: Padding(
         padding: const EdgeInsets.all(16.0),
         child: Column(
           children: [
-            ElevatedButton(
-              onPressed: _fetchData,
-              child: Text('Consultar API'),
-            ),
+            ElevatedButton(onPressed: _fetchData, child: Text('Consultar API')),
             SizedBox(height: 20),
             Container(
               width: double.infinity,
@@ -203,10 +238,7 @@ class _ConsultaPageState extends State<ConsultaPage> {
                 border: Border.all(color: Colors.blueAccent),
                 borderRadius: BorderRadius.circular(8.0),
               ),
-              child: Text(
-                _responseText,
-                style: TextStyle(fontSize: 16),
-              ),
+              child: Text(_responseText, style: TextStyle(fontSize: 16)),
             ),
           ],
         ),
