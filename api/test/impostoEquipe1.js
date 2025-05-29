@@ -88,12 +88,19 @@ fs.mkdirSync("./fotos/impostoEquipe1", { recursive: true });
 			console.error(
 				"Campos de login NÃO encontrados por Semantics. Tentando busca genérica por <input>/<textarea>..."
 			);
-			// Busca genérica: pega os dois primeiros inputs/textarea visíveis na tela
+			// Busca genérica: pega os dois primeiros inputs/textarea visíveis e habilitados na tela
 			const allInputs = await driver.findElements(By.css("input, textarea"));
-			if (allInputs.length >= 2) {
-				userInput = allInputs[0];
-				passInput = allInputs[1];
-				console.log("Campos de login encontrados por busca genérica!");
+			const visibleInputs = [];
+			for (const el of allInputs) {
+				const displayed = await el.isDisplayed();
+				const enabled = await el.isEnabled();
+				if (displayed && enabled) visibleInputs.push(el);
+				if (visibleInputs.length === 2) break;
+			}
+			if (visibleInputs.length >= 2) {
+				userInput = visibleInputs[0];
+				passInput = visibleInputs[1];
+				console.log("Campos de login encontrados por busca genérica (visíveis e habilitados)!");
 			} else {
 				await driver.takeScreenshot().then((image) => {
 					fs.writeFileSync(
@@ -103,11 +110,30 @@ fs.mkdirSync("./fotos/impostoEquipe1", { recursive: true });
 					);
 					console.log("Screenshot de erro salva em erro-login-campos.png");
 				});
-				throw new Error("Não foi possível encontrar os campos de login!");
+				throw new Error("Não foi possível encontrar os campos de login visíveis e habilitados!");
 			}
 		}
-		await userInput.sendKeys("admin");
-		await passInput.sendKeys("1234");
+
+		// Função robusta para preencher campo
+		async function fillInput(driver, el, value) {
+			await driver.wait(async () => await el.isDisplayed() && await el.isEnabled(), 5000);
+			await el.click();
+			await driver.sleep(100);
+			if (el.clear) await el.clear();
+			await el.sendKeys(value);
+			await driver.sleep(100);
+			// Validação: tenta ler o valor digitado
+			let typed = null;
+			try {
+				typed = await el.getAttribute('value');
+			} catch (e) {}
+			if (typed !== null && typed !== value) {
+				throw new Error(`Valor digitado não corresponde: esperado=${value}, obtido=${typed}`);
+			}
+		}
+
+		await fillInput(driver, userInput, "admin");
+		await fillInput(driver, passInput, "1234");
 
 		// Screenshot após preencher login
 		await driver.takeScreenshot().then((image) => {
@@ -182,11 +208,9 @@ fs.mkdirSync("./fotos/impostoEquipe1", { recursive: true });
 			throw e;
 		}
 
-		// Preenche os dois primeiros campos (valor, alíquota)
-		(await icmsInputs[0].clear) && (await icmsInputs[0].clear());
-		await icmsInputs[0].sendKeys("1000");
-		(await icmsInputs[1].clear) && (await icmsInputs[1].clear());
-		await icmsInputs[1].sendKeys("18");
+		// Preenche os dois primeiros campos (valor, alíquota) de forma robusta
+		await fillInput(driver, icmsInputs[0], "1000");
+		await fillInput(driver, icmsInputs[1], "18");
 
 		// Screenshot após preencher os campos
 		await driver.takeScreenshot().then((image) => {
@@ -214,9 +238,9 @@ fs.mkdirSync("./fotos/impostoEquipe1", { recursive: true });
 			);
 		});
 
-		console.log("Teste de ICMS da Equipe 1 finalizado com sucesso!");
+		console.log("Teste funcional da Equipe 1 finalizado com sucesso!");
 	} catch (error) {
-		console.error("Erro no teste de ICMS da Equipe 1:", error);
+		console.error("Erro no teste funcional da Equipe 1:", error);
 	} finally {
 		await driver.quit();
 	}
