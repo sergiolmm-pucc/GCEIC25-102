@@ -47,7 +47,7 @@ fs.mkdirSync('./fotos/impostoEquipe1', { recursive: true });
       throw e;
     }
     await equipe1Button.click();
-    await driver.sleep(4000);
+    await driver.sleep(15000);
 
     // Screenshot da tela de login
     await driver.takeScreenshot().then(image => {
