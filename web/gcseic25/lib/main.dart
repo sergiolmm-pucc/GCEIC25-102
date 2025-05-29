@@ -6,6 +6,7 @@ import 'package:gcseic25/equipes/base/base.dart';
 import 'package:gcseic25/equipes/equipe6/calculadora6.dart';
 import 'package:gcseic25/equipes/equipe_1/splash.dart';
 import 'package:gcseic25/equipes/equipe3/splash_screen_equipe_tres.dart';
+import 'package:gcseic25/equipes/equipe8/splash_screen_piscina.dart';
 import 'equipes/equipe7/calculator_screen.dart';
 import 'package:gcseic25/equipes/equipe2/splash_screen_equipe2.dart';
 
@@ -37,9 +38,11 @@ class MyApp extends StatelessWidget {
                 SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
         '/splashEquipe1': (context) => SplashEquipe(),
         '/calculadora': (context) => CalculatorScreen(),
+        '/gf': (context) => SplashScreenEquipeTres(),
+        '/piscina': (context) => SplashScreenPiscina(), // Da equipe 8
         '/calculadora6': (context) => Calculadora6Page(), // Da equipe6
         '/gf': (context) => SplashScreenEquipeTres(), // Da CI_CD6
-        '/equipe2': (context) => const SplashScreenEquipe2(), // Da sua equipe
+        '/equipe2': (context) => const SplashScreenEquipe2(), 
         '/splash5':
             (context) => SplashScreenEquipe5.SplashScreen(
               nextScreen: 'login',
@@ -159,8 +162,17 @@ class HomePage extends StatelessWidget {
                   child: const Text('Cálculo de Viagens Equipe 5'),
                 ),
               ),
-              const SizedBox(height: 20),
-              // ********************************************
+              SizedBox(height: 20),
+              SizedBox(
+                width: 220,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/piscina');
+                  },
+                  child: Text('Cálculo Construção de Piscina - Equipe 8'),
+                ),
+              ),
+              SizedBox(height: 20),
               Semantics(
                 // Botão Entrar (final)
                 identifier: 'Entrar',
