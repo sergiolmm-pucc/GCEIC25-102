@@ -65,20 +65,32 @@ class _CalculoIcmsPageState extends State<CalculoIcmsPage> {
         padding: const EdgeInsets.all(16),
         child: Column(
           children: [
-            TextField(
-              controller: valorController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: 'Valor do produto'),
+            Semantics(
+              label: 'Valor do produto',
+              textField: true,
+              child: TextField(
+                controller: valorController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(labelText: 'Valor do produto'),
+              ),
             ),
-            TextField(
-              controller: aliquotaController,
-              keyboardType: TextInputType.number,
-              decoration: const InputDecoration(labelText: 'Alíquota ICMS (%)'),
+            Semantics(
+              label: 'Alíquota ICMS',
+              textField: true,
+              child: TextField(
+                controller: aliquotaController,
+                keyboardType: TextInputType.number,
+                decoration: const InputDecoration(labelText: 'Alíquota ICMS (%)'),
+              ),
             ),
             const SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: calcularICMS,
-              child: const Text('Calcular ICMS'),
+            Semantics(
+              label: 'Calcular ICMS',
+              button: true,
+              child: ElevatedButton(
+                onPressed: calcularICMS,
+                child: const Text('Calcular ICMS'),
+              ),
             ),
             const SizedBox(height: 16),
             Text(resultado, style: const TextStyle(fontSize: 16)),

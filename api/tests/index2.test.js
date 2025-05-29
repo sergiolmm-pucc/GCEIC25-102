@@ -8,4 +8,3 @@ describe('Texte exemplo', () => {
         expect(result).toEqual(5);
     })
 })
-
