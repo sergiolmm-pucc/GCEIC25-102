@@ -208,9 +208,39 @@ fs.mkdirSync("./fotos/impostoEquipe1", { recursive: true });
 			throw e;
 		}
 
-		// Preenche os dois primeiros campos (valor, alíquota) de forma robusta
-		await fillInput(driver, icmsInputs[0], "1000");
-		await fillInput(driver, icmsInputs[1], "18");
+		// Tenta preencher todos os pares possíveis de campos visíveis/habilitados
+		let preenchido = false;
+		for (let i = 0; i < icmsInputs.length; i++) {
+			for (let j = 0; j < icmsInputs.length; j++) {
+				if (i === j) continue;
+				try {
+					await fillInput(driver, icmsInputs[i], "1000");
+					await fillInput(driver, icmsInputs[j], "18");
+					// Validação: se ambos os campos ficaram com o valor correto, considera sucesso
+					const v1 = await icmsInputs[i].getAttribute('value');
+					const v2 = await icmsInputs[j].getAttribute('value');
+					if (v1 === "1000" && v2 === "18") {
+						preenchido = true;
+						console.log(`Campos de ICMS preenchidos nos índices [${i},${j}]`);
+						break;
+					}
+				} catch (e) {
+					// Tenta o próximo par
+				}
+			}
+			if (preenchido) break;
+		}
+		if (!preenchido) {
+			await driver.takeScreenshot().then((image) => {
+				fs.writeFileSync(
+					"./fotos/impostoEquipe1/erro-preencher-icms.png",
+					image,
+					"base64"
+				);
+				console.log("Screenshot de erro salva em erro-preencher-icms.png");
+			});
+			throw new Error("Não foi possível preencher corretamente os campos de ICMS!");
+		}
 
 		// Screenshot após preencher os campos
 		await driver.takeScreenshot().then((image) => {
