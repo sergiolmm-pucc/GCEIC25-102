@@ -14,6 +14,7 @@ const baseRoutes = require('./routes/baseRoutes')
 const impostosRoutes = require('./routes/impostoRoutes')
 const gestorFinancasRoute = require('./routes/gestor_financas_route');
 const loginFixoEquipeTresRoutes = require('./routes/loginFixoEquipeTresRoutes');
+const calculoPiscina = require('./routes/calculoPiscinaRoute');
 
 
 
@@ -25,6 +26,7 @@ app.use('/users', userRoutes);
 app.use('/imposto', impostosRoutes);
 app.use('/gf', gestorFinancasRoute);
 app.use('/loginFixoEquipeTres', loginFixoEquipeTresRoutes);
+app.use('/calcularPiscina', calculoPiscina);
 
 
 

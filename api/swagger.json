@@ -532,6 +532,134 @@
           }
         }
       }
+    },
+    "/calcularPiscina": {
+  "post": {
+    "tags": ["Equipe8"],
+    "summary": "Calcula o custo total da construção e manutenção de uma piscina",
+    "description": "Calcula o volume, litros de água e custo total de uma piscina com base nos parâmetros fornecidos",
+    "requestBody": {
+      "required": true,
+      "content": {
+        "application/json": {
+          "schema": {
+            "type": "object",
+            "properties": {
+              "largura": {
+                "type": "number",
+                "description": "Largura da piscina em metros",
+                "example": 3.5
+              },
+              "comprimento": {
+                "type": "number",
+                "description": "Comprimento da piscina em metros",
+                "example": 6.0
+              },
+              "profundidade": {
+                "type": "number",
+                "description": "Profundidade da piscina em metros",
+                "example": 1.5
+              },
+              "custoAguaPorLitro": {
+                "type": "number",
+                "description": "Custo da água por litro",
+                "example": 0.005
+              },
+              "custoEletrica": {
+                "type": "number",
+                "description": "Custo da instalação elétrica",
+                "example": 1500
+              },
+              "custoHidraulica": {
+                "type": "number",
+                "description": "Custo da instalação hidráulica",
+                "example": 1200
+              },
+              "manutencaoMensal": {
+                "type": "number",
+                "description": "Custo mensal de manutenção",
+                "example": 200
+              }
+            },
+            "required": ["largura", "comprimento", "profundidade"]
+          }
+        }
+      }
+    },
+    "responses": {
+      "200": {
+        "description": "Cálculo realizado com sucesso",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": true
+                },
+                "volume_m3": {
+                  "type": "string",
+                  "description": "Volume da piscina em metros cúbicos",
+                  "example": "31.50"
+                },
+                "litros": {
+                  "type": "string",
+                  "description": "Volume em litros",
+                  "example": "31500"
+                },
+                "custoAgua": {
+                  "type": "string",
+                  "description": "Custo da água",
+                  "example": "157.50"
+                },
+                "custoEletrica": {
+                  "type": "string",
+                  "description": "Custo da instalação elétrica",
+                  "example": "1500.00"
+                },
+                "custoHidraulica": {
+                  "type": "string",
+                  "description": "Custo da instalação hidráulica",
+                  "example": "1200.00"
+                },
+                "manutencaoMensal": {
+                  "type": "string",
+                  "description": "Custo mensal de manutenção",
+                  "example": "200.00"
+                },
+                "custoTotal": {
+                  "type": "string",
+                  "description": "Custo total estimado da piscina",
+                  "example": "3057.50"
+                }
+              }
+            }
+          }
+        }
+      },
+      "400": {
+        "description": "Parâmetros obrigatórios ausentes",
+        "content": {
+          "application/json": {
+            "schema": {
+              "type": "object",
+              "properties": {
+                "success": {
+                  "type": "boolean",
+                  "example": false
+                },
+                "message": {
+                  "type": "string",
+                  "example": "Parâmetros largura, comprimento e profundidade são obrigatórios"
+                }
+              }
+            }
+          }
+        }
+      }
     }
+  }
+}
   }
 }

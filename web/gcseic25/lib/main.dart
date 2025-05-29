@@ -5,6 +5,7 @@ import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
 import 'package:gcseic25/equipes/equipe_1/splash.dart';
 import 'package:gcseic25/equipes/equipe3/splash_screen_equipe_tres.dart';
+import 'package:gcseic25/equipes/equipe8/splash_screen_piscina.dart';
 import 'equipes/equipe7/calculator_screen.dart';
 
 void main() {
@@ -30,6 +31,7 @@ class MyApp extends StatelessWidget {
         '/splashEquipe1': (context) => SplashEquipe(),
         '/calculadora': (context) => CalculatorScreen(),
         '/gf': (context) => SplashScreenEquipeTres(),
+        '/piscina': (context) => SplashScreenPiscina(),
       },
     );
   }
@@ -98,6 +100,17 @@ class HomePage extends StatelessWidget {
                   child: Text('Gestor de Finanças Equipe 3'),
                 ),
               ),
+              SizedBox(height: 20),
+              SizedBox(
+                width: 220,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/piscina');
+                  },
+                  child: Text('Cálculo Construção de Piscina - Equipe 8'),
+                ),
+              ),
+
               SizedBox(height: 20),
               Semantics(
                 identifier: 'Entrar',
