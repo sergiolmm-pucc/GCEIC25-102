@@ -5,12 +5,13 @@ import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
 import 'package:gcseic25/equipes/equipe6/calculadora6.dart';
 import 'package:gcseic25/equipes/equipe_1/splash.dart';
-import 'package:gcseic25/equipes/equipe3/splash_screen_equipe_tres.dart'; 
+import 'package:gcseic25/equipes/equipe3/splash_screen_equipe_tres.dart';
 import 'equipes/equipe7/calculator_screen.dart';
 import 'package:gcseic25/equipes/equipe2/splash_screen_equipe2.dart';
 
 // Import da Equipe 5
-import 'equipes/equipe 5/splash_screen.dart' as SplashScreenEquipe5; // <--- Import da Equipe 5
+import 'equipes/equipe 5/splash_screen.dart'
+    as SplashScreenEquipe5; // <--- Import da Equipe 5
 
 void main() {
   WidgetsFlutterBinding.ensureInitialized(); // required semantics binding
@@ -28,14 +29,21 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primarySwatch: Colors.blue),
       home: HomePage(),
       routes: {
-        '/splash1': (context) => SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
-        '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
-        '/splashEquipe1': (context) => SplashEquipe(), 
+        '/splash1':
+            (context) =>
+                SplashScreen1(nextPage: ConsultaPage1(title: 'Base 1')),
+        '/splash2':
+            (context) =>
+                SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
+        '/splashEquipe1': (context) => SplashEquipe(),
         '/calculadora': (context) => CalculatorScreen(),
         '/calculadora6': (context) => Calculadora6Page(), // Da equipe6
         '/gf': (context) => SplashScreenEquipeTres(), // Da CI_CD6
         '/equipe2': (context) => const SplashScreenEquipe2(), // Da sua equipe
-        '/splash5': (context) => SplashScreenEquipe5.SplashScreen(nextScreen: 'login'), // Rota da Equipe 5
+        '/splash5':
+            (context) => SplashScreenEquipe5.SplashScreen(
+              nextScreen: 'login',
+            ), // Rota da Equipe 5
       },
     );
   }
@@ -51,11 +59,13 @@ class HomePage extends StatelessWidget {
         title: const Text('Tela Inicial 102'), // <--- AppBar CORRETA
       ),
       body: Center(
-        child: SingleChildScrollView( // <--- SingleChildScrollView CORRETA
+        child: SingleChildScrollView(
+          // <--- SingleChildScrollView CORRETA
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              SizedBox( // Botão Base 1
+              SizedBox(
+                // Botão Base 1
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
@@ -65,7 +75,8 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              SizedBox( // Botão Consulta 2
+              SizedBox(
+                // Botão Consulta 2
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
@@ -75,17 +86,24 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              SizedBox( // Botão Equipe 1
-                width: 220,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/splashEquipe1');
-                  },
-                  child: const Text('Abrir Equipe 1'),
+              Semantics( // ******** BOTÃO EQUIPE 1 ********
+                identifier: 'Abrir Equipe 1',
+                label: 'Abrir Equipe 1',
+                button: true,
+                child: SizedBox(
+                  // Botão Equipe 1
+                  width: 220,
+                  child: ElevatedButton(
+                    onPressed: () {
+                      Navigator.pushNamed(context, '/splashEquipe1');
+                    },
+                    child: const Text('Abrir Equipe 1'),
+                  ),
                 ),
               ),
               const SizedBox(height: 20),
-              SizedBox( // Botão Calculadora equipe 7
+              SizedBox(
+                // Botão Calculadora equipe 7
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
@@ -95,7 +113,8 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              SizedBox( // Botão Calculadora Equipe 6
+              SizedBox(
+                // Botão Calculadora Equipe 6
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
@@ -105,7 +124,8 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              SizedBox( // Botão Gestor de Finanças Equipe 3
+              SizedBox(
+                // Botão Gestor de Finanças Equipe 3
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
@@ -116,7 +136,8 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               // ******** INÍCIO ADIÇÕES DA SUA EQUIPE (EQUIPE 2) ********
-              SizedBox( // Botão Sistema de Viagens Equipe 2
+              SizedBox(
+                // Botão Sistema de Viagens Equipe 2
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
@@ -128,7 +149,8 @@ class HomePage extends StatelessWidget {
               const SizedBox(height: 20),
               // ********************************************************
               // ******** INÍCIO ADIÇÕES DA EQUIPE 5 ********
-              SizedBox( // Botão Cálculo de Viagens Equipe 5
+              SizedBox(
+                // Botão Cálculo de Viagens Equipe 5
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
@@ -139,7 +161,8 @@ class HomePage extends StatelessWidget {
               ),
               const SizedBox(height: 20),
               // ********************************************
-              Semantics( // Botão Entrar (final)
+              Semantics(
+                // Botão Entrar (final)
                 identifier: 'Entrar',
                 label: 'Entrar',
                 button: true,
@@ -208,8 +231,9 @@ class _ConsultaPageState extends State<ConsultaPage> {
   String _responseText = 'Resultado aparecerá aqui.';
 
   Future<void> _fetchData() async {
-
-    final response = await http.get(Uri.parse('https://sincere-magnificent-cobweb.glitch.me/datetime'));
+    final response = await http.get(
+      Uri.parse('https://sincere-magnificent-cobweb.glitch.me/datetime'),
+    );
     if (response.statusCode == 200) {
       setState(() {
         _responseText = response.body;
