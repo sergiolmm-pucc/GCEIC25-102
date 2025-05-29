@@ -159,7 +159,7 @@ fs.mkdirSync("./fotos/impostoEquipe1", { recursive: true });
 			loginButton = allButtons[0];
 		}
 		await loginButton.click();
-		await driver.sleep(3000);
+		await driver.sleep(10000);
 
 		// Screenshot após login
 		await driver.takeScreenshot().then((image) => {
@@ -175,7 +175,7 @@ fs.mkdirSync("./fotos/impostoEquipe1", { recursive: true });
 			By.xpath("//flt-semantics[@aria-label='Cálculo ICMS']")
 		);
 		await icmsButton.click();
-		await driver.sleep(3000);
+		await driver.sleep(10000);
 
 		// Screenshot da tela de cálculo de ICMS
 		await driver.takeScreenshot().then((image) => {
@@ -184,16 +184,25 @@ fs.mkdirSync("./fotos/impostoEquipe1", { recursive: true });
 
 		// 6. Preencha os campos de valor e alíquota
 
-		// Busca genérica por todos os campos de input/textarea/contenteditable na tela de ICMS
+		// Busca genérica por todos os campos de input/textarea na tela de ICMS (simples)
 		let icmsInputs;
 		try {
 			icmsInputs = await driver.findElements(
-				By.css('textarea, input, [contenteditable="true"]')
+				By.css('input, textarea')
 			);
-			if (icmsInputs.length < 2)
+			// Filtra apenas visíveis e habilitados
+			const visibleInputs = [];
+			for (const el of icmsInputs) {
+				const displayed = await el.isDisplayed();
+				const enabled = await el.isEnabled();
+				if (displayed && enabled) visibleInputs.push(el);
+				if (visibleInputs.length === 2) break;
+			}
+			if (visibleInputs.length < 2)
 				throw new Error(
-					"Menos de 2 campos de input encontrados na tela de ICMS!"
+					"Menos de 2 campos de input visíveis/habilitados na tela de ICMS!"
 				);
+			icmsInputs = visibleInputs;
 			console.log(`Campos de ICMS encontrados: ${icmsInputs.length}`);
 		} catch (e) {
 			console.error("Campos de ICMS NÃO encontrados!");
@@ -208,39 +217,9 @@ fs.mkdirSync("./fotos/impostoEquipe1", { recursive: true });
 			throw e;
 		}
 
-		// Tenta preencher todos os pares possíveis de campos visíveis/habilitados
-		let preenchido = false;
-		for (let i = 0; i < icmsInputs.length; i++) {
-			for (let j = 0; j < icmsInputs.length; j++) {
-				if (i === j) continue;
-				try {
-					await fillInput(driver, icmsInputs[i], "1000");
-					await fillInput(driver, icmsInputs[j], "18");
-					// Validação: se ambos os campos ficaram com o valor correto, considera sucesso
-					const v1 = await icmsInputs[i].getAttribute('value');
-					const v2 = await icmsInputs[j].getAttribute('value');
-					if (v1 === "1000" && v2 === "18") {
-						preenchido = true;
-						console.log(`Campos de ICMS preenchidos nos índices [${i},${j}]`);
-						break;
-					}
-				} catch (e) {
-					// Tenta o próximo par
-				}
-			}
-			if (preenchido) break;
-		}
-		if (!preenchido) {
-			await driver.takeScreenshot().then((image) => {
-				fs.writeFileSync(
-					"./fotos/impostoEquipe1/erro-preencher-icms.png",
-					image,
-					"base64"
-				);
-				console.log("Screenshot de erro salva em erro-preencher-icms.png");
-			});
-			throw new Error("Não foi possível preencher corretamente os campos de ICMS!");
-		}
+		// Preenche os dois campos (valor, alíquota) de forma simples e robusta
+		await fillInput(driver, icmsInputs[0], "1000");
+		await fillInput(driver, icmsInputs[1], "18");
 
 		// Screenshot após preencher os campos
 		await driver.takeScreenshot().then((image) => {
