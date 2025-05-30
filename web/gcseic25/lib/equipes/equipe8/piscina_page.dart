@@ -22,7 +22,7 @@ class _PiscinaPageState extends State<PiscinaPage> {
     final comprimento = double.tryParse(comprimentoController.text) ?? 0;
     final profundidade = double.tryParse(profundidadeController.text) ?? 0;
 
-    final url = Uri.parse('https://sincere-magnificent-cobweb.glitch.me/calcular-custo-casa-container');
+    final url = Uri.parse('https://sincere-magnificent-cobweb.glitch.me/calcularPiscina');
 
     final response = await http.post(
       url,
