@@ -247,6 +247,42 @@ fs.mkdirSync("./fotos/impostoEquipe1", { recursive: true });
 			);
 		});
 
+		await driver.navigate().back();
+		await driver.sleep(5000);
+
+		// 8. Clique no botão "Nota Fiscal"
+		console.log('Procurando botão "Nota Fiscal"...');
+		const notaFiscalButton = await driver.findElement(
+		By.xpath("//flt-semantics[@aria-label='Nota Fiscal']")
+		);
+		await notaFiscalButton.click();
+		console.log('Botão "Nota Fiscal" clicado, aguardando nova tela...');
+		await driver.sleep(10000);  // Ajuste o tempo conforme a velocidade do app
+
+		// Screenshot da nova tela após clicar em "Nota Fiscal"
+		await driver.takeScreenshot().then((image) => {
+		fs.writeFileSync("./fotos/impostoEquipe1/tela-nota-fiscal.png", image, "base64");
+		console.log("Screenshot da nova tela de Nota Fiscal salva.");
+		});
+
+		// 9. Clique no botão "Consultar API"
+		console.log('Procurando botão "Consultar API"...');
+		const consultarApiButton = await driver.findElement(
+			By.xpath("//*[text()='Consultar API']")
+		);
+		await consultarApiButton.click();
+		console.log('Botão "Consultar API" clicado.');
+		await driver.sleep(5000);  // Ajuste conforme a resposta da API
+
+		// Screenshot após clicar em "Consultar API"
+		await driver.takeScreenshot().then((image) => {
+		fs.writeFileSync("./fotos/impostoEquipe1/resultado-consultar-api.png", image, "base64");
+		console.log("Screenshot do resultado de Consultar API salva.");
+		});
+
+		console.log("Parte de Consulta da Nota Fiscal finalizada com sucesso!");
+
+
 		console.log("Teste funcional da Equipe 1 finalizado com sucesso!");
 	} catch (error) {
 		console.error("Erro no teste funcional da Equipe 1:", error);
