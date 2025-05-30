@@ -42,6 +42,8 @@ jobs:
         run: npm run funcional2
       - name: Roda os testes da equipe 1
         run: npm run impostoEquipe1
+      - name: Roda testes construção piscina equipe 8
+        run: npm run funcionalPiscinaEquipe8
       - name: fotos da tela
         uses: actions/upload-artifact@v4
         with:
