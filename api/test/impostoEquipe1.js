@@ -282,6 +282,135 @@ fs.mkdirSync("./fotos/impostoEquipe1", { recursive: true });
 
 		console.log("Parte de Consulta da Nota Fiscal finalizada com sucesso!");
 
+		console.log("Parte de Consulta da Nota Fiscal finalizada com sucesso!");
+
+		// Voltar à tela principal para acessar o cálculo de PIS/COFINS
+		await driver.navigate().back();
+		await driver.sleep(5000);
+
+		// 10. Clique no botão "PIS/COFINS"
+		console.log('Procurando botão "PIS/COFINS"...');
+
+		let pisCofinsButton;
+		try {
+			pisCofinsButton = await driver.findElement(By.xpath("//flt-semantics[@aria-label='PIS/COFINS']"));
+		} catch (error) {
+			console.log("Não foi possível encontrar o botão 'PIS/COFINS' por Semantics. Tentando busca genérica...");
+
+			try {
+				pisCofinsButton = await driver.findElement(By.xpath("//*[contains(text(),'PIS/COFINS')]"));
+			} catch (error) {
+				try {
+					pisCofinsButton = await driver.findElement(By.xpath("//*[contains(., 'PIS') and contains(., 'COFINS')]"));
+				} catch (error) {
+					// Tire screenshot para debug
+					await driver.takeScreenshot().then((image) => {
+						fs.writeFileSync("./fotos/impostoEquipe1/erro-botao-pis-cofins.png", image, "base64");
+						console.log("Screenshot do erro salva em erro-botao-pis-cofins.png");
+					});
+					throw new Error("Não foi possível encontrar o botão PIS/COFINS por nenhum método");
+				}
+			}
+		}
+		
+		await pisCofinsButton.click();
+		console.log('Botão "PIS/COFINS" clicado, aguardando nova tela...');
+		await driver.sleep(5000);
+
+		// Screenshot da tela de cálculo de PIS/COFINS
+		await driver.takeScreenshot().then((image) => {
+    		fs.writeFileSync("./fotos/impostoEquipe1/tela-pis-cofins.png", image, "base64");
+    		console.log("Screenshot da tela de PIS/COFINS salva.");
+		});
+
+		// 11. Selecionar o regime (cumulativo ou não-cumulativo)
+		// Por padrão, cumulativo já está selecionado, então não precisamos clicar
+
+		// 12. Preencher os campos de receita bruta e alíquota
+		let pisCofinsInputs;
+		try {
+    		pisCofinsInputs = await driver.findElements(By.css('input, textarea'));
+    		// Filtra apenas visíveis e habilitados
+    		const visibleInputs = [];
+    		for (const el of pisCofinsInputs) {
+        		const displayed = await el.isDisplayed();
+        		const enabled = await el.isEnabled();
+        		if (displayed && enabled) visibleInputs.push(el);
+        		if (visibleInputs.length === 2) break;
+    		}
+    		if (visibleInputs.length < 2)
+        		throw new Error("Menos de 2 campos de input visíveis/habilitados na tela de PIS/COFINS!");
+    		pisCofinsInputs = visibleInputs;
+    		console.log(`Campos de PIS/COFINS encontrados: ${pisCofinsInputs.length}`);
+		} catch (e) {
+    		console.error("Campos de PIS/COFINS NÃO encontrados!");
+    		await driver.takeScreenshot().then((image) => {
+        		fs.writeFileSync("./fotos/impostoEquipe1/erro-campos-pis-cofins.png", image, "base64");
+        		console.log("Screenshot de erro salva em erro-campos-pis-cofins.png");
+    		});
+    		throw e;
+		}
+
+		// Preencher os campos (receita bruta, alíquota)
+		await fillInput(driver, pisCofinsInputs[0], "10000");
+		await fillInput(driver, pisCofinsInputs[1], "100");
+
+		// Screenshot após preencher os campos
+		await driver.takeScreenshot().then((image) => {
+    		fs.writeFileSync("./fotos/impostoEquipe1/preenchido-pis-cofins.png", image, "base64");
+    		console.log("Screenshot após preencher campos de PIS/COFINS salva.");
+		});
+
+		// 13. Clique no botão "Calcular PIS/COFINS"
+		let calcularPisCofinsButton;
+		try {
+			calcularPisCofinsButton = await driver.findElement(
+				By.xpath("//flt-semantics[@aria-label='Calcular PIS/COFINS']")
+			);
+		} catch (error) {
+			console.log("Não foi possível encontrar o botão 'Calcular PIS/COFINS' por Semantics. Tentando busca genérica...");
+
+			try {
+				calcularPisCofinsButton = await driver.findElement(By.xpath("//*[contains(text(),'Calcular PIS/COFINS')]"));
+			} catch (error) {
+				try {
+					calcularPisCofinsButton = await driver.findElement(By.xpath("//*[contains(., 'Calcular')]"));
+				} catch (error) {
+					// Busca por qualquer botão visível
+					const allButtons = await driver.findElements(By.css('flt-semantics[role="button"]'));
+					const visibleButtons = [];
+					for (const button of allButtons) {
+						if (await button.isDisplayed()) {
+							visibleButtons.push(button);
+						}
+					}
+					
+					if (visibleButtons.length > 0) {
+						calcularPisCofinsButton = visibleButtons[0];  // Usa o primeiro botão visível
+						console.log("Usando o primeiro botão visível como fallback");
+					} else {
+						// Tire screenshot para debug
+						await driver.takeScreenshot().then((image) => {
+							fs.writeFileSync("./fotos/impostoEquipe1/erro-botao-calcular-pis-cofins.png", image, "base64");
+							console.log("Screenshot do erro salva em erro-botao-calcular-pis-cofins.png");
+						});
+						throw new Error("Não foi possível encontrar nenhum botão para calcular PIS/COFINS");
+					}
+				}
+			}
+		}
+
+		await calcularPisCofinsButton.click();
+		console.log('Botão "Calcular PIS/COFINS" clicado.');
+		await driver.sleep(3000);
+
+		// Screenshot do resultado
+		await driver.takeScreenshot().then((image) => {
+    		fs.writeFileSync("./fotos/impostoEquipe1/resultado-pis-cofins.png", image, "base64");
+    		console.log("Screenshot do resultado de PIS/COFINS salva.");
+		});
+
+		console.log("Parte de Cálculo de PIS/COFINS finalizada com sucesso!");
 
 		console.log("Teste funcional da Equipe 1 finalizado com sucesso!");
 	} catch (error) {
