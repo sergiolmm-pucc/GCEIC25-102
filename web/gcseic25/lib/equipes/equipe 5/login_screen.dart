@@ -21,12 +21,12 @@ class _LoginScreenState extends State<LoginScreen> {
     final String password = passwordController.text;
 
     final url = Uri.parse(
-      'https://sincere-magnificent-cobweb.glitch.me/calculadoraViagem/login',
+      'http://localhost:3000/calculadoraViagem/login',
     );
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'username': username, 'password': password}),
+      body: jsonEncode({'username'  : username, 'password': password}),
     );
 
     if (response.statusCode == 401) {

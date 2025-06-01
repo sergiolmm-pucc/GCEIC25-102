@@ -187,7 +187,7 @@ class _HomeScreenState extends State<HomeScreen> {
     try {
       // 1. Requisição para consumo-estimado
       final consumoUrl = Uri.parse(
-        'https://sincere-magnificent-cobweb.glitch.me/calculadoraViagem/consumo-estimado',
+        'http://localhost:3000/calculadoraViagem/consumo-estimado', // Em localhost por causa do erro no glitch
       );
 
       final consumoResponse = await http.post(
@@ -208,7 +208,7 @@ class _HomeScreenState extends State<HomeScreen> {
 
       // 2. Requisição para calcular valor total
       final calcularUrl = Uri.parse(
-        'https://sincere-magnificent-cobweb.glitch.me/calculadoraViagem/calcular',
+        'http://localhost:3000/calculadoraViagem/calcular', // Em localhost por causa do erro no glitch
       );
 
       final calcularResponse = await http.post(

@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart'; // Import necessário para TextInputFormatter
+import 'dart:convert';
+import 'package:http/http.dart' as http;
 
 class TimeScreen extends StatefulWidget {
   @override
@@ -8,38 +11,101 @@ class TimeScreen extends StatefulWidget {
 class _TimeScreenState extends State<TimeScreen> {
   final TextEditingController _distanceController = TextEditingController();
   final TextEditingController _velocityController = TextEditingController();
-  final TextEditingController _kmPerLiterController = TextEditingController();
-  final TextEditingController _peopleController = TextEditingController();
 
   String _result = '';
+  void _calculateTime() async {
+    debugPrint('Método _calculateTime chamado');
 
-  void _calculateTime() {
     final double? distance = double.tryParse(_distanceController.text);
     final double? velocity = double.tryParse(_velocityController.text);
-    final double? kmPerLiter = double.tryParse(_kmPerLiterController.text);
-    final int? people = int.tryParse(_peopleController.text);
 
-    if (distance == null ||
-        velocity == null ||
-        velocity == 0 ||
-        kmPerLiter == null ||
-        people == null ||
-        people == 0) {
+    debugPrint('Distância: $distance, Velocidade: $velocity');
+
+    if (distance == null || velocity == null || velocity == 0) {
       setState(() {
         _result = 'Preencha todos os campos corretamente!';
       });
+      debugPrint('Campos inválidos ou velocidade igual a 0');
       return;
     }
 
-    final double time = distance / velocity;
-    setState(() {
-      _result =
-          'Tempo estimado: ${time.toStringAsFixed(2)} horas\n'
-          'Consumo total: ${(distance / kmPerLiter).toStringAsFixed(2)} litros\n'
-          'Consumo por pessoa: ${(distance / kmPerLiter / people).toStringAsFixed(2)} litros/pessoa';
-    });
-  }
+    try {
+      final tempoUrl = Uri.parse(
+        'http://localhost:3000/calculadoraViagem/estimativa-tempo',
+      );
 
+      debugPrint('URL: $tempoUrl');
+
+      final tempoResponse = await http.post(
+        tempoUrl,
+        headers: {'Content-Type': 'application/json'},
+        body: jsonEncode({"distancia": distance, "velocidadeMedia": velocity}),
+      );
+
+      debugPrint('Resposta do servidor: ${tempoResponse.body}');
+
+      if (tempoResponse.statusCode != 200) {
+        throw Exception("Erro ao calcular tempo estimado");
+      }
+
+      if (tempoResponse.statusCode == 200) {
+        final resultado = jsonDecode(tempoResponse.body)['payload'];
+
+
+        showDialog(
+          context: context,
+          builder: (_) => AlertDialog(
+            title: const Text("Resultado da Estimativa"),
+            content: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  "Tempo estimado em horas:",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  "${resultado['tempoEstimadoHoras'].toStringAsFixed(2)} horas",
+                ),
+                SizedBox(height: 8),
+                Text(
+                  "Tempo estimado total:",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+                Text(
+                  "${resultado['tempoFormatado']}",
+                ),
+              ],
+            ),
+            actions: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text("OK"),
+              ),
+            ],
+          ),
+        );
+      } else {
+        final error = jsonDecode(tempoResponse.body);
+        throw Exception(error['message'] ?? 'Erro desconhecido');
+      }
+    } catch (e) {
+      debugPrint('Erro na requisição: $e');
+
+      showDialog(
+        context: context,
+        builder: (_) => AlertDialog(
+          title: const Text("Erro"),
+          content: Text('Erro na requisição: $e'),
+          actions: [
+            TextButton(
+              onPressed: () => Navigator.pop(context),
+              child: const Text("OK"),
+            ),
+          ],
+        ),
+      );
+    }
+  }
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -77,7 +143,7 @@ class _TimeScreenState extends State<TimeScreen> {
               Center(
                 child: ElevatedButton(
                   onPressed: () {
-                    // Botão sem funcionalidade de cálculo
+                    _calculateTime();
                   },
                   child: const Text(
                     'CALCULAR',

@@ -76,3 +76,36 @@ exports.consumoEstimado = (req, res) => {
         litrosNecessarios: Number(litrosNecessarios.toFixed(2))
     });
 };
+
+exports.estimativaTempo = (req, res) => {
+    const { distancia, velocidadeMedia } = req.body;
+
+    console.log(distancia, velocidadeMedia)
+
+    if (!distancia || !velocidadeMedia) {
+        return res.status(400).json({
+            success: false,
+            message: 'Distância e velocidade média são obrigatórios.'
+        });
+    }
+
+    if (velocidadeMedia <= 0) {
+        return res.status(400).json({
+            success: false,
+            message: 'Velocidade média deve ser maior que zero.'
+        });
+    }
+
+    const tempoHoras = distancia / velocidadeMedia;
+    const horas = Math.floor(tempoHoras);
+    const minutos = Math.round((tempoHoras - horas) * 60);
+
+
+    res.status(200).json({
+        success: true,
+        payload: {
+          tempoEstimadoHoras: Number(tempoHoras.toFixed(2)),
+          tempoFormatado: `${horas}h ${minutos}min`
+        }
+    });
+};
