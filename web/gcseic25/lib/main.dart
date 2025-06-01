@@ -37,6 +37,8 @@ class MyApp extends StatelessWidget {
             (context) =>
                 SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
         '/splashEquipe1': (context) => SplashEquipe(),
+        '/splash-calculadora': (context) => CalculatorSplashScreen(),
+        '/login-calculadora': (context) => CalculatorLoginScreen(),
         '/calculadora': (context) => CalculatorScreen(),
         '/gf': (context) => SplashScreenEquipeTres(),
         '/piscina': (context) => SplashScreenPiscina(), // Da equipe 8
@@ -105,16 +107,16 @@ class HomePage extends StatelessWidget {
                 ),
               ),
               const SizedBox(height: 20),
-              SizedBox(
-                // Botão Calculadora equipe 7
-                width: 220,
-                child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushNamed(context, '/calculadora');
-                  },
-                  child: const Text('Calculadora equipe 7'),
-                ),
+              Semantics(
+              label: 'Botão Calculadora equipe 7',
+              button: true,
+              child: ElevatedButton(
+                onPressed: () {
+                  Navigator.pushNamed(context, '/splash-calculadora');
+                },
+                child: Text('Calculadora equipe 7'),
               ),
+            ),
               const SizedBox(height: 20),
               SizedBox(
                 // Botão Calculadora Equipe 6
@@ -278,6 +280,122 @@ class _ConsultaPageState extends State<ConsultaPage> {
               child: Text(_responseText, style: TextStyle(fontSize: 16)),
             ),
           ],
+        ),
+      ),
+    );
+  }
+}
+
+// Splash Screen específico para a calculadora
+class CalculatorSplashScreen extends StatefulWidget {
+  @override
+  _CalculatorSplashScreenState createState() => _CalculatorSplashScreenState();
+}
+
+class _CalculatorSplashScreenState extends State<CalculatorSplashScreen> {
+  @override
+  void initState() {
+    super.initState();
+    Timer(Duration(seconds: 3), () {
+      Navigator.pushReplacementNamed(context, '/login-calculadora');
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            CircularProgressIndicator(),
+            SizedBox(height: 20),
+            Semantics(
+              label: 'Carregando Calculadora de Casa Container',
+              readOnly: true,
+              child: Text(
+                'Carregando Calculadora de Casa Container',
+                style: TextStyle(fontSize: 24, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+// Tela de Login para a calculadora
+class CalculatorLoginScreen extends StatefulWidget {
+  @override
+  _CalculatorLoginScreenState createState() => _CalculatorLoginScreenState();
+}
+
+class _CalculatorLoginScreenState extends State<CalculatorLoginScreen> {
+  final TextEditingController _usernameController = TextEditingController(text: 'admin');
+  final TextEditingController _passwordController = TextEditingController(text: '123456');
+
+  void _login() {
+    Navigator.pushReplacementNamed(context, '/calculadora');
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Login - Calculadora'),
+      ),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                'Acesso à Calculadora de Casa Container',
+                style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                textAlign: TextAlign.center,
+              ),
+              SizedBox(height: 40),
+              Semantics(
+                label: 'Campo de usuário',
+                textField: true,
+                child: TextField(
+                  controller: _usernameController,
+                  decoration: InputDecoration(
+                    labelText: 'Usuário',
+                    border: OutlineInputBorder(),
+                  ),
+                ),
+              ),
+              SizedBox(height: 20),
+              Semantics(
+                label: 'Campo de senha',
+                textField: true,
+                child: TextField(
+                  controller: _passwordController,
+                  decoration: InputDecoration(
+                    labelText: 'Senha',
+                    border: OutlineInputBorder(),
+                  ),
+                  obscureText: true,
+                ),
+              ),
+              SizedBox(height: 30),
+              Semantics(
+                label: 'Botão Login',
+                button: true,
+                child: ElevatedButton(
+                  onPressed: _login,
+                  style: ElevatedButton.styleFrom(
+                    minimumSize: Size(double.infinity, 50),
+                  ),
+                  child: Text('Login', style: TextStyle(fontSize: 18)),
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
