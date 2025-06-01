@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'login_screen.dart';
-import 'home_screen.dart';
+import 'cost_calculator.dart';
 
 class SplashScreen extends StatefulWidget {
   final String nextScreen; // Define qual tela será exibida após a SplashScreen
