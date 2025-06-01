@@ -1,5 +1,6 @@
 const controller = require('../controllers/calculoViagemEquipe5Controller');
 
+
 test('Deve calcular consumo estimado com sucesso', () => {
     const req = {
         body: {
