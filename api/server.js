@@ -31,7 +31,7 @@ app.use('/loginFixoEquipeTres', loginFixoEquipeTresRoutes);
 app.use('/calcularPiscina', calculoPiscina);
 app.use('/viagens2', viagemRoutes);
 app.use('/equipe6', equipe6Routes); // Rota da equipe6
-app.use('/login', calculadoraViagemRoutes);
+app.use('/calculadoraViagem', calculadoraViagemRoutes);
 
 
 app.listen(port, () => {

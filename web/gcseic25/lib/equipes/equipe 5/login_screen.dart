@@ -23,7 +23,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final String password = passwordController.text;
 
 
-    final url = Uri.parse('https://sincere-magnificent-cobweb.glitch.me/calculadoraViagemRoutes/login');
+    final url = Uri.parse('https://sincere-magnificent-cobweb.glitch.me/calculadoraViagem/login');
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},

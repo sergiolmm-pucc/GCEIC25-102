@@ -98,6 +98,15 @@ class _HomeScreenState extends State<HomeScreen> {
               child: ElevatedButton(
                 onPressed: () {
                   // Botão sem funcionalidade de cálculo
+                  //aqui deve enviar para 'https://sincere-magnificent-cobweb.glitch.me/calculadoraViagem/calcular'
+                  /* 
+                  final url = Uri.parse('https://sincere-magnificent-cobweb.glitch.me/calculadoraViagem/calcular');
+                  final response = await http.post(
+                    url,
+                    headers: {'Content-Type': 'application/json'},
+                    body: jsonEncode({}),
+                  ); */
+
                 },
                 child: const Text(
                   'CALCULAR',
