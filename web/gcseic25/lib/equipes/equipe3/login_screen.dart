@@ -1,54 +1,54 @@
 import 'package:flutter/material.dart';
 import 'salary_input.dart';
-import 'help_screen.dart';  
-import 'sobre_screen.dart'; 
-import 'api_service.dart';  
+import 'help_screen.dart';
+import 'sobre_screen.dart';
+import 'api_service.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
   @override
-  _LoginScreenState createState() => _LoginScreenState();
+  LoginScreenState createState() => LoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class LoginScreenState extends State<LoginScreen> {
   final _userController = TextEditingController();
   final _passwordController = TextEditingController();
   String? _errorMessage;
   bool _isLoading = false;
 
-void _tryLogin() async {
-  setState(() {
-    _errorMessage = null;
-    _isLoading = true;
-  });
+  void _tryLogin() async {
+    setState(() {
+      _errorMessage = null;
+      _isLoading = true;
+    });
 
-  final username = _userController.text.trim();
-  final password = _passwordController.text;
+    final username = _userController.text.trim();
+    final password = _passwordController.text;
 
-  try {
-    bool success = await ApiService.loginFixoEquipeTres(username, password);
-    if (success) {
-      Navigator.pushReplacement(
-        context,
-        MaterialPageRoute(builder: (_) => SalaryInputScreen()),
-      );
-    } else {
+    try {
+      bool success = await ApiService.loginFixoEquipeTres(username, password);
+      if (!mounted) return;
+      if (success) {
+        Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(builder: (_) => SalaryInputScreen()),
+        );
+      } else {
+        setState(() {
+          _errorMessage = 'Usuário ou senha incorretos';
+        });
+      }
+    } catch (e) {
       setState(() {
-        _errorMessage = 'Usuário ou senha incorretos';
+        _errorMessage = 'Erro ao conectar com o servidor';
+      });
+    } finally {
+      setState(() {
+        _isLoading = false;
       });
     }
-  } catch (e) {
-    setState(() {
-      _errorMessage = 'Erro ao conectar com o servidor';
-    });
-  } finally {
-    setState(() {
-      _isLoading = false;
-    });
   }
-}
-
 
   void _logout() {
     Navigator.pushNamedAndRemoveUntil(context, '/', (route) => false);
@@ -67,11 +67,26 @@ void _tryLogin() async {
         ),
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: Center(
-          child: SingleChildScrollView(
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(24),
+            constraints: BoxConstraints(
+              maxWidth: 500,
+            ),
+            decoration: BoxDecoration(
+              color: Colors.black.withOpacity(0.85),
+              borderRadius: BorderRadius.circular(18),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black54,
+                  blurRadius: 12,
+                  spreadRadius: 2,
+                ),
+              ],
+            ),
             child: Column(
+              mainAxisSize: MainAxisSize.min,
               children: [
                 Text(
                   'Login',
@@ -83,6 +98,7 @@ void _tryLogin() async {
                 ),
                 SizedBox(height: 36),
                 TextField(
+                  key: ValueKey('usuarioEquipeTres'),
                   controller: _userController,
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
@@ -93,13 +109,17 @@ void _tryLogin() async {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.cyanAccent, width: 2),
+                      borderSide: BorderSide(
+                        color: Colors.cyanAccent,
+                        width: 2,
+                      ),
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
                 ),
                 SizedBox(height: 20),
                 TextField(
+                  key: ValueKey('senhaEquipeTres'),
                   controller: _passwordController,
                   obscureText: true,
                   style: TextStyle(color: Colors.white),
@@ -111,7 +131,10 @@ void _tryLogin() async {
                       borderRadius: BorderRadius.circular(10),
                     ),
                     focusedBorder: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.cyanAccent, width: 2),
+                      borderSide: BorderSide(
+                        color: Colors.cyanAccent,
+                        width: 2,
+                      ),
                       borderRadius: BorderRadius.circular(10),
                     ),
                   ),
@@ -120,22 +143,53 @@ void _tryLogin() async {
                 if (_errorMessage != null)
                   Text(
                     _errorMessage!,
-                    style: TextStyle(color: Colors.redAccent, fontWeight: FontWeight.bold),
+                    style: TextStyle(
+                      color: Colors.redAccent,
+                      fontWeight: FontWeight.bold,
+                    ),
                   ),
                 SizedBox(height: 28),
                 SizedBox(
                   width: double.infinity,
                   height: 48,
                   child: ElevatedButton(
+                    key: ValueKey('botaoEntrarEquipeTres'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.cyanAccent,
                       foregroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
-                    onPressed: _isLoading ? null : _tryLogin,
+                    // Nunca desabilita! Só impede clique duplo.
+                    onPressed: _isLoading ? () {} : _tryLogin,
                     child: _isLoading
-                        ? CircularProgressIndicator(color: Colors.black)
-                        : Text('Entrar', style: TextStyle(fontWeight: FontWeight.bold)),
+                        ? Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            mainAxisSize: MainAxisSize.min,
+                            children: [
+                              SizedBox(
+                                width: 22,
+                                height: 22,
+                                child: CircularProgressIndicator(
+                                  color: Colors.black,
+                                  strokeWidth: 3,
+                                ),
+                              ),
+                              SizedBox(width: 12),
+                              Text(
+                                'Entrando...',
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  color: Colors.black,
+                                ),
+                              ),
+                            ],
+                          )
+                        : Text(
+                            'Entrar',
+                            style: TextStyle(fontWeight: FontWeight.bold),
+                          ),
                   ),
                 ),
                 SizedBox(height: 12),
@@ -143,10 +197,13 @@ void _tryLogin() async {
                   width: double.infinity,
                   height: 48,
                   child: ElevatedButton(
+                    key: ValueKey('botaoAjudaEquipeTres'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey.shade300,
                       foregroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -154,7 +211,10 @@ void _tryLogin() async {
                         MaterialPageRoute(builder: (_) => const HelpScreen()),
                       );
                     },
-                    child: Text('Ajuda', style: TextStyle(fontWeight: FontWeight.bold)),
+                    child: Text(
+                      'Ajuda',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
                 SizedBox(height: 12),
@@ -162,10 +222,13 @@ void _tryLogin() async {
                   width: double.infinity,
                   height: 48,
                   child: ElevatedButton(
+                    key: ValueKey('botaoSobreEquipeTres'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey.shade300,
                       foregroundColor: Colors.black,
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(10)),
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
                     ),
                     onPressed: () {
                       Navigator.push(
@@ -173,7 +236,10 @@ void _tryLogin() async {
                         MaterialPageRoute(builder: (_) => const SobreScreen()),
                       );
                     },
-                    child: Text('Sobre', style: TextStyle(fontWeight: FontWeight.bold)),
+                    child: Text(
+                      'Sobre',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
                   ),
                 ),
               ],

@@ -10,7 +10,8 @@
     "funcional": "node ./test/funcionalExemplo",
     "funcional2": "node ./test/funcionalExemplo2",
     "impostoEquipe1": "node ./test/impostoEquipe1",
-    "funcionalPiscinaEquipe8": "node ./test/funcionalPiscinaEquipe8"
+    "funcionalPiscinaEquipe8": "node ./test/funcionalPiscinaEquipe8",
+    "funcionalEquipeTres": "node test/testeFuncionalEquipeTres.js"
   },
   "dependencies": {
     "@rentready/flutter-selenium-bridge": "^1.0.5",
