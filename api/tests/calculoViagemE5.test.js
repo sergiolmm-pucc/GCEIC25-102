@@ -1,118 +1,100 @@
 const controller = require('../controllers/calculoViagemEquipe5Controller');
 
-describe('Teste da função calcular', () => {
-    const buildRes = () => ({
-        status: jest.fn().mockReturnThis(),
-        json: jest.fn()
+describe('Rota /calcular (com totalLitrosGasolina)', () => {
+  const buildRes = () => ({
+    status: jest.fn().mockReturnThis(),
+    json: jest.fn()
+  });
+
+  test('Deve calcular os valores corretamente com todos os campos', () => {
+    const req = {
+      body: {
+        totalLitrosGasolina: 40,
+        precoGasolina: 5,
+        precoManutencao: 20,
+        pedagios: 30,
+        outros: 10,
+        numPessoas: 2
+      }
+    };
+
+    const res = buildRes();
+    controller.calcular(req, res);
+
+    expect(res.status).toHaveBeenCalledWith(200);
+    expect(res.json).toHaveBeenCalledWith({
+      success: true,
+      payload: {
+        totalGasolina: 200,       // 40 * 5
+        totalLitrosGasolina: 40,
+        precoTotal: 260,          // 200 + 20 + 30 + 10
+        precoPorPessoa: 130       // 260 / 2
+      }
     });
+  });
 
-    test('Deve calcular com sucesso todos os custos', () => {
-        const req = {
-            body: {
-                distancia: 100,
-                kilometragemPorLitro: 10,
-                precoGasolina: 5,
-                precoManutencao: 20,
-                pedagios: 30,
-                outros: 10,
-                numPessoas: 2
-            }
-        };
+  test('Deve retornar erro se totalLitrosGasolina estiver ausente', () => {
+    const req = {
+      body: {
+        precoGasolina: 5,
+        precoManutencao: 10,
+        pedagios: 5,
+        outros: 0,
+        numPessoas: 2
+      }
+    };
 
-        const res = buildRes();
-        controller.calcular(req, res);
+    const res = buildRes();
+    controller.calcular(req, res);
 
-        expect(res.status).toHaveBeenCalledWith(200);
-        expect(res.json).toHaveBeenCalledWith({
-            success: true,
-            payload: {
-                totalGasolina: 50, // 100 km / 10 km/L * R$5
-                totalLitrosGasolina: 10, // 100km / 10km/L
-                precoTotal: 110,   // 50 + 20 + 30 + 10
-                precoPorPessoa: 55 // 110 / 2
-            }
-        });
-    });
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
+      success: false,
+      message: expect.stringMatching(/totalLitrosGasolina/i)
+    }));
+  });
 
-    test('Deve retornar erro se kilometragem ou número de pessoas estiver ausente', () => {
-        const req = {
-            body: {
-                distancia: 100,
-                precoGasolina: 5
-            }
-        };
+  test('Deve retornar erro se numPessoas for zero', () => {
+    const req = {
+      body: {
+        totalLitrosGasolina: 20,
+        precoGasolina: 5,
+        precoManutencao: 10,
+        pedagios: 5,
+        outros: 5,
+        numPessoas: 0
+      }
+    };
 
-        const res = buildRes();
-        controller.calcular(req, res);
+    const res = buildRes();
+    controller.calcular(req, res);
 
-        expect(res.status).toHaveBeenCalledWith(400);
-        expect(res.json).toHaveBeenCalledWith({
-            success: false,
-            message: "A kilometragem por litro e o número de pessoas são obrigatórios e devem ser maior que zero."
-        });
-    });
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
+      success: false,
+      message: expect.stringMatching(/numPessoas/i)
+    }));
+  });
 
-    test('Deve retornar erro se nenhum dos campos principais for fornecido', () => {
-        const req = {
-            body: {
-                kilometragemPorLitro: 10,
-                numPessoas: 2
-            }
-        };
+  test('Deve retornar erro se nenhum custo for informado', () => {
+    const req = {
+      body: {
+        totalLitrosGasolina: 30,
+        precoGasolina: 0,
+        precoManutencao: 0,
+        pedagios: 0,
+        outros: 0,
+        numPessoas: 2
+      }
+    };
 
-        const res = buildRes();
-        controller.calcular(req, res);
+    const res = buildRes();
+    controller.calcular(req, res);
 
-        expect(res.status).toHaveBeenCalledWith(400);
-        expect(res.json).toHaveBeenCalledWith({
-            success: false,
-            message: "Você deve informar ao menos um campo!"
-        });
-    });
-
-    test('Deve lidar com número de pessoas igual a zero', () => {
-        const req = {
-            body: {
-                distancia: 100,
-                kilometragemPorLitro: 10,
-                precoGasolina: 5,
-                precoManutencao: 20,
-                pedagios: 30,
-                outros: 10,
-                numPessoas: 0
-            }
-        };
-
-        const res = buildRes();
-        controller.calcular(req, res);
-
-        expect(res.status).toHaveBeenCalledWith(400);
-        expect(res.json).toHaveBeenCalledWith({
-            success: false,
-            message: "A kilometragem por litro e o número de pessoas são obrigatórios e devem ser maior que zero."
-        });
-    });
-
-    test('Deve lidar com kilometragem igual a zero', () => {
-        const req = {
-            body: {
-                distancia: 100,
-                kilometragemPorLitro: 0,
-                precoGasolina: 5,
-                precoManutencao: 20,
-                pedagios: 30,
-                outros: 10,
-                numPessoas: 3
-            }
-        };
-
-        const res = buildRes();
-        controller.calcular(req, res);
-
-        expect(res.status).toHaveBeenCalledWith(400);
-        expect(res.json).toHaveBeenCalledWith({
-            success: false,
-            message: "A kilometragem por litro e o número de pessoas são obrigatórios e devem ser maior que zero."
-        });
-    });
+    expect(res.status).toHaveBeenCalledWith(400);
+    expect(res.json).toHaveBeenCalledWith(expect.objectContaining({
+      success: false,
+      message: expect.stringMatching(/informar ao menos um valor/i)
+    }));
+  });
 });
