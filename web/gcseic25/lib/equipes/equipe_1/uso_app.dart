@@ -52,78 +52,102 @@ class _UsoAppPageState extends State<UsoAppPage> {
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            ElevatedButton(
-              onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => NotaFiscalPage(estruturaImpostos: estruturaImpostos))),
-              child: Text('Nota Fiscal'),
+            Semantics(
+              label: 'Nota Fiscal',
+              button: true,
+              child: ElevatedButton(
+                onPressed: () => Navigator.push(context, MaterialPageRoute(builder: (_) => NotaFiscalPage(estruturaImpostos: estruturaImpostos))),
+                child: Text('Nota Fiscal'),
+              ),
             ),
             SizedBox(height: 20),
             Text(resultado),
             Divider(height: 40),
-            ElevatedButton(
-              onPressed:
-                  () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => SobrePage()),
-                  ),
-              child: Text('Sobre a Equipe'),
-            ),
-            ElevatedButton(
-              onPressed:
-                  () => Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (_) => AjudaPage()),
-                  ),
-              child: Text('Ajuda'),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (_) => CalculoIcmsPage(
-                          title: 'Cálculo ICMS',
-                          estruturaImpostos: estruturaImpostos,
-                        ),
-                  ),
-                );
-                // Atualiza a tela principal ao voltar da tela de cálculo
-                setState(() {});
-              },
-              child: Text('Cálculo ICMS'),
-            ),
-            ElevatedButton(
-              onPressed: () async {
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder: (_) => CalculoIpiPage(
-                      title: 'Cálculo IPI',
-                      estruturaImpostos: estruturaImpostos,
+            Semantics(
+              label: 'Sobre a Equipe',
+              button: true,
+              child: ElevatedButton(
+                onPressed:
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => SobrePage()),
                     ),
-                  ),
-                );
-                // Atualiza a tela principal ao voltar da tela de cálculo
-                setState(() {});
-              },
-              child: Text('Cálculo IPI'),
+                child: Text('Sobre a Equipe'),
+              ),
             ),
-            ElevatedButton(
-              onPressed: () async {
-                await Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                    builder:
-                        (_) => PisCofinsPage(
-                          title: 'Cálculo de PIS/COFINS',
-                          estruturaImpostos: estruturaImpostos,
-                        ),
-                  ),
-                );
-                // Atualiza a tela principal ao voltar da tela de cálculo
-                setState(() {});
-              },
-              child: Text('Cálculo de PIS/COFINS'),
+            Semantics(
+              label: 'Ajuda',
+              button: true,
+              child: ElevatedButton(
+                onPressed:
+                    () => Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (_) => AjudaPage()),
+                    ),
+                child: Text('Ajuda'),
+              ),
+            ),
+            Semantics(
+              label: 'Cálculo ICMS',
+              button: true,
+              child: ElevatedButton(
+                onPressed: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (_) => CalculoIcmsPage(
+                            title: 'Cálculo ICMS',
+                            estruturaImpostos: estruturaImpostos,
+                          ),
+                    ),
+                  );
+                  // Atualiza a tela principal ao voltar da tela de cálculo
+                  setState(() {});
+                },
+                child: Text('Cálculo ICMS'),
+              ),
+            ),
+            Semantics(
+              label: 'Cálculo IPI',
+              button: true,
+              child: ElevatedButton(
+                onPressed: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder: (_) => CalculoIpiPage(
+                        title: 'Cálculo IPI',
+                        estruturaImpostos: estruturaImpostos,
+                      ),
+                    ),
+                  );
+                  // Atualiza a tela principal ao voltar da tela de cálculo
+                  setState(() {});
+                },
+                child: Text('Cálculo IPI'),
+              ),
+            ),
+            Semantics(
+              label: 'Cálculo de PIS/COFINS',
+              button: true,
+              child: ElevatedButton(
+                onPressed: () async {
+                  await Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                      builder:
+                          (_) => PisCofinsPage(
+                            title: 'Cálculo de PIS/COFINS',
+                            estruturaImpostos: estruturaImpostos,
+                          ),
+                    ),
+                  );
+                  // Atualiza a tela principal ao voltar da tela de cálculo
+                  setState(() {});
+                },
+                child: Text('Cálculo de PIS/COFINS'),
+              ),
             ),
             Text(
               'Estrutura de Impostos: ICMS: ${estruturaImpostos.icms}, PIS: ${estruturaImpostos.pis}, COFINS: ${estruturaImpostos.cofins}, IPI: ${estruturaImpostos.ipi}',
