@@ -6,7 +6,7 @@ async function runTest() {
 
   try {
     // Passo 1: Acessar a página inicial
-    await driver.get("http://localhost:8080/");
+    await driver.get("http://localhost:45289/");
     await driver.sleep(3000);
     let screenshot = await driver.takeScreenshot();
     fs.writeFileSync("tela_inicial.png", screenshot, "base64");
@@ -87,7 +87,7 @@ async function runTest() {
       10000
     );
 
-    await driver.sleep(3000);
+    await driver.sleep(5000);
     screenshot = await driver.takeScreenshot();
     fs.writeFileSync("resultado_calculadora.png", screenshot, "base64");
 
