@@ -9,6 +9,9 @@
     "test:coverage": "jest --coverage --ci --reporters=default --testResultsProcessor=jest-junit",
     "funcional": "node ./test/funcionalExemplo",
     "funcional2": "node ./test/funcionalExemplo2"
+
+    
+    "funcional3": "node test/testeFuncionalEquipeTres.js"
   },
   "dependencies": {
     "@rentready/flutter-selenium-bridge": "^1.0.5",
