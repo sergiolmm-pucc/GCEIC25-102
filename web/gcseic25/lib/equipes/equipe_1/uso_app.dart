@@ -26,8 +26,8 @@ class _UsoAppPageState extends State<UsoAppPage> {
   Future<void> consultarAPI() async {
     try {
       final response = await http.get(
-        Uri.parse('https://sincere-magnificent-cobweb.glitch.me/gf/imposto/'),
-      ); // substitua pelo seu endpoint
+        Uri.parse('https://sincere-magnificent-cobweb.glitch.me/imposto/'),
+      );
       if (response.statusCode == 200) {
         setState(() {
           resultado = response.body;

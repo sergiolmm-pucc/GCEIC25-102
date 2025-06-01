@@ -17,7 +17,7 @@ class _NotaFiscalPageState extends State<NotaFiscalPage> {
   String _resultado = 'Clique em "Consultar API" para ver o resumo.';
 
   Future<void> consultarNotaFiscal() async {
-    final baseUrl = 'https://sincere-magnificent-cobweb.glitch.me/gf/imposto/resumo-nota-fiscal'; // use o IP correto conforme seu ambiente
+    final baseUrl = 'https://sincere-magnificent-cobweb.glitch.me/imposto/resumo-nota-fiscal'; // use o IP correto conforme seu ambiente
 
     final uri = Uri.parse(baseUrl).replace(queryParameters: {
       'valor_produto': widget.estruturaImpostos.valor_produto.toString(),
