@@ -35,3 +35,28 @@ exports.calcular = (req, res) => {
         }
     });
 }
+
+exports.consumoEstimado = (req, res) => {
+    const { distancia, kilometragemPorLitro } = req.body;
+
+    if (!distancia || !kilometragemPorLitro) {
+        return res.status(400).json({
+            success: false,
+            message: 'Distância e kilometragem por litro são obrigatórios.'
+        });
+    }
+
+    if (kilometragemPorLitro <= 0) {
+        return res.status(400).json({
+            success: false,
+            message: 'A kilometragem por litro deve ser maior que zero.'
+        });
+    }
+
+    const litrosNecessarios = distancia / kilometragemPorLitro;
+
+    res.status(200).json({
+        success: true,
+        litrosNecessarios: Number(litrosNecessarios.toFixed(2))
+    });
+};
