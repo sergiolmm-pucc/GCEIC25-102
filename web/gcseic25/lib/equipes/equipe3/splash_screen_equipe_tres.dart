@@ -25,23 +25,22 @@ class SplashScreenEquipeTresState extends State<SplashScreenEquipeTres> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      // Usamos um Column para preencher toda a tela e
-      // definimos mainAxisAlignment e crossAxisAlignment para centralizar o filho.
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: const [
-          Text(
-            'Carregando o Gestor de Finanças...',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.cyanAccent,
-              fontSize: 32,
-              fontWeight: FontWeight.bold,
-              letterSpacing: 2,
-            ),
+      // Usamos um Container que ocupa toda a tela (width: double.infinity, height: double.infinity)
+      // e definimos alignment: Alignment.center para centralizar o filho.
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        alignment: Alignment.center,
+        child: const Text(
+          'Carregando o Gestor de Finanças...',
+          textAlign: TextAlign.center,
+          style: TextStyle(
+            color: Colors.cyanAccent,
+            fontSize: 32,
+            fontWeight: FontWeight.bold,
+            letterSpacing: 2,
           ),
-        ],
+        ),
       ),
     );
   }
