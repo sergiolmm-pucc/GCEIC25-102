@@ -80,6 +80,7 @@ class HomePage extends StatelessWidget {
               SizedBox(
                 width: 220,
                 child: ElevatedButton(
+                  key: ValueKey('botaoGestorFinancasEquipeTres'),
                   onPressed: () {
                     Navigator.pushNamed(context, '/gf');
                   },

@@ -164,6 +164,7 @@ class ResultsScreen extends StatelessWidget {
                     width: 180,
                     height: 48,
                     child: ElevatedButton(
+                      key: ValueKey('botaoCalcularNovamenteEquipeTres'),
                       onPressed: () {
                         Navigator.pushReplacement(
                           context,

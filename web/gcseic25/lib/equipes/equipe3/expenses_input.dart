@@ -31,11 +31,10 @@ class ExpensesInputScreenState extends State<ExpensesInputScreen> {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder:
-            (_) => PercentagesInputScreen(
-              salarioBruto: widget.salarioBruto,
-              gastosFixos: gastos,
-            ),
+        builder: (_) => PercentagesInputScreen(
+          salarioBruto: widget.salarioBruto,
+          gastosFixos: gastos,
+        ),
       ),
     );
   }
@@ -62,7 +61,7 @@ class ExpensesInputScreenState extends State<ExpensesInputScreen> {
           child: Container(
             padding: EdgeInsets.all(24),
             constraints: BoxConstraints(
-              maxWidth: 500, // Ajuste a largura máxima se quiser
+              maxWidth: 500,
             ),
             decoration: BoxDecoration(
               color: Color(0xD9000000),
@@ -92,6 +91,7 @@ class ExpensesInputScreenState extends State<ExpensesInputScreen> {
                   children: [
                     Expanded(
                       child: TextField(
+                        key: ValueKey('nomeGastoEquipeTres'),
                         controller: nomeController,
                         style: TextStyle(color: Colors.white),
                         decoration: InputDecoration(
@@ -112,6 +112,7 @@ class ExpensesInputScreenState extends State<ExpensesInputScreen> {
                     SizedBox(
                       width: 90,
                       child: TextField(
+                        key: ValueKey('valorGastoEquipeTres'),
                         controller: valorController,
                         keyboardType: TextInputType.number,
                         style: TextStyle(color: Colors.white),
@@ -131,6 +132,7 @@ class ExpensesInputScreenState extends State<ExpensesInputScreen> {
                     ),
                     SizedBox(width: 8),
                     IconButton(
+                      key: ValueKey('botaoAdicionarGastoEquipeTres'),
                       icon: Icon(Icons.add, color: Colors.cyanAccent),
                       onPressed: _addExpense,
                       splashRadius: 24,
@@ -138,38 +140,37 @@ class ExpensesInputScreenState extends State<ExpensesInputScreen> {
                   ],
                 ),
                 SizedBox(height: 18),
-                // Delimita a altura máxima da lista pra não estourar o card!
                 ConstrainedBox(
                   constraints: BoxConstraints(maxHeight: 200),
-                  child:
-                      gastos.isEmpty
-                          ? Text(
-                            'Nenhum gasto adicionado.',
-                            style: TextStyle(color: Colors.grey[400]),
-                          )
-                          : ListView.builder(
-                            shrinkWrap: true,
-                            itemCount: gastos.length,
-                            itemBuilder: (ctx, idx) {
-                              final gasto = gastos[idx];
-                              return ListTile(
-                                title: Text(
-                                  gasto['nome'],
-                                  style: TextStyle(color: Colors.white),
-                                ),
-                                trailing: Text(
-                                  'R\$ ${gasto['valor'].toStringAsFixed(2)}',
-                                  style: TextStyle(color: Colors.cyanAccent),
-                                ),
-                              );
-                            },
-                          ),
+                  child: gastos.isEmpty
+                      ? Text(
+                          'Nenhum gasto adicionado.',
+                          style: TextStyle(color: Colors.grey[400]),
+                        )
+                      : ListView.builder(
+                          shrinkWrap: true,
+                          itemCount: gastos.length,
+                          itemBuilder: (ctx, idx) {
+                            final gasto = gastos[idx];
+                            return ListTile(
+                              title: Text(
+                                gasto['nome'],
+                                style: TextStyle(color: Colors.white),
+                              ),
+                              trailing: Text(
+                                'R\$ ${gasto['valor'].toStringAsFixed(2)}',
+                                style: TextStyle(color: Colors.cyanAccent),
+                              ),
+                            );
+                          },
+                        ),
                 ),
                 SizedBox(height: 20),
                 SizedBox(
                   width: double.infinity,
                   height: 48,
                   child: ElevatedButton(
+                    key: ValueKey('botaoProximoGastosEquipeTres'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.cyanAccent,
                       foregroundColor: Colors.black,

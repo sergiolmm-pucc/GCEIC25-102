@@ -76,6 +76,7 @@ class SalaryInputScreenState extends State<SalaryInputScreen> {
                 ),
                 SizedBox(height: 24),
                 TextField(
+                  key: ValueKey('campoSalarioEquipeTres'),
                   controller: _controller,
                   keyboardType: TextInputType.number,
                   style: TextStyle(color: Colors.white),
@@ -101,6 +102,7 @@ class SalaryInputScreenState extends State<SalaryInputScreen> {
                   width: double.infinity,
                   height: 48,
                   child: ElevatedButton(
+                    key: ValueKey('botaoProximoSalarioEquipeTres'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.cyanAccent,
                       foregroundColor: Colors.black,

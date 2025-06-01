@@ -133,6 +133,7 @@ class PercentagesInputScreenState extends State<PercentagesInputScreen> {
                 ),
                 SizedBox(height: 32),
                 TextField(
+                  key: ValueKey('percentualInvestimentoEquipeTres'),
                   controller: investimentoController,
                   keyboardType: TextInputType.number,
                   style: TextStyle(color: Colors.white),
@@ -155,6 +156,7 @@ class PercentagesInputScreenState extends State<PercentagesInputScreen> {
                 ),
                 SizedBox(height: 20),
                 TextField(
+                  key: ValueKey('percentualLazerEquipeTres'),
                   controller: lazerController,
                   keyboardType: TextInputType.number,
                   style: TextStyle(color: Colors.white),
@@ -180,6 +182,7 @@ class PercentagesInputScreenState extends State<PercentagesInputScreen> {
                   width: double.infinity,
                   height: 48,
                   child: ElevatedButton(
+                    key: ValueKey('botaoCalcularEquipeTres'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.cyanAccent,
                       foregroundColor: Colors.black,

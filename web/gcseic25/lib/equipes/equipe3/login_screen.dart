@@ -98,6 +98,7 @@ class LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 36),
                 TextField(
+                  key: ValueKey('usuarioEquipeTres'),
                   controller: _userController,
                   style: TextStyle(color: Colors.white),
                   decoration: InputDecoration(
@@ -118,6 +119,7 @@ class LoginScreenState extends State<LoginScreen> {
                 ),
                 SizedBox(height: 20),
                 TextField(
+                  key: ValueKey('senhaEquipeTres'),
                   controller: _passwordController,
                   obscureText: true,
                   style: TextStyle(color: Colors.white),
@@ -151,6 +153,7 @@ class LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   height: 48,
                   child: ElevatedButton(
+                    key: ValueKey('botaoEntrarEquipeTres'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.cyanAccent,
                       foregroundColor: Colors.black,
@@ -194,6 +197,7 @@ class LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   height: 48,
                   child: ElevatedButton(
+                    key: ValueKey('botaoAjudaEquipeTres'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey.shade300,
                       foregroundColor: Colors.black,
@@ -218,6 +222,7 @@ class LoginScreenState extends State<LoginScreen> {
                   width: double.infinity,
                   height: 48,
                   child: ElevatedButton(
+                    key: ValueKey('botaoSobreEquipeTres'),
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.grey.shade300,
                       foregroundColor: Colors.black,
