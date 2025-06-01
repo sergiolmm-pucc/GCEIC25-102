@@ -413,7 +413,7 @@ fs.mkdirSync("./fotos/impostoEquipe1", { recursive: true });
 
 		console.log("Parte de Cálculo de PIS/COFINS finalizada com sucesso!");
 
-		// Voltar para a tela principal antes de buscar o botão "Cálculo IPI"
+		// 14. Voltar para a tela principal antes de buscar o botão "Cálculo IPI"
 		try {
 			// Tenta clicar no botão de voltar (seta)
 			const backButton = await driver.findElement(By.xpath("//flt-semantics[@aria-label='Voltar']"));
@@ -457,7 +457,7 @@ fs.mkdirSync("./fotos/impostoEquipe1", { recursive: true });
 			console.log("Screenshot da tela de IPI salva.");
 		});
 
-		// 9. Preencher os campos de valor, quantidade e alíquota
+		// 15.  Preencher os campos de valor, quantidade e alíquota
 		let ipiInputs;
 		try {
 			ipiInputs = await driver.findElements(By.css('input, textarea'));
@@ -493,7 +493,7 @@ fs.mkdirSync("./fotos/impostoEquipe1", { recursive: true });
 			console.log("Screenshot após preencher campos de IPI salva.");
 		});
 
-		// 10.Clique no botão "Calcular IPI"
+		// 16.Clique no botão "Calcular IPI"
 		let calcularIpiButton;
 		try {
 			calcularIpiButton = await driver.findElement(By.xpath("//flt-semantics[@aria-label='Calcular IPI']"));
