@@ -5,10 +5,10 @@ class SalaryInputScreen extends StatefulWidget {
   const SalaryInputScreen({super.key});
 
   @override
-  _SalaryInputScreenState createState() => _SalaryInputScreenState();
+  SalaryInputScreenState createState() => SalaryInputScreenState();
 }
 
-class _SalaryInputScreenState extends State<SalaryInputScreen> {
+class SalaryInputScreenState extends State<SalaryInputScreen> {
   final TextEditingController _controller = TextEditingController();
   String? _error;
 
@@ -44,59 +44,79 @@ class _SalaryInputScreenState extends State<SalaryInputScreen> {
         ),
         elevation: 0,
       ),
-      body: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 24.0),
-        child: Center(
-          child: Column(
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Text(
-                'Qual seu salário bruto mensal?',
-                style: TextStyle(
-                  fontSize: 22,
-                  fontWeight: FontWeight.bold,
-                  color: Colors.white,
+      body: Center(
+        child: SingleChildScrollView(
+          child: Container(
+            padding: EdgeInsets.all(24),
+            constraints: BoxConstraints(
+              maxWidth: 400, // Altere se quiser mais largo
+            ),
+            decoration: BoxDecoration(
+              color: Color(0xD9000000),
+              borderRadius: BorderRadius.circular(18),
+              boxShadow: [
+                BoxShadow(
+                  color: Colors.black54,
+                  blurRadius: 12,
+                  spreadRadius: 2,
                 ),
-                textAlign: TextAlign.center,
-              ),
-              SizedBox(height: 24),
-              TextField(
-                controller: _controller,
-                keyboardType: TextInputType.number,
-                style: TextStyle(color: Colors.white),
-                decoration: InputDecoration(
-                  hintText: 'Digite aqui...',
-                  hintStyle: TextStyle(color: Colors.grey[400]),
-                  filled: true,
-                  fillColor: Colors.transparent,
-                  enabledBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.white),
+              ],
+            ),
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Text(
+                  'Qual seu salário bruto mensal?',
+                  style: TextStyle(
+                    fontSize: 22,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.white,
                   ),
-                  focusedBorder: OutlineInputBorder(
-                    borderRadius: BorderRadius.circular(10),
-                    borderSide: BorderSide(color: Colors.cyanAccent),
-                  ),
-                  errorText: _error,
+                  textAlign: TextAlign.center,
                 ),
-                onTap: () => setState(() => _error = null),
-              ),
-              SizedBox(height: 28),
-              SizedBox(
-                width: double.infinity,
-                height: 48,
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
-                    backgroundColor: Colors.cyanAccent,
-                    foregroundColor: Colors.black,
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
+                SizedBox(height: 24),
+                TextField(
+                  controller: _controller,
+                  keyboardType: TextInputType.number,
+                  style: TextStyle(color: Colors.white),
+                  decoration: InputDecoration(
+                    hintText: 'Digite aqui...',
+                    hintStyle: TextStyle(color: Colors.grey[400]),
+                    filled: true,
+                    fillColor: Colors.transparent,
+                    enabledBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.white),
+                    ),
+                    focusedBorder: OutlineInputBorder(
+                      borderRadius: BorderRadius.circular(10),
+                      borderSide: BorderSide(color: Colors.cyanAccent),
+                    ),
+                    errorText: _error,
                   ),
-                  onPressed: _goToNext,
-                  child: Text('Próximo', style: TextStyle(fontWeight: FontWeight.bold)),
+                  onTap: () => setState(() => _error = null),
                 ),
-              ),
-            ],
+                SizedBox(height: 28),
+                SizedBox(
+                  width: double.infinity,
+                  height: 48,
+                  child: ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                      backgroundColor: Colors.cyanAccent,
+                      foregroundColor: Colors.black,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                    ),
+                    onPressed: _goToNext,
+                    child: Text(
+                      'Próximo',
+                      style: TextStyle(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                ),
+              ],
+            ),
           ),
         ),
       ),

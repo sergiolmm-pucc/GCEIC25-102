@@ -6,10 +6,10 @@ class SplashScreenEquipeTres extends StatefulWidget {
   const SplashScreenEquipeTres({super.key});
 
   @override
-  _SplashScreenEquipeTresState createState() => _SplashScreenEquipeTresState();
+  SplashScreenEquipeTresState createState() => SplashScreenEquipeTresState();
 }
 
-class _SplashScreenEquipeTresState extends State<SplashScreenEquipeTres> {
+class SplashScreenEquipeTresState extends State<SplashScreenEquipeTres> {
   @override
   void initState() {
     super.initState();
