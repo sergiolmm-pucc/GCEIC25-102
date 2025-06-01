@@ -1,6 +1,7 @@
 const { Builder, By, Key } = require("selenium-webdriver");
 const { Options } = require("selenium-webdriver/chrome");
 const fs = require("fs");
+const { until } = require("selenium-webdriver");
 
 fs.mkdirSync("./fotos/impostoEquipe1", { recursive: true });
 
@@ -411,6 +412,111 @@ fs.mkdirSync("./fotos/impostoEquipe1", { recursive: true });
 		});
 
 		console.log("Parte de Cálculo de PIS/COFINS finalizada com sucesso!");
+
+		// 14. Voltar para a tela principal antes de buscar o botão "Cálculo IPI"
+		try {
+			// Tenta clicar no botão de voltar (seta)
+			const backButton = await driver.findElement(By.xpath("//flt-semantics[@aria-label='Voltar']"));
+			await backButton.click();
+			await driver.sleep(2000); // Aguarda a navegação
+		} catch (e) {
+			// Se não encontrar o botão de voltar, pode tentar usar o navegador
+			await driver.navigate().back();
+			await driver.sleep(2000);
+		}
+
+		// Screenshot antes de buscar o botão
+		await driver.takeScreenshot().then((image) => {
+			fs.writeFileSync("./fotos/impostoEquipe1/debug-antes-botao-ipi.png", image, "base64");
+			console.log("Screenshot antes de buscar o botão IPI salva.");
+		});
+
+		// Rola a tela para baixo
+		await driver.executeScript("window.scrollTo(0, document.body.scrollHeight);");
+		await driver.sleep(1000);
+
+		let ipiButton;
+		try {
+			await driver.wait(until.elementLocated(By.xpath("//*[contains(text(),'Cálculo IPI')]")), 10000);
+			ipiButton = await driver.findElement(By.xpath("//*[contains(text(),'Cálculo IPI')]"));
+			await driver.wait(until.elementIsVisible(ipiButton), 5000);
+			console.log('Botão "Cálculo IPI" encontrado pelo texto!');
+		} catch (error) {
+			await driver.takeScreenshot().then((image) => {
+				fs.writeFileSync("./fotos/impostoEquipe1/erro-botao-ipi.png", image, "base64");
+				console.log("Screenshot do erro salva em erro-botao-ipi.png");
+			});
+			throw new Error("Não foi possível encontrar o botão Cálculo IPI por nenhum método");
+		}
+		await ipiButton.click();
+		await driver.sleep(5000);
+
+		// Screenshot da tela de cálculo de IPI
+		await driver.takeScreenshot().then((image) => {
+			fs.writeFileSync("./fotos/impostoEquipe1/tela-ipi.png", image, "base64");
+			console.log("Screenshot da tela de IPI salva.");
+		});
+
+		// 15.  Preencher os campos de valor, quantidade e alíquota
+		let ipiInputs;
+		try {
+			ipiInputs = await driver.findElements(By.css('input, textarea'));
+			// Filtra apenas visíveis e habilitados
+			const visibleInputs = [];
+			for (const el of ipiInputs) {
+				const displayed = await el.isDisplayed();
+				const enabled = await el.isEnabled();
+				if (displayed && enabled) visibleInputs.push(el);
+				if (visibleInputs.length === 3) break;
+			}
+			if (visibleInputs.length < 3)
+				throw new Error("Menos de 3 campos de input visíveis/habilitados na tela de IPI!");
+			ipiInputs = visibleInputs;
+			console.log(`Campos de IPI encontrados: ${ipiInputs.length}`);
+		} catch (e) {
+			console.error("Campos de IPI NÃO encontrados!");
+			await driver.takeScreenshot().then((image) => {
+				fs.writeFileSync("./fotos/impostoEquipe1/erro-campos-ipi.png", image, "base64");
+				console.log("Screenshot de erro salva em erro-campos-ipi.png");
+			});
+			throw e;
+		}
+
+		// Preenche os três campos (valor, quantidade, alíquota)
+		await fillInput(driver, ipiInputs[0], "1000");
+		await fillInput(driver, ipiInputs[1], "5");    
+		await fillInput(driver, ipiInputs[2], "10");  
+
+		// Screenshot após preencher os campos
+		await driver.takeScreenshot().then((image) => {
+			fs.writeFileSync("./fotos/impostoEquipe1/preenchido-ipi.png", image, "base64");
+			console.log("Screenshot após preencher campos de IPI salva.");
+		});
+
+		// 16.Clique no botão "Calcular IPI"
+		let calcularIpiButton;
+		try {
+			calcularIpiButton = await driver.findElement(By.xpath("//flt-semantics[@aria-label='Calcular IPI']"));
+		} catch (error) {
+			try {
+				calcularIpiButton = await driver.findElement(By.xpath("//*[contains(text(),'Calcular IPI')]"));
+			} catch (error) {
+				calcularIpiButton = await driver.findElement(By.xpath("//*[contains(., 'Calcular')]"));
+			}
+		}
+		await calcularIpiButton.click();
+		console.log('Botão "Calcular IPI" clicado.');
+		await driver.sleep(3000);
+
+		// Screenshot do resultado
+		await driver.takeScreenshot().then((image) => {
+			fs.writeFileSync("./fotos/impostoEquipe1/resultado-ipi.png", image, "base64");
+			console.log("Screenshot do resultado de IPI salva.");
+		});
+
+		// Voltar à tela principal
+		await driver.navigate().back();
+		await driver.sleep(5000);
 
 		console.log("Teste funcional da Equipe 1 finalizado com sucesso!");
 	} catch (error) {
