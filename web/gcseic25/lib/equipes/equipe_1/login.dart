@@ -14,33 +14,45 @@ class LoginPage extends StatelessWidget {
         padding: EdgeInsets.all(16),
         child: Column(
           children: [
-            TextField(
-              controller: _userController,
-              decoration: InputDecoration(labelText: 'Usuário'),
+            Semantics(
+              label: 'Usuário',
+              textField: true,
+              child: TextField(
+                controller: _userController,
+                decoration: InputDecoration(labelText: 'Usuário'),
+              ),
             ),
-            TextField(
-              controller: _passController,
-              decoration: InputDecoration(labelText: 'Senha'),
-              obscureText: true,
+            Semantics(
+              label: 'Senha',
+              textField: true,
+              child: TextField(
+                controller: _passController,
+                decoration: InputDecoration(labelText: 'Senha'),
+                obscureText: true,
+              ),
             ),
             SizedBox(height: 20),
-            ElevatedButton(
-              onPressed: () {
-                if (_userController.text == 'admin' &&
-                    _passController.text == '1234') {
-                  Navigator.pushReplacement(
-                    context,
-                    MaterialPageRoute(
-                      builder: (_) => UsoAppPage(),
-                    ),
-                  );
-                } else {
-                  ScaffoldMessenger.of(context).showSnackBar(
-                    SnackBar(content: Text('Usuário ou senha incorretos')),
-                  );
-                }
-              },
-              child: Text('Entrar'),
+            Semantics(
+              label: 'Entrar',
+              button: true,
+              child: ElevatedButton(
+                onPressed: () {
+                  if (_userController.text == 'admin' &&
+                      _passController.text == '1234') {
+                    Navigator.pushReplacement(
+                      context,
+                      MaterialPageRoute(
+                        builder: (_) => UsoAppPage(),
+                      ),
+                    );
+                  } else {
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      SnackBar(content: Text('Usuário ou senha incorretos')),
+                    );
+                  }
+                },
+                child: Text('Entrar'),
+              ),
             )
           ],
         ),

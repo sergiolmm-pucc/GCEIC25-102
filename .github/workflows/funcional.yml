@@ -40,6 +40,12 @@ jobs:
         run: npm i @rentready/flutter-selenium-bridge
       - name: Roda os testes
         run: npm run funcional2
+      - name: Roda os testes da equipe 1
+        run: npm run impostoEquipe1
+      - name: Roda testes construção piscina equipe 8
+        run: npm run funcionalPiscinaEquipe8
+      - name: Roda testes equipe 3
+        run: npm run funcionalEquipeTres
       - name: fotos da tela
         uses: actions/upload-artifact@v4
         with:
