@@ -1,5 +1,5 @@
 {
-  "name": "etec-api",
+  "name": "meu-projeto-node",
   "version": "1.0.0",
   "description": "API com Express e Swagger",
   "main": "server.js",
@@ -18,20 +18,14 @@
     "@rentready/flutter-selenium-bridge": "^1.0.5",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-<<<<<<< HEAD
     "meu-projeto-node": "file:",
     "selenium-webdriver": "^4.33.0",
     "swagger-ui-express": "^4.6.3"
-=======
-    "swagger-ui-express": "^4.6.3",
-    "selenium-webdriver": "^4.33.0",
-    "meu-projeto-node": "file:"
   },
   "devDependencies": {
     "jest": "^29.7.0",
     "jest-junit": "^16.0.0",
     "supertest": "^7.1.1"
->>>>>>> CI_CD4
   },
   "engines": {
     "node": "22.x"
