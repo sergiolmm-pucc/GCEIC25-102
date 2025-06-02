@@ -52,14 +52,12 @@ jobs:
         run: ls -la
       - name: lista diretorio
         run: |
-          cd api/tests 
-          ls -la
+          ls -la api/tests 
+          
       - name: lista diretorio
         run: |
-          cd .. 
-          cd ..
-          cd api/test
-          ls -la
+          ls -la  api/test
+          
 
   test:
     needs: getCode
