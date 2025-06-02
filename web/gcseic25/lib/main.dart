@@ -9,6 +9,8 @@ import 'package:gcseic25/equipes/equipe3/splash_screen_equipe_tres.dart';
 import 'package:gcseic25/equipes/equipe8/splash_screen_piscina.dart';
 import 'equipes/equipe7/calculator_screen.dart';
 import 'package:gcseic25/equipes/equipe2/splash_screen_equipe2.dart';
+import 'package:gcseic25/equipes/equipe4/calculadora4.dart';
+
 
 // Import da Equipe 5
 import 'equipes/equipe 5/splash_screen.dart'
@@ -67,6 +69,19 @@ class HomePage extends StatelessWidget {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
+              const SizedBox(height: 20),
+              SizedBox(
+                width: 220,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(builder: (context) => const Calculadora4Page()),
+                    );
+                  },
+                  child: const Text('Cálculo Grupo 4'),
+                ),
+              ),
               SizedBox(
                 // Botão Base 1
                 width: 220,
