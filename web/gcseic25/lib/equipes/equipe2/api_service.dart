@@ -5,7 +5,7 @@ import 'package:http/http.dart' as http; // Certifique-se que o 'http' está no 
 class ApiService {
   // Ajuste para o seu site API. Para desenvolvimento local, use localhost.
   // Quando for para produção, mude para o URL do seu site API (ex: https://seusistemaviagens-api.com)
-  final String _baseUrl = 'http://localhost:3000';
+  final String _baseUrl = 'https://sincere-magnificent-cobweb.glitch.me/';
 
   Future<Map<String, dynamic>> post(String endpoint, Map<String, dynamic> data) async {
     try {
