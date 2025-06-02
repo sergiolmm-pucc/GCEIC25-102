@@ -155,42 +155,43 @@ jobs:
       - name: lista
         run: ls -la
 
-  Deploy_slmm:
-    needs: test
-    runs-on: ubuntu-latest
-   # defaults:
-   #   run:
-   #     working-directory: api # Define o diretório base para todos os comandos
-    steps:
-  
-         
-
-      - name: Git checkout    
-        uses: actions/checkout@v3
-
-      - name: git
-        run: |
-          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
-          git --version
-          git config --global user.email "sergio.marques@puc-campinas.edu.br"
-          git config --global user.name "SLMM"
-
-      - name: Configurar chave SSH
-        run: |
-          mkdir -p ~/.ssh
-          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
-          chmod 600 ~/.ssh/id_rsa
-          ssh-keyscan -H sergi3607.c35.integrator.host >> ~/.ssh/known_hosts
-
-
-      - name: lista
-        run: ls -la
-
-      - name: git2
-        run: |
-           #  ajusta a origem  e faz um git pull     
-           git remote set-url origin ssh://sergi3607@sergi3607.c35.integrator.host/home/sergi3607/applications/repositories/api102/.git
-           git push -u origin main
+#  Deploy_slmm:
+#    needs: test
+#    runs-on: ubuntu-latest
+#   # defaults:
+#   #   run:
+#   #     working-directory: api # Define o diretório base para todos os comandos
+#    steps:
+#  
+#         #
+#
+#      - name: Git checkout    
+#
+#          uses: actions/checkout@v3
+#
+#      - name: git
+#        run: |
+#          # setup the username and email. I tend to use 'GitHub Actions Bot' with no email by default
+#          git --version
+#          git config --global user.email "sergio.marques@puc-campinas.edu.br"
+#          git config --global user.name "SLMM"
+#
+#      - name: Configurar chave SSH
+#        run: |
+#          mkdir -p ~/.ssh
+#          echo "${{ secrets.SSH_PRIVATE_KEY }}" > ~/.ssh/id_rsa
+#          chmod 600 ~/.ssh/id_rsa
+#          ssh-keyscan -H sergi3607.c35.integrator.host >> ~/.ssh/known_hosts
+#
+#
+#      - name: lista
+#        run: ls -la
+#
+#      - name: git2
+#        run: |
+#           #  ajusta a origem  e faz um git pull     
+#           git remote set-url origin ssh://sergi3607@sergi3607.c35.integrator.host/home/sergi3607/applications/repositories/api102/.git
+#           git push -u origin main
 
           
  #  git remote remove origin
