@@ -7,6 +7,7 @@
     "start": "node server.js",
     "test": "jest --no-coverage --ci --reporters=default --testResultsProcessor=jest-junit",
     "test:coverage": "jest --coverage --ci --reporters=default --testResultsProcessor=jest-junit",
+    "lint": "eslint .",
     "funcional": "node ./test/funcionalExemplo",
     "funcional2": "node ./test/funcionalExemplo2",
     "impostoEquipe1": "node ./test/impostoEquipe1",
