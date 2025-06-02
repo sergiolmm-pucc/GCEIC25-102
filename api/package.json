@@ -11,13 +11,16 @@
     "funcional2": "node ./test/funcionalExemplo2",
     "impostoEquipe1": "node ./test/impostoEquipe1",
     "funcionalPiscinaEquipe8": "node ./test/funcionalPiscinaEquipe8",
-    "funcionalEquipeTres": "node test/testeFuncionalEquipeTres.js"
+    "funcionalEquipeTres": "node ./test/testeFuncionalEquipeTres.js",
+    "FuncionalNaoSeiDeQuem": "node ./test/test.js"
   },
   "dependencies": {
     "@rentready/flutter-selenium-bridge": "^1.0.5",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "swagger-ui-express": "^4.6.3"
+    "swagger-ui-express": "^4.6.3",
+    "selenium-webdriver": "^4.33.0",
+    "meu-projeto-node": "file:"
   },
   "devDependencies": {
     "jest": "^29.7.0",
