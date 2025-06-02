@@ -3,11 +3,14 @@ import 'package:flutter/rendering.dart';
 import 'dart:async'; // Para o Timer
 import 'package:http/http.dart' as http;
 import 'package:gcseic25/equipes/base/base.dart';
-import 'package:gcseic25/equipes/equipe6/calculadora6.dart';
 import 'package:gcseic25/equipes/equipe_1/splash.dart';
 import 'package:gcseic25/equipes/equipe3/splash_screen_equipe_tres.dart'; 
 import 'equipes/equipe7/calculator_screen.dart';
 import 'package:gcseic25/equipes/equipe2/splash_screen_equipe2.dart';
+import 'package:gcseic25/equipes/equipe6/calculadora6.dart';
+import 'package:gcseic25/equipes/equipe6/login_screen6.dart';
+import 'package:gcseic25/equipes/equipe6/sobre.dart';
+import 'package:gcseic25/equipes/equipe6/menu.dart';
 
 // Import da Equipe 5
 import 'equipes/equipe 5/splash_screen.dart' as SplashScreenEquipe5; // <--- Import da Equipe 5
@@ -32,10 +35,13 @@ class MyApp extends StatelessWidget {
         '/splash2': (context) => SplashScreen(nextPage: ConsultaPage(title: 'Consulta 2')),
         '/splashEquipe1': (context) => SplashEquipe(), 
         '/calculadora': (context) => CalculatorScreen(),
-        '/calculadora6': (context) => Calculadora6Page(), // Da equipe6
         '/gf': (context) => SplashScreenEquipeTres(), // Da CI_CD6
         '/equipe2': (context) => const SplashScreenEquipe2(), // Da sua equipe
         '/splash5': (context) => SplashScreenEquipe5.SplashScreen(nextScreen: 'login'), // Rota da Equipe 5
+        '/login6': (context) => LoginPage6(),
+        '/menu6': (context) => MenuEquipe6(),
+        '/sobre6': (context) => SobrePage6(),
+        '/calculadora6': (context) => Calculadora6Page(),    
       },
     );
   }
@@ -99,7 +105,7 @@ class HomePage extends StatelessWidget {
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/calculadora6');
+                    Navigator.pushNamed(context, '/login6');
                   },
                   child: const Text('Calculadora Equipe 6'),
                 ),
