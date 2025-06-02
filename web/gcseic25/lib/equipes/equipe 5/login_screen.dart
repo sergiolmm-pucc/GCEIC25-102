@@ -1,9 +1,7 @@
 import 'dart:convert';
-
 import 'package:flutter/material.dart';
-import 'package:gcseic25/equipes/equipe 5/splash_screen.dart';
 import 'package:http/http.dart' as http;
-
+import 'package:gcseic25/equipes/equipe 5/selection_screen.dart'; // Import da tela de seleção
 
 class LoginScreen extends StatefulWidget {
   @override
@@ -22,15 +20,16 @@ class _LoginScreenState extends State<LoginScreen> {
     final String username = usernameController.text;
     final String password = passwordController.text;
 
-
-    final url = Uri.parse('https://sincere-magnificent-cobweb.glitch.me/calculadoraViagemRoutes/login');
+    final url = Uri.parse(
+      'http://localhost:3000/calculadoraViagem/login',
+    );
     final response = await http.post(
       url,
       headers: {'Content-Type': 'application/json'},
-      body: jsonEncode({'username': username, 'password': password}),
+      body: jsonEncode({'username'  : username, 'password': password}),
     );
 
-    if (response.statusCode==401){
+    if (response.statusCode == 401) {
       showDialog(
         context: context,
         builder:
@@ -46,10 +45,12 @@ class _LoginScreenState extends State<LoginScreen> {
             ),
       );
     } else {
-      Navigator.push(
+      Navigator.pushReplacement(
         context,
         MaterialPageRoute(
-          builder: (context) => SplashScreen(nextScreen: 'home'),
+          builder:
+              (context) =>
+                  HomeScreenEquipe5(), // Redireciona para selection_screen
         ),
       );
     }
@@ -68,10 +69,8 @@ class _LoginScreenState extends State<LoginScreen> {
           child: Padding(
             padding: const EdgeInsets.all(16.0),
             child: Column(
-              mainAxisAlignment:
-                  MainAxisAlignment.center, // Centraliza verticalmente
-              crossAxisAlignment:
-                  CrossAxisAlignment.center, // Centraliza horizontalmente
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const Text(
                   'Use o username "tester" e a senha "teste123" para acessar.',

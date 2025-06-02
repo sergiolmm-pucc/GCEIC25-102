@@ -1,5 +1,4 @@
 exports.login = (req, res) => {
-  console.log(req)
   const { username, password } = req.body;
 
   if (!username || !password) {
