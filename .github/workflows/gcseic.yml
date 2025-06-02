@@ -57,7 +57,8 @@ jobs:
       - name: lista diretorio
         run: |
           cd .. 
-          cd test
+          cd ..
+          cd api/test
           ls -la
 
   test:
