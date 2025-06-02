@@ -21,7 +21,7 @@ class _LoginScreenState extends State<LoginScreen> {
     final String password = passwordController.text;
 
     final url = Uri.parse(
-      'http://localhost:3000/calculadoraViagem/login',
+      'https://sincere-magnificent-cobweb.glitch.me/calculadoraViagem/login',
     );
     final response = await http.post(
       url,
