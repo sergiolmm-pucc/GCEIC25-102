@@ -77,7 +77,7 @@ jobs:
           ls -la test
           ls -la tests 
           ls -la
-          cat api/package.json
+          cat package.json
       - name: Install NodeJS
         uses: actions/setup-node@v3
         with:
