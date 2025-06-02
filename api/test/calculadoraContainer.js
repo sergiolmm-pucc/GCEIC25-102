@@ -1,16 +1,28 @@
 const { Builder, By, until } = require("selenium-webdriver");
+const { Options } = require("selenium-webdriver/chrome");
 const fs = require("fs");
 
 fs.mkdirSync("./fotos/equipe7", { recursive: true });
 
 (async () => {
-  const driver = await new Builder().forBrowser("chrome").build();
+  const screen = { width: 1024, height: 720 };
+  const chromeOptions = new Options();
+  chromeOptions.addArguments("--headless");
+  chromeOptions.addArguments("--no-sandbox");
+  chromeOptions.addArguments("--disable-dev-shm-usage");
+  chromeOptions.windowSize(screen);
+
+  const builder = new Builder()
+    .forBrowser("chrome")
+    .setChromeOptions(chromeOptions);
+
+  let driver = await builder.build();
 
   try {
     await driver.get("https://sergi3607.c35.integrator.host/");
     await driver.sleep(3000);
     let screenshot = await driver.takeScreenshot();
-    fs.writeFileSync("tela_inicial.png", screenshot, "base64");
+    fs.writeFileSync("./fotos/equipe7/tela_inicial.png", screenshot, "base64");
 
     const botaoCalculadora = await driver.wait(
       until.elementLocated(By.css('[aria-label="Botão Calculadora equipe 7"]')),
