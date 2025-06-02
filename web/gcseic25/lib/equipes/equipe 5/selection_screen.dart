@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gcseic25/equipes/equipe 5/time_screen.dart';
 import 'package:gcseic25/equipes/equipe 5/cost_calculator.dart';
-import 'package:gcseic25/equipes/equipe 5/gas_screen.dart';
 import 'package:gcseic25/equipes/equipe 5/selection_screen.dart';
 
 class HomeScreenEquipe5 extends StatelessWidget {
