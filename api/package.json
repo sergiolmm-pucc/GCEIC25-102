@@ -12,7 +12,7 @@
     "impostoEquipe1": "node ./test/impostoEquipe1",
     "funcionalPiscinaEquipe8": "node ./test/funcionalPiscinaEquipe8",
     "funcionalEquipeTres": "node ./test/testeFuncionalEquipeTres.js",
-    "FuncionalNaoSeiDeQuem": "node ./test/test.js"
+    "funcionalEquipeSete": "node ./test/calculadoraContainer.js"
   },
   "dependencies": {
     "@rentready/flutter-selenium-bridge": "^1.0.5",

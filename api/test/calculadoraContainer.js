@@ -1,11 +1,13 @@
 const { Builder, By, until } = require("selenium-webdriver");
 const fs = require("fs");
 
-async function runTest() {
+fs.mkdirSync("./fotos/equipe7", { recursive: true });
+
+(async () => {
   const driver = await new Builder().forBrowser("chrome").build();
 
   try {
-    await driver.get("http://localhost:45289/");
+    await driver.get("https://sergi3607.c35.integrator.host/");
     await driver.sleep(3000);
     let screenshot = await driver.takeScreenshot();
     fs.writeFileSync("tela_inicial.png", screenshot, "base64");
@@ -26,10 +28,14 @@ async function runTest() {
       10000
     );
     screenshot = await driver.takeScreenshot();
-    fs.writeFileSync("splash_calculadora.png", screenshot, "base64");
+    fs.writeFileSync(
+      "./fotos/equipe7/splash_calculadora.png",
+      screenshot,
+      "base64"
+    );
     console.log("Splash screen capturado");
 
-    await driver.sleep(3500); 
+    await driver.sleep(3500);
 
     const loginTitle = await driver.wait(
       until.elementLocated(
@@ -40,7 +46,7 @@ async function runTest() {
       10000
     );
     screenshot = await driver.takeScreenshot();
-    fs.writeFileSync("tela_login.png", screenshot, "base64");
+    fs.writeFileSync("./fotos/equipe7/tela_login.png", screenshot, "base64");
     console.log("Tela de login capturada");
 
     const usernameField = await driver.findElement(
@@ -68,7 +74,11 @@ async function runTest() {
     );
 
     screenshot = await driver.takeScreenshot();
-    fs.writeFileSync("inicio_calculadora.png", screenshot, "base64");
+    fs.writeFileSync(
+      "./fotos/equipe7/inicio_calculadora.png",
+      screenshot,
+      "base64"
+    );
     console.log("Tela da calculadora carregada");
 
     await calculateButton.click();
@@ -80,7 +90,11 @@ async function runTest() {
 
     await driver.sleep(5000);
     screenshot = await driver.takeScreenshot();
-    fs.writeFileSync("resultado_calculadora.png", screenshot, "base64");
+    fs.writeFileSync(
+      "./fotos/equipe7/resultado_calculadora.png",
+      screenshot,
+      "base64"
+    );
 
     const resultText = await resultElement.getText();
     console.log("Resultado da calculadora:", resultText);
@@ -90,6 +104,4 @@ async function runTest() {
   } finally {
     await driver.quit();
   }
-}
-
-runTest();
+})();
