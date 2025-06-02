@@ -52,7 +52,7 @@ jobs:
         run: ls -la
       - name: lista diretorio
         run: |
-          cd tests 
+          cd api/tests 
           ls -la
       - name: lista diretorio
         run: |
