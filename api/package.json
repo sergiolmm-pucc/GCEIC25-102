@@ -22,11 +22,6 @@
     "selenium-webdriver": "^4.33.0",
     "swagger-ui-express": "^4.6.3"
   },
-  "devDependencies": {
-    "jest": "^29.7.0",
-    "jest-junit": "^16.0.0",
-    "supertest": "^7.1.1"
-  },
   "engines": {
     "node": "22.x"
   },
@@ -37,5 +32,10 @@
   "keywords": [
     "node",
     "glitch"
-  ]
+  ],
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-junit": "^16.0.0",
+    "supertest": "^7.1.1"
+  }
 }
