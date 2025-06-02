@@ -73,7 +73,11 @@ jobs:
       - name: Get Code from repository
         uses: actions/checkout@v3
       - name: lista diretorio
-        run: ls -la
+        run: |
+          ls -la api/test
+          ls -la api/tests 
+          ls -la
+          cat api/package.json
       - name: Install NodeJS
         uses: actions/setup-node@v3
         with:
