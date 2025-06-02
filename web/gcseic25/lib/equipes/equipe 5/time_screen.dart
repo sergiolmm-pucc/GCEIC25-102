@@ -31,7 +31,7 @@ class _TimeScreenState extends State<TimeScreen> {
 
     try {
       final tempoUrl = Uri.parse(
-        'http://localhost:3000/calculadoraViagem/estimativa-tempo',
+        'https://sincere-magnificent-cobweb.glitch.me/calculadoraViagem/estimativa-tempo',
       );
 
       debugPrint('URL: $tempoUrl');
