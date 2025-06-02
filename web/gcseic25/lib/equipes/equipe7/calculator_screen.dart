@@ -26,8 +26,13 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
   int rooms = 1;
 
   double? result;
+  bool isLoading = false;
 
   Future<void> calculateCost() async {
+    setState(() {
+      isLoading = true;
+    });
+
     final url = Uri.parse('https://sincere-magnificent-cobweb.glitch.me/calcular-custo-casa-container');
 
     final response = await http.post(
@@ -51,10 +56,14 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
       }),
     );
 
+    setState(() {
+      isLoading = false;
+    });
+
     if (response.statusCode == 200) {
       final data = jsonDecode(response.body);
       setState(() {
-        result = data['custoTotal'].toDouble();
+        result = data['custoTotal']?.toDouble();
       });
     } else {
       setState(() {
@@ -66,131 +75,107 @@ class _CalculatorScreenState extends State<CalculatorScreen> {
     }
   }
 
-  Widget _buildNumberField(String label, int initialValue, Function(int) onChanged) {
+  Widget _numberField(String label, int initial, Function(int) onChanged) {
     return TextFormField(
-      initialValue: initialValue.toString(),
+      key: ValueKey(label),
+      initialValue: initial.toString(),
       decoration: InputDecoration(labelText: label),
       keyboardType: TextInputType.number,
-      onChanged: (value) => onChanged(int.tryParse(value) ?? initialValue),
+      onChanged: (v) => onChanged(int.tryParse(v) ?? initial),
     );
   }
 
-  Widget _buildDoubleField(String label, double initialValue, Function(double) onChanged) {
+  Widget _doubleField(String label, double initial, Function(double) onChanged) {
     return TextFormField(
-      initialValue: initialValue.toString(),
+      key: ValueKey(label),
+      initialValue: initial.toString(),
       decoration: InputDecoration(labelText: label),
       keyboardType: TextInputType.number,
-      onChanged: (value) => onChanged(double.tryParse(value) ?? initialValue),
+      onChanged: (v) => onChanged(double.tryParse(v) ?? initial),
     );
   }
 
-@override
-Widget build(BuildContext context) {
-  return Scaffold(
-    backgroundColor: Colors.white,
-    appBar: AppBar(
-      title: Text('Calculadora de Casa Contêiner'),
-      backgroundColor: Colors.white,
-      foregroundColor: Colors.black,
-      elevation: 0,
-    ),
-    body: SingleChildScrollView(
-      padding: EdgeInsets.all(16),
-      child: Form(
-        key: _formKey,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            _buildNumberField("Quantidade de Contêineres", containers, (v) => containers = v),
-            SizedBox(height: 16),
-            _styledDropdown("Tamanho do Contêiner", containerSize, ['40ft', '20ft'], (v) => setState(() => containerSize = v!)),
-            SizedBox(height: 16),
-            _styledDropdown("Nível de Acabamento", finishLevel, ['basico', 'intermediario', 'luxo'], (v) => setState(() => finishLevel = v!)),
-            SizedBox(height: 16),
-            _styledDropdown("Tipo de Fundação", foundationType, ['sapata', 'radier', 'pilotis'], (v) => setState(() => foundationType = v!)),
-            SizedBox(height: 16),
-            _styledDropdown("Isolamento", insulation, ['nenhum', 'poliuretano', 'lã de rocha'], (v) => setState(() => insulation = v!)),
-            SizedBox(height: 16),
-            _styledSwitch("Instalação Elétrica", electricity, (v) => setState(() => electricity = v)),
-            _styledSwitch("Hidráulica", plumbing, (v) => setState(() => plumbing = v)),
-            _styledSwitch("Energia Solar", solarEnergy, (v) => setState(() => solarEnergy = v)),
-            SizedBox(height: 16),
-            _buildNumberField("Janelas", windows, (v) => windows = v),
-            SizedBox(height: 16),
-            _buildNumberField("Portas", doors, (v) => doors = v),
-            SizedBox(height: 16),
-            _styledSwitch("Móveis Planejados", customFurniture, (v) => setState(() => customFurniture = v)),
-            _styledSwitch("Projeto Pronto", projectReady, (v) => setState(() => projectReady = v)),
-            SizedBox(height: 16),
-            _buildDoubleField("Distância (km)", distance, (v) => distance = v),
-            SizedBox(height: 16),
-            _buildNumberField("Quantidade de Cômodos", rooms, (v) => rooms = v),
-            SizedBox(height: 24),
-            ElevatedButton(
-              style: ElevatedButton.styleFrom(
-                backgroundColor: Colors.black,
-                foregroundColor: Colors.white,
-                padding: EdgeInsets.symmetric(vertical: 16),
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(12),
+  Widget _dropdown(String label, String currentValue, List<String> options, Function(String?) onChanged) {
+    return DropdownButtonFormField<String>(
+      key: ValueKey(label),
+      decoration: InputDecoration(labelText: label),
+      value: currentValue,
+      onChanged: onChanged,
+      items: options.map((opt) => DropdownMenuItem(value: opt, child: Text(opt))).toList(),
+    );
+  }
+
+  Widget _switch(String label, bool value, Function(bool) onChanged) {
+    return SwitchListTile(
+      key: ValueKey(label),
+      title: Text(label),
+      value: value,
+      onChanged: onChanged,
+    );
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Calculadora de Casa Contêiner'),
+      ),
+      body: SingleChildScrollView(
+        padding: EdgeInsets.all(16),
+        child: Form(
+          key: _formKey,
+          child: Column(
+            children: [
+              _numberField('Quantidade de Contêineres', containers, (v) => setState(() => containers = v)),
+              _dropdown('Tamanho do Contêiner', containerSize, ['40ft', '20ft'], (v) => setState(() => containerSize = v!)),
+              _dropdown('Nível de Acabamento', finishLevel, ['basico', 'intermediario', 'luxo'], (v) => setState(() => finishLevel = v!)),
+              _dropdown('Tipo de Fundação', foundationType, ['sapata', 'radier', 'pilotis'], (v) => setState(() => foundationType = v!)),
+              _dropdown('Isolamento', insulation, ['nenhum', 'poliuretano', 'lã de rocha'], (v) => setState(() => insulation = v!)),
+
+              _switch('Instalação Elétrica', electricity, (v) => setState(() => electricity = v)),
+              _switch('Hidráulica', plumbing, (v) => setState(() => plumbing = v)),
+              _switch('Energia Solar', solarEnergy, (v) => setState(() => solarEnergy = v)),
+
+              _numberField('Janelas', windows, (v) => setState(() => windows = v)),
+              _numberField('Portas', doors, (v) => setState(() => doors = v)),
+
+              _switch('Móveis Planejados', customFurniture, (v) => setState(() => customFurniture = v)),
+              _switch('Projeto Pronto', projectReady, (v) => setState(() => projectReady = v)),
+
+              _doubleField('Distância (km)', distance, (v) => setState(() => distance = v)),
+              _numberField('Quantidade de Cômodos', rooms, (v) => setState(() => rooms = v)),
+
+              SizedBox(height: 24),
+
+              Semantics(
+                label: 'Botão Calcular Custo',
+                button: true,
+                child: ElevatedButton(
+                  key: Key('BotaoCalcularCusto'),
+                  onPressed: isLoading ? null : calculateCost,
+                  child: isLoading
+                      ? CircularProgressIndicator(color: Colors.white)
+                      : Text('Calcular Custo'),
                 ),
               ),
-              onPressed: calculateCost,
-              child: Text("Calcular Custo"),
-            ),
-            if (result != null)
-              Padding(
-                padding: const EdgeInsets.only(top: 24),
-                child: Text(
-                  "Custo Total: R\$ ${result!.toStringAsFixed(2)}",
-                  style: TextStyle(
-                    fontSize: 20,
-                    fontWeight: FontWeight.bold,
-                    color: Colors.black,
+
+              if (result != null)
+                Semantics(
+                  label: 'Resultado do Custo Total',
+                  readOnly: true,
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 24),
+                    child: Text(
+                      'Custo Total: R\$ ${result!.toStringAsFixed(2)}',
+                      key: Key('ResultadoCustoTotal'),
+                      style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+                    ),
                   ),
-                  textAlign: TextAlign.center,
                 ),
-              ),
-          ],
+            ],
+          ),
         ),
       ),
-    ),
-  );
-}
-
-Widget _styledDropdown(String label, String currentValue, List<String> options, ValueChanged<String?> onChanged) {
-  return DropdownButtonFormField<String>(
-    value: currentValue,
-    items: options.map((e) => DropdownMenuItem(value: e, child: Text(e))).toList(),
-    onChanged: onChanged,
-    style: TextStyle(color: Colors.black),
-    decoration: InputDecoration(
-      labelText: label,
-      labelStyle: TextStyle(color: Colors.black),
-      filled: true,
-      fillColor: Colors.white,
-      enabledBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.black),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      focusedBorder: OutlineInputBorder(
-        borderSide: BorderSide(color: Colors.black, width: 2),
-        borderRadius: BorderRadius.circular(12),
-      ),
-      contentPadding: EdgeInsets.symmetric(horizontal: 16, vertical: 12),
-    ),
-    dropdownColor: Colors.white,
-  );
-}
-
-Widget _styledSwitch(String label, bool value, ValueChanged<bool> onChanged) {
-  return SwitchListTile(
-    title: Text(label, style: TextStyle(color: Colors.black)),
-    value: value,
-    onChanged: onChanged,
-    activeColor: Colors.black,
-    contentPadding: EdgeInsets.zero,
-  );
-}
-
+    );
+  }
 }

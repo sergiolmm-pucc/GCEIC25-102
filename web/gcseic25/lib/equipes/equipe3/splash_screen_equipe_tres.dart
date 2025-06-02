@@ -6,10 +6,10 @@ class SplashScreenEquipeTres extends StatefulWidget {
   const SplashScreenEquipeTres({super.key});
 
   @override
-  _SplashScreenEquipeTresState createState() => _SplashScreenEquipeTresState();
+  SplashScreenEquipeTresState createState() => SplashScreenEquipeTresState();
 }
 
-class _SplashScreenEquipeTresState extends State<SplashScreenEquipeTres> {
+class SplashScreenEquipeTresState extends State<SplashScreenEquipeTres> {
   @override
   void initState() {
     super.initState();
@@ -25,9 +25,15 @@ class _SplashScreenEquipeTresState extends State<SplashScreenEquipeTres> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: Colors.black,
-      body: const Center(
-        child: Text(
+      // Usamos um Container que ocupa toda a tela (width: double.infinity, height: double.infinity)
+      // e definimos alignment: Alignment.center para centralizar o filho.
+      body: Container(
+        width: double.infinity,
+        height: double.infinity,
+        alignment: Alignment.center,
+        child: const Text(
           'Carregando o Gestor de Finanças...',
+          textAlign: TextAlign.center,
           style: TextStyle(
             color: Colors.cyanAccent,
             fontSize: 32,
