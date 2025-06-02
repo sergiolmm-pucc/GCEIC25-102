@@ -1,5 +1,5 @@
 {
-  "name": "meu-projeto-node",
+  "name": "etec-api",
   "version": "1.0.0",
   "description": "API com Express e Swagger",
   "main": "server.js",
@@ -17,8 +17,12 @@
     "@rentready/flutter-selenium-bridge": "^1.0.5",
     "cors": "^2.8.5",
     "express": "^4.18.2",
-    "meu-projeto-node": "file:",
     "swagger-ui-express": "^4.6.3"
+  },
+  "devDependencies": {
+    "jest": "^29.7.0",
+    "jest-junit": "^16.0.0",
+    "supertest": "^7.1.1"
   },
   "engines": {
     "node": "22.x"
@@ -30,10 +34,5 @@
   "keywords": [
     "node",
     "glitch"
-  ],
-  "devDependencies": {
-    "jest": "^29.7.0",
-    "jest-junit": "^16.0.0",
-    "supertest": "^7.1.1"
-  }
+  ]
 }
