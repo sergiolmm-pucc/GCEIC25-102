@@ -18,7 +18,9 @@ test('Deve retornar tempo estimado corretamente', () => {
     expect(res.status).toHaveBeenCalledWith(200);
     expect(res.json).toHaveBeenCalledWith({
         success: true,
-        tempoEstimadoHoras: 3,
-        tempoFormatado: "3h 0min"
+        payload: {
+            tempoEstimadoHoras: 3,
+            tempoFormatado: "3h 0min"
+        }
     });
 });
