@@ -9,6 +9,10 @@ import 'package:gcseic25/equipes/equipe3/splash_screen_equipe_tres.dart';
 import 'package:gcseic25/equipes/equipe8/splash_screen_piscina.dart';
 import 'equipes/equipe7/calculator_screen.dart';
 import 'package:gcseic25/equipes/equipe2/splash_screen_equipe2.dart';
+import 'package:gcseic25/equipes/equipe6/calculadora6.dart';
+import 'package:gcseic25/equipes/equipe6/login_screen6.dart';
+import 'package:gcseic25/equipes/equipe6/sobre.dart';
+import 'package:gcseic25/equipes/equipe6/menu.dart';
 
 // Import da Equipe 5
 import 'equipes/equipe 5/splash_screen.dart'
@@ -49,6 +53,10 @@ class MyApp extends StatelessWidget {
             (context) => SplashScreenEquipe5.SplashScreen(
               nextScreen: 'login',
             ), // Rota da Equipe 5
+        '/login6': (context) => LoginPage6(),
+        '/menu6': (context) => MenuEquipe6(),
+        '/sobre6': (context) => SobrePage6(),
+        '/calculadora6': (context) => Calculadora6Page(),  
       },
     );
   }
@@ -123,7 +131,7 @@ class HomePage extends StatelessWidget {
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/calculadora6');
+                    Navigator.pushNamed(context, '/login6');
                   },
                   child: const Text('Calculadora Equipe 6'),
                 ),

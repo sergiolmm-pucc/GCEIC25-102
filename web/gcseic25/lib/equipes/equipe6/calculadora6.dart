@@ -12,8 +12,10 @@ class _Calculadora6PageState extends State<Calculadora6Page> {
   String? _inss;
   String? _fgts;
   String? _salarioLiquido;
+  String? _necessidades;
+  String? _lazer;
+  String? _poupanca;
   String? _error;
-
   bool _loading = false;
 
   Future<void> calcularSalario() async {
@@ -47,10 +49,15 @@ class _Calculadora6PageState extends State<Calculadora6Page> {
 
       if (response.statusCode == 200) {
         final data = jsonDecode(response.body);
+        final divisao = data['sugestaoDivisao'] ?? {};
+
         setState(() {
           _inss = data['inss'];
           _fgts = data['fgts'];
           _salarioLiquido = data['salarioLiquido'];
+          _necessidades = divisao['necessidades'];
+          _lazer = divisao['lazer'];
+          _poupanca = divisao['poupanca'];
           _error = null;
         });
       } else {
@@ -60,6 +67,9 @@ class _Calculadora6PageState extends State<Calculadora6Page> {
           _inss = null;
           _fgts = null;
           _salarioLiquido = null;
+          _necessidades = null;
+          _lazer = null;
+          _poupanca = null;
         });
       }
     } catch (e) {
@@ -68,6 +78,9 @@ class _Calculadora6PageState extends State<Calculadora6Page> {
         _inss = null;
         _fgts = null;
         _salarioLiquido = null;
+        _necessidades = null;
+        _lazer = null;
+        _poupanca = null;
       });
     } finally {
       setState(() {
@@ -91,6 +104,7 @@ class _Calculadora6PageState extends State<Calculadora6Page> {
       body: Padding(
         padding: EdgeInsets.all(16),
         child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             TextField(
               controller: _salarioController,
@@ -103,7 +117,9 @@ class _Calculadora6PageState extends State<Calculadora6Page> {
             SizedBox(height: 16),
             ElevatedButton(
               onPressed: _loading ? null : calcularSalario,
-              child: _loading ? CircularProgressIndicator(color: Colors.white) : Text('Calcular'),
+              child: _loading
+                  ? CircularProgressIndicator(color: Colors.white)
+                  : Text('Calcular'),
             ),
             SizedBox(height: 24),
             if (_error != null)
@@ -118,6 +134,14 @@ class _Calculadora6PageState extends State<Calculadora6Page> {
                   Text('INSS: R\$ $_inss'),
                   Text('FGTS: R\$ $_fgts'),
                   Text('Salário Líquido: R\$ $_salarioLiquido'),
+                  SizedBox(height: 16),
+                  Text(
+                    'Sugestão de divisão (40/30/30):',
+                    style: TextStyle(fontWeight: FontWeight.bold),
+                  ),
+                  Text('• Necessidades: R\$ $_necessidades'),
+                  Text('• Lazer: R\$ $_lazer'),
+                  Text('• Poupança: R\$ $_poupanca'),
                 ],
               ),
           ],
