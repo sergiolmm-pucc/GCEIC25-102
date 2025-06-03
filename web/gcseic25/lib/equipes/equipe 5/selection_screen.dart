@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gcseic25/equipes/equipe 5/time_screen.dart';
 import 'package:gcseic25/equipes/equipe 5/cost_calculator.dart';
 import 'package:gcseic25/equipes/equipe 5/selection_screen.dart';
+import 'package:gcseic25/equipes/equipe 5/help_screen.dart';
+import 'package:gcseic25/equipes/equipe 5/about_screen.dart';
 
 class HomeScreenEquipe5 extends StatelessWidget {
   @override
@@ -42,6 +44,28 @@ class HomeScreenEquipe5 extends StatelessWidget {
               ),
             ),
             SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => HelpScreen()),
+                );
+              },
+              child: Text('Ajuda', style: TextStyle(color: Colors.black)),
+            ),
+            SizedBox(height: 20),
+            ElevatedButton(
+              onPressed: () {
+                Navigator.push(
+                  context,
+                  MaterialPageRoute(builder: (context) => AboutScreen()),
+                );
+              },
+              child: Text(
+                'Sobre o Time',
+                style: TextStyle(color: Colors.black),
+              ),
+            ),
           ],
         ),
       ),
