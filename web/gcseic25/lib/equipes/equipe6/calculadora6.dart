@@ -42,7 +42,7 @@ class _Calculadora6PageState extends State<Calculadora6Page> {
 
     try {
       final response = await http.post(
-        Uri.parse('http://localhost:3000/equipe6'),
+        Uri.parse('https://sincere-magnificent-cobweb.glitch.me/equipe6'),
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'salario': salario}),
       );
