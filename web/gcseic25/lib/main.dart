@@ -13,7 +13,7 @@ import 'package:gcseic25/equipes/equipe6/calculadora6.dart';
 import 'package:gcseic25/equipes/equipe6/login_screen6.dart';
 import 'package:gcseic25/equipes/equipe6/sobre.dart';
 import 'package:gcseic25/equipes/equipe6/menu.dart';
-import 'login_calculadora4.dart';
+import 'package:gcseic25/equipes/equipe 4/login_calculadora4.dart';
 
 
 // Import da Equipe 5
