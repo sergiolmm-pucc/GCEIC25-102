@@ -59,6 +59,7 @@ class MyApp extends StatelessWidget {
         '/menu6': (context) => MenuEquipe6(),
         '/sobre6': (context) => SobrePage6(),
         '/calculadora6': (context) => Calculadora6Page(),  
+        '/calculadora4': (context) => LoginCalculadora4Page(),
       },
     );
   }
@@ -154,7 +155,7 @@ class HomePage extends StatelessWidget {
                 width: 220,
                 child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pushNamed(context, '/LoginCalculadora4Page');
+                    Navigator.pushNamed(context, '/calculadora4');
                   },
                   child: const Text('Calculadora Equipe 4'),
                 ),
