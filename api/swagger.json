@@ -216,6 +216,33 @@
         }
       }
     },
+    "/ETEC/calcular": {
+      "post": {
+        "summary": "Calcula encargos com base no salário",
+        "requestBody": {
+          "required": true,
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "salario": { "type": "number" }
+                },
+                "required": ["salario"]
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Encargos calculados com sucesso"
+          },
+          "400": {
+            "description": "Erro de validação"
+          }
+        }
+      }
+    },
     "/calcular-custo-casa-container": {
       "post": {
         "tags": ["CI_CD7"],

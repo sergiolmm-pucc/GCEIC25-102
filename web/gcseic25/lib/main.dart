@@ -13,6 +13,8 @@ import 'package:gcseic25/equipes/equipe6/calculadora6.dart';
 import 'package:gcseic25/equipes/equipe6/login_screen6.dart';
 import 'package:gcseic25/equipes/equipe6/sobre.dart';
 import 'package:gcseic25/equipes/equipe6/menu.dart';
+import 'login_calculadora4.dart';
+
 
 // Import da Equipe 5
 import 'equipes/equipe 5/splash_screen.dart'
@@ -145,6 +147,16 @@ class HomePage extends StatelessWidget {
                     Navigator.pushNamed(context, '/gf');
                   },
                   child: const Text('Gestor de Finanças Equipe 3'),
+                ),
+              ),
+              const SizedBox(height: 20),
+              SizedBox(
+                width: 220,
+                child: ElevatedButton(
+                  onPressed: () {
+                    Navigator.pushNamed(context, '/LoginCalculadora4Page');
+                  },
+                  child: const Text('Calculadora Equipe 4'),
                 ),
               ),
               const SizedBox(height: 20),
