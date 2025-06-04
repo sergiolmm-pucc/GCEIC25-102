@@ -26,7 +26,7 @@ class _Calculadora4PageState extends State<Calculadora4Page> {
 
     try {
       final response = await http.post(
-        Uri.parse('https://sergi3607.c35.integrator.host/'), // ou 10.0.2.2 se for emulador Android
+        Uri.parse('https://sergi3607.c35.integrator.host/calcular'), // ou 10.0.2.2 se for emulador Android
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'salario': salario}),
       );
