@@ -17,7 +17,6 @@ Repositorio para Flutter A ser disponibilizado.
 ## Como usar:
 
 1. Instale as dependências:
-
 ```bash
 
 
