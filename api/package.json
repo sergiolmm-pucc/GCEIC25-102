@@ -7,13 +7,20 @@
     "start": "node server.js",
     "test": "jest --no-coverage --ci --reporters=default --testResultsProcessor=jest-junit",
     "test:coverage": "jest --coverage --ci --reporters=default --testResultsProcessor=jest-junit",
+    "lint": "eslint .",
     "funcional": "node ./test/funcionalExemplo",
-    "funcional2": "node ./test/funcionalExemplo2"
+    "funcional2": "node ./test/funcionalExemplo2",
+    "impostoEquipe1": "node ./test/impostoEquipe1",
+    "funcionalPiscinaEquipe8": "node ./test/funcionalPiscinaEquipe8",
+    "funcionalEquipeTres": "node ./test/testeFuncionalEquipeTres.js",
+    "funcionalEquipeSete": "node ./test/calculadoraContainer.js"
   },
   "dependencies": {
     "@rentready/flutter-selenium-bridge": "^1.0.5",
     "cors": "^2.8.5",
     "express": "^4.18.2",
+    "meu-projeto-node": "file:",
+    "selenium-webdriver": "^4.33.0",
     "swagger-ui-express": "^4.6.3"
   },
   "engines": {
@@ -29,7 +36,7 @@
   ],
   "devDependencies": {
     "jest": "^29.7.0",
-    "supertest": "^7.1.1",
-    "jest-junit": "^16.0.0"
+    "jest-junit": "^16.0.0",
+    "supertest": "^7.1.1"
   }
 }

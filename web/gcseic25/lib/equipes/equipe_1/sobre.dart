@@ -11,7 +11,7 @@ class SobrePage extends StatelessWidget {
           const Padding(
             padding: EdgeInsets.all(16.0),
             child: Text(
-              'Integrantes da Equipe:\n- Kauan Barbosa Silva - 22020168\n- Paulo Vitor Reis Ribeiro - [RA]\n- Vinicius Kenji Okita Eugênio - 22022285\n- Gianpaolo Del Vale Aranha - [RA]',
+              'Integrantes da Equipe:\n- Kauan Barbosa Silva - 22020168\n- Paulo Vitor Reis Ribeiro - 22886386\n- Vinicius Kenji Okita Eugênio - 22022285\n- Gianpaolo Del Vale Aranha - 22024287',
               style: TextStyle(fontSize: 18),
             ),
           )

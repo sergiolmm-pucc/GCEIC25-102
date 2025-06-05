@@ -1,31 +1,119 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<testsuites name="jest tests" tests="15" failures="0" errors="0" time="0.284">
-  <testsuite name="Classe ICMS" errors="0" failures="0" skipped="0" timestamp="2025-05-18T22:27:14" time="0.153" tests="13">
+<testsuites name="jest tests" tests="87" failures="0" errors="0" time="2.407">
+  <testsuite name="Teste de Funções Base" errors="0" failures="0" skipped="0" timestamp="2025-06-02T14:24:06" time="0.852" tests="23">
+    <testcase classname="Teste de Funções Base Aplicar desconto com valor maior que desconto" name="Teste de Funções Base Aplicar desconto com valor maior que desconto" time="0.003">
+    </testcase>
+    <testcase classname="Teste de Funções Base Aplicar desconto com valor igual ao desconto" name="Teste de Funções Base Aplicar desconto com valor igual ao desconto" time="0">
+    </testcase>
+    <testcase classname="Teste de Funções Base Aplicar desconto com desconto maior que valor" name="Teste de Funções Base Aplicar desconto com desconto maior que valor" time="0.001">
+    </testcase>
+    <testcase classname="Teste de Funções Base Calcula custo básico de container 20ft" name="Teste de Funções Base Calcula custo básico de container 20ft" time="0.001">
+    </testcase>
+    <testcase classname="Teste de Funções Base Calcula custo de container 40ft com acabamento intermediário" name="Teste de Funções Base Calcula custo de container 40ft com acabamento intermediário" time="0">
+    </testcase>
+    <testcase classname="Teste de Funções Base Calcula custo com valores padrão para parâmetros opcionais" name="Teste de Funções Base Calcula custo com valores padrão para parâmetros opcionais" time="0">
+    </testcase>
+    <testcase classname="Teste do BaseController datetime retorna data e hora ISO" name="Teste do BaseController datetime retorna data e hora ISO" time="0.003">
+    </testcase>
+    <testcase classname="Teste do BaseController data retorna data e hora ISO" name="Teste do BaseController data retorna data e hora ISO" time="0.001">
+    </testcase>
+    <testcase classname="Teste do BaseController concat retorna valor concatenado com frase fixa" name="Teste do BaseController concat retorna valor concatenado com frase fixa" time="0">
+    </testcase>
+    <testcase classname="Teste do BaseController concat retorna erro quando valor não é fornecido" name="Teste do BaseController concat retorna erro quando valor não é fornecido" time="0.001">
+    </testcase>
+    <testcase classname="Teste do BaseController calcularCustoCasaContainer calcula o custo total" name="Teste do BaseController calcularCustoCasaContainer calcula o custo total" time="0.001">
+    </testcase>
+    <testcase classname="Teste do BaseController calcularCustoCasaContainer retorna erro em caso de falha" name="Teste do BaseController calcularCustoCasaContainer retorna erro em caso de falha" time="0.001">
+    </testcase>
+    <testcase classname="Teste do UserController listUsers retorna dados do usuário" name="Teste do UserController listUsers retorna dados do usuário" time="0">
+    </testcase>
+    <testcase classname="Teste do UserController getUserById retorna usuário pelo ID" name="Teste do UserController getUserById retorna usuário pelo ID" time="0.001">
+    </testcase>
+    <testcase classname="Teste do UserController createUser retorna mensagem de criação" name="Teste do UserController createUser retorna mensagem de criação" time="0.001">
+    </testcase>
+    <testcase classname="Teste de Integração das Rotas e Servidor GET /datetime retorna data e hora" name="Teste de Integração das Rotas e Servidor GET /datetime retorna data e hora" time="0.043">
+    </testcase>
+    <testcase classname="Teste de Integração das Rotas e Servidor GET /data retorna data e hora" name="Teste de Integração das Rotas e Servidor GET /data retorna data e hora" time="0.007">
+    </testcase>
+    <testcase classname="Teste de Integração das Rotas e Servidor POST /concat retorna valor concatenado" name="Teste de Integração das Rotas e Servidor POST /concat retorna valor concatenado" time="0.024">
+    </testcase>
+    <testcase classname="Teste de Integração das Rotas e Servidor POST /calcular-custo-casa-container calcula custo" name="Teste de Integração das Rotas e Servidor POST /calcular-custo-casa-container calcula custo" time="0.008">
+    </testcase>
+    <testcase classname="Teste de Integração das Rotas e Servidor GET /users retorna lista de usuários" name="Teste de Integração das Rotas e Servidor GET /users retorna lista de usuários" time="0.007">
+    </testcase>
+    <testcase classname="Teste de Integração das Rotas e Servidor GET /users/:id retorna usuário pelo ID" name="Teste de Integração das Rotas e Servidor GET /users/:id retorna usuário pelo ID" time="0.005">
+    </testcase>
+    <testcase classname="Teste de Integração das Rotas e Servidor POST /users cria um novo usuário" name="Teste de Integração das Rotas e Servidor POST /users cria um novo usuário" time="0.008">
+    </testcase>
+    <testcase classname="Teste de Integração das Rotas e Servidor POST /calcular-custo-casa-container retorna erro com parâmetros inválidos" name="Teste de Integração das Rotas e Servidor POST /calcular-custo-casa-container retorna erro com parâmetros inválidos" time="0.007">
+    </testcase>
+  </testsuite>
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2025-06-02T14:24:07" time="0.344" tests="1">
+    <testcase classname=" Deve retornar tempo estimado corretamente" name=" Deve retornar tempo estimado corretamente" time="0.005">
+    </testcase>
+  </testsuite>
+  <testsuite name="Função calcularCustoViagem" errors="0" failures="0" skipped="0" timestamp="2025-06-02T14:24:07" time="0.251" tests="10">
+    <testcase classname="Função calcularCustoViagem Deve calcular corretamente o custo total em baixa temporada" name="Função calcularCustoViagem Deve calcular corretamente o custo total em baixa temporada" time="0.022">
+    </testcase>
+    <testcase classname="Função calcularCustoViagem Deve aplicar acréscimo de 20% para alta temporada" name="Função calcularCustoViagem Deve aplicar acréscimo de 20% para alta temporada" time="0.008">
+    </testcase>
+    <testcase classname="Função calcularCustoViagem Deve retornar erro 400 se campos obrigatórios estiverem faltando" name="Função calcularCustoViagem Deve retornar erro 400 se campos obrigatórios estiverem faltando" time="0.013">
+    </testcase>
+    <testcase classname="Função calcularCustoViagem Deve retornar erro 400 se diasEstadia for zero ou negativo" name="Função calcularCustoViagem Deve retornar erro 400 se diasEstadia for zero ou negativo" time="0.009">
+    </testcase>
+    <testcase classname="Função calcularCustoViagem Deve retornar erro 400 se o país não estiver na lista" name="Função calcularCustoViagem Deve retornar erro 400 se o país não estiver na lista" time="0.008">
+    </testcase>
+    <testcase classname="Função calcularCustoViagem Deve retornar erro 400 se companhia aérea não existir" name="Função calcularCustoViagem Deve retornar erro 400 se companhia aérea não existir" time="0.008">
+    </testcase>
+    <testcase classname="Função calcularCustoViagem Deve retornar erro 400 se hotel não existir" name="Função calcularCustoViagem Deve retornar erro 400 se hotel não existir" time="0.006">
+    </testcase>
+    <testcase classname="Função calcularCustoViagem Deve retornar erro 400 se temporada for inválida" name="Função calcularCustoViagem Deve retornar erro 400 se temporada for inválida" time="0.005">
+    </testcase>
+    <testcase classname="Função calcularCustoViagem Deve retornar erro 400 se quantidadeRestaurantes for negativa" name="Função calcularCustoViagem Deve retornar erro 400 se quantidadeRestaurantes for negativa" time="0.008">
+    </testcase>
+    <testcase classname="Função calcularCustoViagem Deve retornar erro 400 se quantidadePessoas for zero ou negativa" name="Função calcularCustoViagem Deve retornar erro 400 se quantidadePessoas for zero ou negativa" time="0.006">
+    </testcase>
+  </testsuite>
+  <testsuite name="Classe ICMS" errors="0" failures="0" skipped="0" timestamp="2025-06-02T14:24:08" time="0.094" tests="23">
     <testcase classname="Classe ICMS Deve calcular corretamente o valor do ICMS" name="Classe ICMS Deve calcular corretamente o valor do ICMS" time="0.001">
     </testcase>
     <testcase classname="Classe ICMS toJSON deve retornar o objeto esperado" name="Classe ICMS toJSON deve retornar o objeto esperado" time="0.001">
     </testcase>
-    <testcase classname="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms não forem informados" name="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms não forem informados" time="0">
+    <testcase classname="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms não forem informados" name="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms não forem informados" time="0.001">
     </testcase>
-    <testcase classname="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms não forem números" name="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms não forem números" time="0">
+    <testcase classname="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms não forem números" name="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms não forem números" time="0.001">
     </testcase>
     <testcase classname="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms forem negativos" name="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms forem negativos" time="0">
     </testcase>
-    <testcase classname="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms forem zero" name="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms forem zero" time="0.001">
+    <testcase classname="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms forem zero" name="Classe ICMS Deve retornar erro se valor_produto ou aliquota_icms forem zero" time="0">
+    </testcase>
+    <testcase classname="Classe IPI Deve calcular corretamente o valor do IPI" name="Classe IPI Deve calcular corretamente o valor do IPI" time="0">
+    </testcase>
+    <testcase classname="Classe IPI toJSON deve retornar o objeto esperado" name="Classe IPI toJSON deve retornar o objeto esperado" time="0">
+    </testcase>
+    <testcase classname="Classe IPI Deve calcular IPI corretamente com quantidade maior que 1" name="Classe IPI Deve calcular IPI corretamente com quantidade maior que 1" time="0">
+    </testcase>
+    <testcase classname="Classe IPI Deve retornar erro se valor_produto ou aliquota_ipi não forem informados" name="Classe IPI Deve retornar erro se valor_produto ou aliquota_ipi não forem informados" time="0.001">
+    </testcase>
+    <testcase classname="Classe IPI Deve retornar erro se valor_produto ou aliquota_ipi não forem números" name="Classe IPI Deve retornar erro se valor_produto ou aliquota_ipi não forem números" time="0">
+    </testcase>
+    <testcase classname="Classe IPI Deve retornar erro se valor_produto ou aliquota_ipi forem negativos" name="Classe IPI Deve retornar erro se valor_produto ou aliquota_ipi forem negativos" time="0">
+    </testcase>
+    <testcase classname="Classe IPI Deve retornar erro se valor_produto ou aliquota_ipi forem zero" name="Classe IPI Deve retornar erro se valor_produto ou aliquota_ipi forem zero" time="0">
     </testcase>
     <testcase classname="Função getICMS Deve calcular corretamente o ICMS com parâmetros válidos" name="Função getICMS Deve calcular corretamente o ICMS com parâmetros válidos" time="0">
     </testcase>
     <testcase classname="Função getICMS Deve retornar erro quando parâmetros obrigatórios não são informados" name="Função getICMS Deve retornar erro quando parâmetros obrigatórios não são informados" time="0">
     </testcase>
-    <testcase classname="Função getICMS Deve retornar erro quando parâmetros inválidos são fornecidos" name="Função getICMS Deve retornar erro quando parâmetros inválidos são fornecidos" time="0.001">
+    <testcase classname="Função getICMS Deve retornar erro quando parâmetros inválidos são fornecidos" name="Função getICMS Deve retornar erro quando parâmetros inválidos são fornecidos" time="0">
     </testcase>
-    <testcase classname="Função calcularPisCofins Deve calcular corretamente PIS/COFINS no regime cumulativo" name="Função calcularPisCofins Deve calcular corretamente PIS/COFINS no regime cumulativo" time="0">
+    <testcase classname="Função calcularPisCofins Deve calcular corretamente PIS/COFINS no regime cumulativo" name="Função calcularPisCofins Deve calcular corretamente PIS/COFINS no regime cumulativo" time="0.001">
     </testcase>
     <testcase classname="Função calcularPisCofins Deve calcular corretamente PIS/COFINS no regime não-cumulativo" name="Função calcularPisCofins Deve calcular corretamente PIS/COFINS no regime não-cumulativo" time="0">
     </testcase>
     <testcase classname="Função calcularPisCofins Deve aplicar o fator de alíquota corretamente" name="Função calcularPisCofins Deve aplicar o fator de alíquota corretamente" time="0">
     </testcase>
-    <testcase classname="Função calcularPisCofins Deve retornar erro quando parâmetros obrigatórios não são informados" name="Função calcularPisCofins Deve retornar erro quando parâmetros obrigatórios não são informados" time="0">
+    <testcase classname="Função calcularPisCofins Deve retornar erro quando parâmetros obrigatórios não são informados" name="Função calcularPisCofins Deve retornar erro quando parâmetros obrigatórios não são informados" time="0.001">
     </testcase>
     <testcase classname="Função getNotaFiscal Deve retornar nota fiscal válida com parâmetros corretos" name="Função getNotaFiscal Deve retornar nota fiscal válida com parâmetros corretos" time="0.001">
     </testcase>
@@ -34,66 +122,78 @@
     <testcase classname="Função getNotaFiscal Deve retornar erro quando parâmetros são inválidos" name="Função getNotaFiscal Deve retornar erro quando parâmetros são inválidos" time="0.001">
     </testcase>
   </testsuite>
-  <testsuite name="Texte exemplo" errors="0" failures="0" skipped="0" timestamp="2025-05-18T22:27:14" time="0.034" tests="1">
+  <testsuite name="undefined" errors="0" failures="0" skipped="0" timestamp="2025-06-02T14:24:08" time="0.062" tests="1">
+    <testcase classname=" Deve calcular consumo estimado com sucesso" name=" Deve calcular consumo estimado com sucesso" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Funções auxiliares de INSS" errors="0" failures="0" skipped="0" timestamp="2025-06-02T14:24:08" time="0.107" tests="17">
+    <testcase classname="Funções auxiliares de INSS inssFaixa1" name="Funções auxiliares de INSS inssFaixa1" time="0.001">
+    </testcase>
+    <testcase classname="Funções auxiliares de INSS inssFaixa2" name="Funções auxiliares de INSS inssFaixa2" time="0.001">
+    </testcase>
+    <testcase classname="Funções auxiliares de INSS inssFaixa3" name="Funções auxiliares de INSS inssFaixa3" time="0">
+    </testcase>
+    <testcase classname="Funções auxiliares de INSS inssFaixa4" name="Funções auxiliares de INSS inssFaixa4" time="0">
+    </testcase>
+    <testcase classname="Funções auxiliares de INSS inssTeto" name="Funções auxiliares de INSS inssTeto" time="0">
+    </testcase>
+    <testcase classname="Funções auxiliares de INSS calcularINSS em todas as faixas" name="Funções auxiliares de INSS calcularINSS em todas as faixas" time="0.001">
+    </testcase>
+    <testcase classname="Funções auxiliares de IRPF irpfIsento" name="Funções auxiliares de IRPF irpfIsento" time="0">
+    </testcase>
+    <testcase classname="Funções auxiliares de IRPF irpfFaixa1" name="Funções auxiliares de IRPF irpfFaixa1" time="0">
+    </testcase>
+    <testcase classname="Funções auxiliares de IRPF irpfFaixa2" name="Funções auxiliares de IRPF irpfFaixa2" time="0">
+    </testcase>
+    <testcase classname="Funções auxiliares de IRPF irpfFaixa3" name="Funções auxiliares de IRPF irpfFaixa3" time="0">
+    </testcase>
+    <testcase classname="Funções auxiliares de IRPF irpfFaixa4" name="Funções auxiliares de IRPF irpfFaixa4" time="0.001">
+    </testcase>
+    <testcase classname="Funções auxiliares de IRPF calcularIRPF em todas as faixas" name="Funções auxiliares de IRPF calcularIRPF em todas as faixas" time="0.001">
+    </testcase>
+    <testcase classname="Controller calcularFinancas Cálculo de finanças válido" name="Controller calcularFinancas Cálculo de finanças válido" time="0.001">
+    </testcase>
+    <testcase classname="Controller calcularFinancas Erro quando salário bruto é inválido" name="Controller calcularFinancas Erro quando salário bruto é inválido" time="0.001">
+    </testcase>
+    <testcase classname="Controller calcularFinancas Erro quando percentual de lazer é inválido" name="Controller calcularFinancas Erro quando percentual de lazer é inválido" time="0.001">
+    </testcase>
+    <testcase classname="Controller loginFixoEquipeTres Login com credenciais corretas (admin/admin123)" name="Controller loginFixoEquipeTres Login com credenciais corretas (admin/admin123)" time="0.001">
+    </testcase>
+    <testcase classname="Controller loginFixoEquipeTres Login com credenciais incorretas" name="Controller loginFixoEquipeTres Login com credenciais incorretas" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Teste da função calcularPiscina" errors="0" failures="0" skipped="0" timestamp="2025-06-02T14:24:08" time="0.082" tests="4">
+    <testcase classname="Teste da função calcularPiscina Deve calcular corretamente o custo total da piscina" name="Teste da função calcularPiscina Deve calcular corretamente o custo total da piscina" time="0.001">
+    </testcase>
+    <testcase classname="Teste da função calcularPiscina Deve usar valores padrão se custos não forem passados" name="Teste da função calcularPiscina Deve usar valores padrão se custos não forem passados" time="0.001">
+    </testcase>
+    <testcase classname="Teste da função calcularPiscina Deve retornar erro se largura, comprimento ou profundidade não forem informados" name="Teste da função calcularPiscina Deve retornar erro se largura, comprimento ou profundidade não forem informados" time="0">
+    </testcase>
+    <testcase classname="Teste da função calcularPiscina Deve calcular corretamente com valores decimais" name="Teste da função calcularPiscina Deve calcular corretamente com valores decimais" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Rota /calcular (com totalLitrosGasolina)" errors="0" failures="0" skipped="0" timestamp="2025-06-02T14:24:08" time="0.103" tests="4">
+    <testcase classname="Rota /calcular (com totalLitrosGasolina) Deve calcular os valores corretamente com todos os campos" name="Rota /calcular (com totalLitrosGasolina) Deve calcular os valores corretamente com todos os campos" time="0.003">
+    </testcase>
+    <testcase classname="Rota /calcular (com totalLitrosGasolina) Deve retornar erro se totalLitrosGasolina estiver ausente" name="Rota /calcular (com totalLitrosGasolina) Deve retornar erro se totalLitrosGasolina estiver ausente" time="0.001">
+    </testcase>
+    <testcase classname="Rota /calcular (com totalLitrosGasolina) Deve retornar erro se numPessoas for zero" name="Rota /calcular (com totalLitrosGasolina) Deve retornar erro se numPessoas for zero" time="0">
+    </testcase>
+    <testcase classname="Rota /calcular (com totalLitrosGasolina) Deve retornar erro se nenhum custo for informado" name="Rota /calcular (com totalLitrosGasolina) Deve retornar erro se nenhum custo for informado" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Texte exemplo" errors="0" failures="0" skipped="0" timestamp="2025-06-02T14:24:08" time="0.067" tests="1">
+    <testcase classname="Texte exemplo Aplicar desconto" name="Texte exemplo Aplicar desconto" time="0.001">
+    </testcase>
+  </testsuite>
+  <testsuite name="Teste de login" errors="0" failures="0" skipped="0" timestamp="2025-06-02T14:24:08" time="0.08" tests="2">
+    <testcase classname="Teste de login Tentar fazer login com sucesso" name="Teste de login Tentar fazer login com sucesso" time="0.001">
+    </testcase>
+    <testcase classname="Teste de login Tentar fazer login com falha" name="Teste de login Tentar fazer login com falha" time="0">
+    </testcase>
+  </testsuite>
+  <testsuite name="Texte exemplo" errors="0" failures="0" skipped="0" timestamp="2025-06-02T14:24:08" time="0.076" tests="1">
     <testcase classname="Texte exemplo Aplicar desconto" name="Texte exemplo Aplicar desconto" time="0">
-    </testcase>
-  </testsuite>
-  <testsuite name="Texte exemplo" errors="0" failures="0" skipped="0" timestamp="2025-05-18T22:27:14" time="0.037" tests="1">
-    <testcase classname="Texte exemplo Aplicar desconto" name="Texte exemplo Aplicar desconto" time="0">
-  <testsuite name="Texte exemplo" errors="0" failures="0" skipped="0" timestamp="2025-05-19T14:07:23" time="0.384" tests="1">
-    <testcase classname="Texte exemplo Aplicar desconto" name="Texte exemplo Aplicar desconto" time="0.006">
-    </testcase>
-  </testsuite>
-  <testsuite name="Texte exemplo" errors="0" failures="0" skipped="0" timestamp="2025-05-19T14:07:23" time="0.389" tests="1">
-    <testcase classname="Texte exemplo Aplicar desconto" name="Texte exemplo Aplicar desconto" time="0.004">
-    </testcase>
-  </testsuite>
-  <testsuite name="Teste de Funções Base" errors="0" failures="0" skipped="0" timestamp="2025-05-19T14:07:23" time="0.645" tests="23">
-    <testcase classname="Teste de Funções Base Aplicar desconto com valor maior que desconto" name="Teste de Funções Base Aplicar desconto com valor maior que desconto" time="0.003">
-    </testcase>
-    <testcase classname="Teste de Funções Base Aplicar desconto com valor igual ao desconto" name="Teste de Funções Base Aplicar desconto com valor igual ao desconto" time="0">
-    </testcase>
-    <testcase classname="Teste de Funções Base Aplicar desconto com desconto maior que valor" name="Teste de Funções Base Aplicar desconto com desconto maior que valor" time="0">
-    </testcase>
-    <testcase classname="Teste de Funções Base Calcula custo básico de container 20ft" name="Teste de Funções Base Calcula custo básico de container 20ft" time="0.001">
-    </testcase>
-    <testcase classname="Teste de Funções Base Calcula custo de container 40ft com acabamento intermediário" name="Teste de Funções Base Calcula custo de container 40ft com acabamento intermediário" time="0">
-    </testcase>
-    <testcase classname="Teste de Funções Base Calcula custo com valores padrão para parâmetros opcionais" name="Teste de Funções Base Calcula custo com valores padrão para parâmetros opcionais" time="0">
-    </testcase>
-    <testcase classname="Teste do BaseController datetime retorna data e hora ISO" name="Teste do BaseController datetime retorna data e hora ISO" time="0.002">
-    </testcase>
-    <testcase classname="Teste do BaseController data retorna data e hora ISO" name="Teste do BaseController data retorna data e hora ISO" time="0">
-    </testcase>
-    <testcase classname="Teste do BaseController concat retorna valor concatenado com frase fixa" name="Teste do BaseController concat retorna valor concatenado com frase fixa" time="0.001">
-    </testcase>
-    <testcase classname="Teste do BaseController concat retorna erro quando valor não é fornecido" name="Teste do BaseController concat retorna erro quando valor não é fornecido" time="0">
-    </testcase>
-    <testcase classname="Teste do BaseController calcularCustoCasaContainer calcula o custo total" name="Teste do BaseController calcularCustoCasaContainer calcula o custo total" time="0.001">
-    </testcase>
-    <testcase classname="Teste do BaseController calcularCustoCasaContainer retorna erro em caso de falha" name="Teste do BaseController calcularCustoCasaContainer retorna erro em caso de falha" time="0">
-    </testcase>
-    <testcase classname="Teste do UserController listUsers retorna dados do usuário" name="Teste do UserController listUsers retorna dados do usuário" time="0">
-    </testcase>
-    <testcase classname="Teste do UserController getUserById retorna usuário pelo ID" name="Teste do UserController getUserById retorna usuário pelo ID" time="0.001">
-    </testcase>
-    <testcase classname="Teste do UserController createUser retorna mensagem de criação" name="Teste do UserController createUser retorna mensagem de criação" time="0">
-    </testcase>
-    <testcase classname="Teste de Integração das Rotas e Servidor GET /datetime retorna data e hora" name="Teste de Integração das Rotas e Servidor GET /datetime retorna data e hora" time="0.014">
-    </testcase>
-    <testcase classname="Teste de Integração das Rotas e Servidor GET /data retorna data e hora" name="Teste de Integração das Rotas e Servidor GET /data retorna data e hora" time="0.002">
-    </testcase>
-    <testcase classname="Teste de Integração das Rotas e Servidor POST /concat retorna valor concatenado" name="Teste de Integração das Rotas e Servidor POST /concat retorna valor concatenado" time="0.01">
-    </testcase>
-    <testcase classname="Teste de Integração das Rotas e Servidor POST /calcular-custo-casa-container calcula custo" name="Teste de Integração das Rotas e Servidor POST /calcular-custo-casa-container calcula custo" time="0.003">
-    </testcase>
-    <testcase classname="Teste de Integração das Rotas e Servidor GET /users retorna lista de usuários" name="Teste de Integração das Rotas e Servidor GET /users retorna lista de usuários" time="0.002">
-    </testcase>
-    <testcase classname="Teste de Integração das Rotas e Servidor GET /users/:id retorna usuário pelo ID" name="Teste de Integração das Rotas e Servidor GET /users/:id retorna usuário pelo ID" time="0.002">
-    </testcase>
-    <testcase classname="Teste de Integração das Rotas e Servidor POST /users cria um novo usuário" name="Teste de Integração das Rotas e Servidor POST /users cria um novo usuário" time="0.002">
-    </testcase>
-    <testcase classname="Teste de Integração das Rotas e Servidor POST /calcular-custo-casa-container retorna erro com parâmetros inválidos" name="Teste de Integração das Rotas e Servidor POST /calcular-custo-casa-container retorna erro com parâmetros inválidos" time="0.001">
     </testcase>
   </testsuite>
 </testsuites>

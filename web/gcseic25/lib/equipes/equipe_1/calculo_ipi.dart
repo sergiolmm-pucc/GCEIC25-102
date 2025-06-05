@@ -34,7 +34,7 @@ class _CalculoIpiPageState extends State<CalculoIpiPage> {
 
     try {
       final url = Uri.parse(
-        'https://sincere-magnificent-cobweb.glitch.me/gf/imposto/calculo-ipi?valor_produto=$valor&aliquota_ipi=$aliquota&quantidade=$quantidade',
+        'https://sincere-magnificent-cobweb.glitch.me/imposto/calculo-ipi?valor_produto=$valor&aliquota_ipi=$aliquota&quantidade=$quantidade',
       );
       final resp = await http.get(url);
       
