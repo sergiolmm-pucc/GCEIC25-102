@@ -26,7 +26,7 @@ class _Calculadora4PageState extends State<Calculadora4Page> {
 
     try {
       final response = await http.post(
-        Uri.parse('https://sincere-magnificent-cobweb.glitch.me//calcularslarioequipe4'), // ou 10.0.2.2 se for emulador Android
+        Uri.parse('https://sincere-magnificent-cobweb.glitch.me/ETEC/calcularequipe4'), // ou 10.0.2.2 se for emulador Android
         headers: {'Content-Type': 'application/json'},
         body: jsonEncode({'salario': salario}),
       );
