@@ -1,4 +1,4 @@
-const { calcularEncargosETEC } = require('../services/etecService');
+const { calcularEncargosETEC } = require('../routes/services/etecService');
 
 exports.calcularEncargos = (req, res) => {
   const { salario } = req.body;
